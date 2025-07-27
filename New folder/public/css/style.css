@@ -205,6 +205,10 @@
   color: #3d640f;
   text-decoration: none;
 }
+.pure-list-item:nth-child(1):hover #tab-2{
+  background-color: #90c54b;
+  display: none;
+}
 .pure-list-item-product {
   display: flex;
 }
@@ -262,9 +266,9 @@
   text-decoration: line-through;
   color: #999;
 }
-.pure-item {
+/* .pure-item {
   display: none;
-}
+} */
 .title-san-pham:hover .pure-item {
   display: flex !important;
 }
@@ -278,15 +282,15 @@
   background-color: #90c54b;
 }
 /* Hover toàn bộ menu thì hiển thị sản phẩm */
-.title-san-pham:hover .right-1 {
+.title-san-pham:hover .pure-item-right {
   display: grid !important;
 }
-.right-2 {
-  display: none !important;
-}
+
 /* Nhưng nếu hover vào các mục khác => không active li:first-child */
 .pure-item-left:has(li:hover:not(:first-child)) li:first-child {
   background-color: transparent !important;
 }
+
+
 
 /* Sale - combo chăm sóc tóc */
