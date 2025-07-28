@@ -148,6 +148,11 @@
   background-color: #f3f3f3;
   z-index: 1000;
 }
+
+.title-san-pham {
+  text-align: center;
+  padding: 0 20px;
+}
 .title-san-pham a {
   color: white;
   font-family: "Inter", serif;
@@ -222,6 +227,7 @@
   background-color: #f9f9f9;
   display: none;
 }
+
 .pure-item-right-content-skin {
   width: calc(95% - 10px);
   border: 1px solid #ddd;
@@ -277,16 +283,460 @@
 .title-san-pham:hover li:first-child {
   background-color: #90c54b;
 }
-/* Hover toàn bộ menu thì hiển thị sản phẩm */
+/* danh sách hiển thị pure-item-right */
+/* Khi hover menu chính, hiện .right-1 */
 .title-san-pham:hover .right-1 {
   display: grid !important;
-}
-.right-2 {
-  display: none !important;
 }
 /* Nhưng nếu hover vào các mục khác => không active li:first-child */
 .pure-item-left:has(li:hover:not(:first-child)) li:first-child {
   background-color: transparent !important;
 }
 
-/* Sale - combo chăm sóc tóc */
+/* Ẩn mặc định tất cả phần phải */
+.right-1,
+.right-2,
+.right-3,
+.right-4,
+.right-5 {
+  display: none;
+}
+/* Combo right 1*/
+/* Khi hover li:first-child thì vẫn hiện right-1 */
+.pure-item-left:has(li:nth-child(1):hover) ~ .right-1 {
+  display: grid !important;
+}
+/* Combo right 2 */
+.pure-item-left:has(li:nth-child(2):hover) ~ .right-1 {
+  display: none !important;
+}
+.pure-item-left:has(li:nth-child(2):hover) ~ .right-2 {
+  display: grid !important;
+}
+/* Combo right 3 */
+.pure-item-left:has(li:nth-child(3):hover) ~ .right-1,
+.pure-item-left:has(li:nth-child(3):hover) ~ .right-2 {
+  display: none !important;
+}
+.pure-item-left:has(li:nth-child(3):hover) ~ .right-3 {
+  display: grid !important;
+}
+/* Combo right 4 */
+.pure-item-left:has(li:nth-child(4):hover) ~ .right-1,
+.pure-item-left:has(li:nth-child(4):hover) ~ .right-2,
+.pure-item-left:has(li:nth-child(4):hover) ~ .right-3 {
+  display: none !important;
+}
+.pure-item-left:has(li:nth-child(4):hover) ~ .right-4 {
+  display: grid !important;
+}
+/* Combo right 5 */
+.pure-item-left:has(li:nth-child(5):hover) ~ .right-1,
+.pure-item-left:has(li:nth-child(5):hover) ~ .right-2,
+.pure-item-left:has(li:nth-child(5):hover) ~ .right-3,
+.pure-item-left:has(li:nth-child(5):hover) ~ .right-4 {
+  display: none !important;
+}
+.pure-item-left:has(li:nth-child(5):hover) ~ .right-5 {
+  display: grid !important;
+}
+
+/* slide */
+.slideshow-container {
+  width: 100%;
+  height: 70vh;
+  /* Hoặc 50vh cho 50% chiều cao màn hình */
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  /* Đảm bảo hình ảnh không vượt quá chiều cao */
+}
+
+.mySlides {
+  display: none;
+  /* Ẩn các slide theo mặc định */
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.mySlides img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  /* Đảm bảo hình ảnh phủ kín và cắt nếu cần */
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.prev,
+.next,
+.prev-1,
+.next-1 {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 16px;
+  margin-top: -22px;
+  color: grey;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.prev,
+.next {
+  color: white;
+  font-size: 24px;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  border-radius: 3px;
+  padding: 10px;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.slideshow-container:hover .prev,
+.slideshow-container:hover .next {
+  display: block;
+}
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* === SUB BANNER */
+.banner-sub {
+  display: flex;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 1px 7px #3e6807;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #3e6807,
+    #4a7305 10px,
+    #3e6807 10px,
+    #3e6807 10px
+  );
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 15px;
+}
+.banner-sub-item-1 {
+  width: 18%;
+}
+.banner-sub-item-1 a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.banner-sub-item-1 a img {
+  width: 50px;
+  height: auto;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.banner-sub-item-1-content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.banner-sub-item-1-content span:nth-child(1) {
+  font-size: 16px;
+  font-weight: bold;
+  color: yellow;
+  font-family: "Inter", serif;
+}
+.banner-sub-item-1 a {
+  text-decoration: none;
+  color: white;
+  font-family: "Inter", serif;
+  font-size: 14px;
+}
+
+/* <!-- CARD --> */
+.card-section {
+  margin-top: 60px;
+}
+.card-headerr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+.card-headerr img {
+  width: 32px;
+  height: auto;
+  border-radius: 5px;
+}
+.card-headerr h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #3d640f;
+  font-family: "Inter", serif;
+  text-align: center;
+  margin: 0;
+}
+.slider-container {
+  max-width: 81%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.product {
+  flex: 0 0 calc(25% - 22px);
+  box-sizing: border-box;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dddddd;
+}
+.product:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+/* Xoá margin của phần tử cuối cùng mỗi slide (dùng JS gán thêm class nếu cần) */
+.product.last-in-slide {
+  margin-right: 0;
+}
+
+.product img {
+  width: 100%;
+}
+
+.card-item-content {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px 0 0 0;
+}
+.card-item-content h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3d640f;
+  margin: 10px 0;
+  font-family: "Inter", serif;
+  display: flex;
+}
+.price-product {
+  display: flex;
+  font-family: "Inter", serif;
+  justify-content: flex-start;
+}
+.Newprice {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d35400;
+}
+.Oldprice {
+  font-size: 16px;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.prev-1,
+.next-1 {
+  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  background-color: rgb(128, 128, 128);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1;
+  opacity: 0.5;
+  transition: background-color 0.2s ease;
+  display: none;
+}
+.slider-container:hover .prev-1,
+.slider-container:hover .next-1 {
+  display: block !important;
+}
+
+.next-1:hover {
+  opacity: 1;
+  border: none;
+}
+.prev-1:hover {
+  opacity: 1;
+  border: none;
+}
+
+.prev-1 {
+  left: 0;
+}
+.next-1 {
+  right: 0;
+}
+
+/* Banner-secondary */
+.banner-secondary {
+  max-width: 79%;
+  margin: auto;
+}
+.banner-secondary-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  gap: 20px;
+}
+.banner-secondary-item img {
+  width: 600px;
+  margin-top: 80px;
+  height: 210px;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* Banner chăm sóc da */
+.banner-cham-soc-da {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 25px;
+}
+/* Banner son môi */
+.banner-son-moi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-top: 25px;
+}
+.banner-son-moi img {
+  width: 80%;
+  height: auto;
+}
+
+/* Chuyện của cỏ */
+.home-abouts {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  margin: auto;
+  margin-top: 60px;
+  gap: 50px;
+}
+.home-abouts-item-1 {
+  flex: 2;
+}
+.home-abouts-item-1 img {
+  width: 100%;
+}
+.home-abouts-item-2 {
+  flex: 3;
+  position: relative;
+}
+.home-abouts-item-2 h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #4c503d;
+  font-family: "Inter", serif;
+  text-transform: uppercase;
+}
+.home-abouts-item-2 h3 {
+  font-size: 16px;
+  font-family: "Inter", serif;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.home-abouts-item-2 p {
+  font-size: 16px;
+  color: #333;
+  font-family: "Inter", serif;
+  line-height: 1.6;
+  margin-top: 30px;
+}
+.home-abouts-item-2 a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: orange;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 20px;
+  font-family: "Inter", serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+.home-abouts-item-2 a:hover {
+  background-color: #3d640f;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.home-abouts-item-3 {
+  display: flex;
+  width: 120%;
+  gap: 20px;
+  position: absolute;
+  right: 0;
+  top: 60%;
+}
+.home-abouts-item-3-1 {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+.home-abouts-item-3-1:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  color: #3d640f;
+  cursor: pointer;
+}
+.home-abouts-item-3-1 img {
+  flex: 1;
+  height: auto;
+  width: 35%;
+}
+.home-abouts-item-3-1 h3 {
+  width: 100%;
+  flex: 3;
+  height: auto;
+  font-size: 16px;
+  font-family: "Inter", serif;
+  font-weight: inherit;
+  margin: 0;
+  line-height: 25px;
+}
