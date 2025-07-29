@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Beauty</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <div class="logo">
+        <img src="logo.png" alt="">
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="form-box">
+        <h2 class="brand-name">Aura Beauty</h2>
+        <div class="tab">
+          <button class="tablink active" onclick="switchTab('register')">Đăng ký</button>
+          <button class="tablink" onclick="switchTab('login')">Đăng nhập</button>
+        </div>
+
+        <!-- Form Đăng Ký -->
+        <form id="register-form" class="form">
+          <label>Tài khoản</label>
+          <input type="text" placeholder="Điền tên tài khoản" />
+
+          <label>Mã xác nhận OTP</label>
+          <div class="otp-group">
+          <input type="text" placeholder="Nhập 6 ký tự" id="otp-input" />
+          <button id="resend-btn" disabled>Gửi lại mã sau <span id="countdown">20</span>s</button>
+          </div>
+
+
+          <label>Mật khẩu</label>
+          <input type="password" placeholder="Điền mật khẩu" />
+
+          <label class="checkbox">
+            <input type="checkbox" /> Chấp nhận điều khoản
+          </label>
+
+          <button type="submit" class="btn register">Đăng ký</button>
+          <button type="button" class="btn google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+            Đăng nhập bằng Google
+          </button>
+        </form>
+
+        <!-- Form Đăng Nhập -->
+        <form id="login-form" class="form hidden">
+          <label>Tài khoản</label>
+          <input type="text" placeholder="Nhập số điện thoại hoặc email" />
+
+          <label>Mật khẩu</label>
+          <input type="password" placeholder="Nhập mật khẩu" />
+
+         <div class="login-options">
+            <label class="checkbox">
+            <input type="checkbox" /> Ghi nhớ đăng nhập
+          </label>
+          <a href="#" class="forgot-password">Quên mật khẩu</a>
+          </div>
+
+          <button type="submit" class="btn register">Đăng nhập</button>
+
+          <button type="button" class="btn google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+            Đăng nhập bằng tài khoản Google
+          </button>
+
+          <button type="button" class="btn admin">
+            <img src="https://www.svgrepo.com/show/506501/user-circle.svg" alt="Admin" />
+            Đăng nhập với tư cách quản trị viên
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(tab) {
+      document.querySelectorAll(".tablink").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".form").forEach(form => form.classList.add("hidden"));
+      if (tab === 'register') {
+        document.getElementById("register-form").classList.remove("hidden");
+        document.querySelector(".tablink:nth-child(1)").classList.add("active");
+      } else {
+        document.getElementById("login-form").classList.remove("hidden");
+        document.querySelector(".tablink:nth-child(2)").classList.add("active");
+      }
+    }
+    
+  // Countdown resend OTP
+  let countdown = 20;
+  const resendBtn = document.getElementById("resend-btn");
+  const countdownSpan = document.getElementById("countdown");
+
+  function startCountdown() {
+    resendBtn.disabled = true;
+    resendBtn.classList.remove("enabled");
+    countdown = 20;
+    countdownSpan.textContent = countdown;
+    const timer = setInterval(() => {
+      countdown--;
+      countdownSpan.textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(timer);
+        resendBtn.textContent = "Gửi lại mã";
+        resendBtn.disabled = false;
+        resendBtn.classList.add("enabled");
+      }
+    }, 1000);
+  }
+
+  resendBtn.addEventListener("click", () => {
+    if (!resendBtn.disabled) {
+      resendBtn.innerHTML = `Gửi lại mã sau <span id="countdown">60</span>s`;
+      startCountdown();
+      // TODO: Gọi API gửi lại mã ở đây nếu cần
+    }
+  });
+
+  // Gọi khi trang load
+  startCountdown();
+
+
+  </script>
+</body>
+</html>
