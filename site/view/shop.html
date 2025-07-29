@@ -19,185 +19,16 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet" />
-    <style>
-       
-        .shop-info {
-            display: flex;
-            justify-content: space-between;
-            background: #f5f5f5;
-            padding: 24px;
-            margin: 24px 0;
-            border-radius: 12px;
-        }
-        .shop-info .stats {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-        .shop-info .stats div {
-            font-size: 18px;
-            color: #388e3c;
-        }
-        .shop-info .banner img {
-            height: 120px;
-            border-radius: 8px;
-        }
-        .main-content {
-            display: flex;
-            gap: 32px;
-        }
-        .sidebar {
-            width: 280px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 24px;
-            box-sizing: border-box;
-        }
-        .sidebar h3 {
-            color: #388e3c;
-            font-size: 18px;
-            margin-bottom: 16px;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px 0;
-        }
-        .sidebar ul li {
-            margin-bottom: 8px;
-        }
-        .sidebar ul li label {
-            cursor: pointer;
-        }
-        .sidebar .shop-list {
-            font-size: 15px;
-        }
-        .shop-grid {
-            flex: 1;
-        }
-        .shop-grid h3 {
-            color: #388e3c;
-            font-size: 18px;
-            margin-bottom: 16px;
-        }
-        .shops {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-        .shop-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            overflow: hidden;
-            transition: box-shadow 0.2s;
-        }
-        .shop-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-        }
-        .shop-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-        .shop-card .info {
-            padding: 12px;
-        }
-        .shop-card .info .phone {
-            color: #388e3c;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        .shop-card .info .name {
-            font-size: 16px;
-            font-weight: 500;
-            margin: 8px 0 4px 0;
-        }
-        .shop-card .info .address {
-            font-size: 14px;
-            color: #666;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 32px 0;
-        }
-        .pagination button {
-            background: #fff;
-            border: 1px solid #388e3c;
-            color: #388e3c;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .pagination button.active {
-            background: #388e3c;
-            color: #fff;
-        }
-        footer {
-            background: #f5f5f5;
-            padding: 32px 0 16px 0;
-            margin-top: 48px;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            gap: 32px;
-            width: 1200px;
-            margin: 0 auto;
-            font-size: 15px;
-        }
-        .footer-content div {
-            flex: 1;
-        }
-        .footer-bottom {
-            text-align: center;
-            color: #888;
-            font-size: 13px;
-            margin-top: 16px;
-        }
-        .social {
-            margin-top: 8px;
-        }
-        .social a {
-            color: #388e3c;
-            margin-right: 8px;
-            font-size: 20px;
-        }
-        @media (max-width: 1300px) {
-            .container, .footer-content {
-                width: 100%;
-                padding: 0 16px;
-            }
-            .main-content {
-                flex-direction: column;
-            }
-            .shops {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 900px) {
-            .shops {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                width: 100%;
-                margin-bottom: 24px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../../public/css/shop.css">
     <link rel="stylesheet" href="../../public/css/style.css">
-    <link rel="stylesheet" href="../../public/css/product-details.css">
+    
 </head>
 <body>
 <header>
-    <div class="header">
+    <div class="header" id="navbar">
       <div class="header-top">
         <div class="header-top-left">
-          <img src="../../public/img/logo.png" alt="Logo" />
+          <a href="trangchu.html"><img src="../../public/img/logo.png" alt="Logo" /></a>
         </div>
         <div class="header-top-main">
           <div class="menu">
@@ -240,44 +71,1912 @@
         <ul class="pure-list" id="pure-list">
           <li class="title-san-pham">
             <a href="trangchu.html">Sale</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Combo chăm sóc da</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="trangchu.html">Combo chăm sóc tóc</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="trangchu.html">Combo chăm sóc môi</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="trangchu.html">Combo khác</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="trangchu.html">Black Green Day</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung combo chăm sóc da -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung combo chăm sóc tóc -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung combo chăm sóc môi -->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-cham-soc-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung combo khác -->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-khac.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-khac.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/combo-khac.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung combo Black green day -->
+              <div class="pure-item-right right-5">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
+          <!-- title-san-pham -->
           <li class="title-san-pham">
-            <a href="trangchu.html">Trang Điểm</a>
+            <a href="trangdiem.html">Trang Điểm</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Son dưỡng môi</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Son màu</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Tẩy da chết môi</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Kem nền</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Kem má</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung son dưỡng môi -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung son màu -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-mau.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-mau.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="../../public/img/son-mau.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung tẩy da chế -->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem nền -->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem má -->
+              <div class="pure-item-right right-5">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/01/Frame_11223_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/01/Frame_11223_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/01/Frame_11223_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Da</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Tẩy trang - rửa mặt</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Toner - xịt khoáng</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Dưỡng da</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Kem chống nắng</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tẩy trang- rửa mặt -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung Toner - xịt khoáng -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung dưỡng da-->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Tóc</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Sản phẩm gội đầu</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Sản phẩm dưỡng tóc</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung sản phẩm gội đầu -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung sản phẩm dưỡng tóc -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Làm Đẹp Đường Uống</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Làm đẹp đường uống</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung làm đẹp đường uống -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Cơ Thể</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Xà bông thiên nhiên</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Sữa tắm thiên nhiên</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Dưỡng thể</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Tẩy da chết body</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Chăm sóc răng miệng</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tẩy trang- rửa mặt -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+         <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung Toner - xịt khoáng -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung dưỡng da-->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-5">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Em Bé</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Tắm bé</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Chăm sóc bé</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tắm bé -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung chăm sóc bé -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Hương Thơm</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Tinh dầu nhỏ giọt nguyên chất</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Tinh dầu trị liệu</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Tinh dầu treo thông minh</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Nước hoa khô</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Nước hoa dạng xịt</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tẩy trang- rửa mặt -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung Toner - xịt khoáng -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung dưỡng da-->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-5">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+<div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Quà Tặng</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Dưới 300k</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Dưới 500k</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Dưới 1 triệu</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tắm bé -->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung tắm bé -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung chăm sóc bé -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Bộ Sản Phẩm</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Bộ chăm sóc da ngừa lão hóa</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Bộ chăm sóc da Rau Má</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Bộ chăm sóc da tơ tắm</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Bộ chăm sóc da Sơ-Ri</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tẩy trang- rửa mặt -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung Toner - xịt khoáng -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung dưỡng da-->
+              <div class="pure-item-right right-3">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/07/kem-duong-am-sam-1700_27_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung kem chống nắng-->
+              <div class="pure-item-right right-4">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2024/12/Frame_11107_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Về Aura Beauty</a>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Khác</a>
+            <div class="pure-item">
+              <div class="pure-item-left">
+                <ul class="pure-list-item">
+                  <li>
+                    <a href="#">Chăm sóc nhà cửa</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                  <li>
+                    <a href="#">Túi vải bảo vệ môi trường</a>
+                    <i class="fas fa-greater-than"></i>
+                  </li>
+                </ul>
+              </div>
+              <!-- Nội dung tẩy trang- rửa mặt -->
+              <div class="pure-item-right right-1">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/05/bo-cham-soc-da-to-tam-chuan_sp.webp" alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Nội dung Toner - xịt khoáng -->
+              <div class="pure-item-right right-2">
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+                 <div class="pure-item-right-content-skin">
+                  <a>
+                    <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
+                      alt="" />
+                  </a>
+                  <a href="">
+                    <p>Combo Gội xả thảo dược Tóc Mây</p>
+                  </a>
+                  <div class="pure-item-price-info">
+                    <span class="price">1.200.000đ</span>
+                    <span class="old-price">1.500.000đ</span>
+                  </div>
+                </div>
+              </div>
           </li>
         </ul>
       </div>
     </div>
-
     </header>
     <div class="Container-fluid">
         <div class="shop-info">
@@ -384,5 +2083,60 @@
             <small>© 2025 Cỏ Mềm. Tất cả quyền được bảo lưu.</small>
         </div>
     </footer>
+    <script>
+        // Xử lý cuộn trang
+  let lastScrollTop = 0;
+  const navbar = document.getElementById('navbar');
+
+  window.addEventListener('scroll', function () {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+      navbar.style.top = "-200px"; // Ẩn khi cuộn xuống
+    } else {
+      navbar.style.top = "0";      // Hiện khi cuộn lên
+    }
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  });
+
+  // Hiển thị pure-item khi hover vào title-san-pham (menu cha)
+  document.querySelectorAll('.title-san-pham').forEach(item => { // Lặp qua từng menu cha
+    const pureItem = item.querySelector('.pure-item'); // Lấy menu con tương ứng
+    item.addEventListener('mouseenter', () => { // Khi hover vào menu cha
+      if (pureItem) {
+        pureItem.style.display = 'flex'; // Hiện menu con
+        // Luôn active li đầu và hiện sản phẩm đầu tiên
+        const lis = pureItem.querySelectorAll('.pure-item-left ul li'); // Lấy tất cả mục bên trái
+        const rights = pureItem.querySelectorAll('.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
+        lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
+        rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
+        const firstLi = pureItem.querySelector('.pure-item-left ul li:first-child'); // Lấy li đầu tiên
+        const firstRight = pureItem.querySelector('.pure-item-right.right-1'); // Lấy sản phẩm đầu tiên
+        if (firstLi) firstLi.classList.add('active'); // Active li đầu tiên
+        if (firstRight) firstRight.style.display = 'grid'; // Hiện sản phẩm đầu tiên
+      }
+    });
+    item.addEventListener('mouseleave', () => { // Khi rời chuột khỏi menu cha
+      if (pureItem) pureItem.style.display = 'none'; // Ẩn menu con
+    });
+  });
+
+  // Xử lý hover bên trong pure-item (menu con)
+  document.querySelectorAll('.pure-item').forEach(menu => { // Lặp qua từng menu con
+    const lis = menu.querySelectorAll('.pure-item-left ul li'); // Lấy tất cả mục bên trái
+    const rights = menu.querySelectorAll('.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
+
+    // Xử lý hover từng li bên trái
+    lis.forEach((li, idx) => { // Lặp qua từng li bên trái
+      li.addEventListener('mouseenter', function () { // Khi hover vào từng li
+        rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
+        const right = menu.querySelector('.pure-item-right.right-' + (idx + 1)); // Lấy sản phẩm tương ứng
+        if (right) right.style.display = 'grid'; // Hiện sản phẩm tương ứng
+        lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
+        li.classList.add('active'); // Active li đang hover
+      });
+    });
+  });
+    </script>
 </body>
 </html>
