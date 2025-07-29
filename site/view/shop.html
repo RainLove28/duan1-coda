@@ -1,388 +1,428 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Hệ thống cửa hàng Cỏ Mềm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-     <!-- Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-    rel="stylesheet" />
-  <!-- font-awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font-awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-       
-        .shop-info {
-            display: flex;
-            justify-content: space-between;
-            background: #f5f5f5;
-            padding: 24px;
-            margin: 24px 0;
-            border-radius: 12px;
-        }
-        .shop-info .stats {
-            display: flex;
-            gap: 32px;
-            align-items: center;
-        }
-        .shop-info .stats div {
-            font-size: 18px;
-            color: #388e3c;
-        }
-        .shop-info .banner img {
-            height: 120px;
-            border-radius: 8px;
+      .shop-info {
+        display: flex;
+        justify-content: space-between;
+        background: #f5f5f5;
+        padding: 24px;
+        margin: 24px 0;
+        border-radius: 12px;
+      }
+      .shop-info .stats {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+      }
+      .shop-info .stats div {
+        font-size: 18px;
+        color: #388e3c;
+      }
+      .shop-info .banner img {
+        height: 120px;
+        border-radius: 8px;
+      }
+      .main-content {
+        display: flex;
+        gap: 32px;
+      }
+      .sidebar {
+        width: 280px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+      .sidebar h3 {
+        color: #388e3c;
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+      .sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px 0;
+      }
+      .sidebar ul li {
+        margin-bottom: 8px;
+      }
+      .sidebar ul li label {
+        cursor: pointer;
+      }
+      .sidebar .shop-list {
+        font-size: 15px;
+      }
+      .shop-grid {
+        flex: 1;
+      }
+      .shop-grid h3 {
+        color: #388e3c;
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+      .shops {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+      }
+      .shop-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        transition: box-shadow 0.2s;
+      }
+      .shop-card:hover {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+      .shop-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+      }
+      .shop-card .info {
+        padding: 12px;
+      }
+      .shop-card .info .phone {
+        color: #388e3c;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      .shop-card .info .name {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 8px 0 4px 0;
+      }
+      .shop-card .info .address {
+        font-size: 14px;
+        color: #666;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 32px 0;
+      }
+      .pagination button {
+        background: #fff;
+        border: 1px solid #388e3c;
+        color: #388e3c;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .pagination button.active {
+        background: #388e3c;
+        color: #fff;
+      }
+      footer {
+        background: #f5f5f5;
+        padding: 32px 0 16px 0;
+        margin-top: 48px;
+      }
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+        width: 1200px;
+        margin: 0 auto;
+        font-size: 15px;
+      }
+      .footer-content div {
+        flex: 1;
+      }
+      .footer-bottom {
+        text-align: center;
+        color: #888;
+        font-size: 13px;
+        margin-top: 16px;
+      }
+      .social {
+        margin-top: 8px;
+      }
+      .social a {
+        color: #388e3c;
+        margin-right: 8px;
+        font-size: 20px;
+      }
+      @media (max-width: 1300px) {
+        .container,
+        .footer-content {
+          width: 100%;
+          padding: 0 16px;
         }
         .main-content {
-            display: flex;
-            gap: 32px;
-        }
-        .sidebar {
-            width: 280px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 24px;
-            box-sizing: border-box;
-        }
-        .sidebar h3 {
-            color: #388e3c;
-            font-size: 18px;
-            margin-bottom: 16px;
-        }
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px 0;
-        }
-        .sidebar ul li {
-            margin-bottom: 8px;
-        }
-        .sidebar ul li label {
-            cursor: pointer;
-        }
-        .sidebar .shop-list {
-            font-size: 15px;
-        }
-        .shop-grid {
-            flex: 1;
-        }
-        .shop-grid h3 {
-            color: #388e3c;
-            font-size: 18px;
-            margin-bottom: 16px;
+          flex-direction: column;
         }
         .shops {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+          grid-template-columns: repeat(2, 1fr);
         }
-        .shop-card {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            overflow: hidden;
-            transition: box-shadow 0.2s;
+      }
+      @media (max-width: 900px) {
+        .shops {
+          grid-template-columns: 1fr;
         }
-        .shop-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        .sidebar {
+          width: 100%;
+          margin-bottom: 24px;
         }
-        .shop-card img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-        }
-        .shop-card .info {
-            padding: 12px;
-        }
-        .shop-card .info .phone {
-            color: #388e3c;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        .shop-card .info .name {
-            font-size: 16px;
-            font-weight: 500;
-            margin: 8px 0 4px 0;
-        }
-        .shop-card .info .address {
-            font-size: 14px;
-            color: #666;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 32px 0;
-        }
-        .pagination button {
-            background: #fff;
-            border: 1px solid #388e3c;
-            color: #388e3c;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .pagination button.active {
-            background: #388e3c;
-            color: #fff;
-        }
-        footer {
-            background: #f5f5f5;
-            padding: 32px 0 16px 0;
-            margin-top: 48px;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            gap: 32px;
-            width: 1200px;
-            margin: 0 auto;
-            font-size: 15px;
-        }
-        .footer-content div {
-            flex: 1;
-        }
-        .footer-bottom {
-            text-align: center;
-            color: #888;
-            font-size: 13px;
-            margin-top: 16px;
-        }
-        .social {
-            margin-top: 8px;
-        }
-        .social a {
-            color: #388e3c;
-            margin-right: 8px;
-            font-size: 20px;
-        }
-        @media (max-width: 1300px) {
-            .container, .footer-content {
-                width: 100%;
-                padding: 0 16px;
-            }
-            .main-content {
-                flex-direction: column;
-            }
-            .shops {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (max-width: 900px) {
-            .shops {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                width: 100%;
-                margin-bottom: 24px;
-            }
-        }
+      }
     </style>
-    <link rel="stylesheet" href="../../public/css/style.css">
-    <link rel="stylesheet" href="../../public/css/product-details.css">
-</head>
-<body>
-<header>
-    <div class="header">
-      <div class="header-top">
-        <div class="header-top-left">
-          <img src="../../public/img/logo.png" alt="Logo" />
+    <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="../../public/css/product-details.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div class="header-top">
+          <div class="header-top-left">
+            <img src="../../public/img/logo.png" alt="Logo" />
+          </div>
+          <div class="header-top-main">
+            <div class="menu">
+              <a href="#">Kem Chống Nắng</a>
+              <span>|</span>
+              <a href="#">Tẩy Trang</a>
+              <span>|</span>
+              <a href="#">Toner</a>
+              <span>|</span>
+              <a href="#">Son màu</a>
+              <span>|</span>
+              <a href="#">Dầu Gội</a>
+            </div>
+            <div class="search-box">
+              <input
+                type="text"
+                placeholder="Tìm sản phẩm, danh mục mong muốn ..."
+              />
+              <button><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+          <div class="header-top-right">
+            <div class="cart">
+              <a href="/cart" class="cart-link">
+                <i class="fas fa-home"></i>
+                <span>Hệ thống cửa hàng</span></a
+              >
+            </div>
+            <div class="cart">
+              <a href="/cart"><i class="fas fa-heart"></i></a>
+            </div>
+            <div class="cart">
+              <a href="/profile"><i class="fas fa-user"></i></a>
+            </div>
+            <div class="cart">
+              <a href="/cart" class="cart-link">
+                <i class="fas fa-shopping-cart"></i>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="header-top-main">
-          <div class="menu">
-            <a href="#">Kem Chống Nắng</a>
-            <span>|</span>
-            <a href="#">Tẩy Trang</a>
-            <span>|</span>
-            <a href="#">Toner</a>
-            <span>|</span>
-            <a href="#">Son màu</a>
-            <span>|</span>
-            <a href="#">Dầu Gội</a>
-          </div>
-          <div class="search-box">
-            <input type="text" placeholder="Tìm sản phẩm, danh mục mong muốn ..." />
-            <button><i class="fa fa-search"></i></button>
-          </div>
-        </div>
-        <div class="header-top-right">
-          <div class="cart">
-            <a href="/cart" class="cart-link">
-              <i class="fas fa-home"></i>
-              <span>Hệ thống cửa hàng</span></a>
-          </div>
-          <div class="cart">
-            <a href="/cart"><i class="fas fa-heart"></i></a>
-          </div>
-          <div class="cart">
-            <a href="/profile"><i class="fas fa-user"></i></a>
-          </div>
-          <div class="cart">
-            <a href="/cart" class="cart-link">
-              <i class="fas fa-shopping-cart"></i>
-            </a>
-          </div>
+        <!-- Header-bottom -->
+        <div class="header-bottom">
+          <ul class="pure-list" id="pure-list">
+            <li class="title-san-pham">
+              <a href="trangchu.html">Sale</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Trang Điểm</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Da</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Tóc</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Làm Đẹp Đường Uống</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Cơ Thể</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Em Bé</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Hương Thơm</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Quà Tặng</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Bộ Sản Phẩm</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Về Aura Beauty</a>
+            </li>
+            <li class="title-san-pham">
+              <a href="trangchu.html">Khác</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- Header-bottom -->
-      <div class="header-bottom">
-        <ul class="pure-list" id="pure-list">
-          <li class="title-san-pham">
-            <a href="trangchu.html">Sale</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Trang Điểm</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Da</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Tóc</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Làm Đẹp Đường Uống</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Cơ Thể</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Em Bé</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Hương Thơm</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Quà Tặng</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Bộ Sản Phẩm</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Về Aura Beauty</a>
-          </li>
-          <li class="title-san-pham">
-            <a href="trangchu.html">Khác</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
     </header>
     <div class="Container-fluid">
-        <div class="shop-info">
-            <div class="stats">
-                <div><b>79</b><br>Cửa hàng trên toàn quốc</div>
-                <div><b>5.000+</b><br>Khách được phục vụ mỗi ngày</div>
-                <div><b>9:00 - 21:30</b><br>Kể cả chủ nhật và ngày lễ</div>
-            </div>
-            <div class="banner">
-                <img src="../../public/img/banner-store-new.png" alt="Mỹ phẩm thiên nhiên Lành & Thật">
-            </div>
+      <div class="shop-info">
+        <div class="stats">
+          <div><b>79</b><br />Cửa hàng trên toàn quốc</div>
+          <div><b>5.000+</b><br />Khách được phục vụ mỗi ngày</div>
+          <div><b>9:00 - 21:30</b><br />Kể cả chủ nhật và ngày lễ</div>
         </div>
-        <div class="container">
+        <div class="banner">
+          <img
+            src="../../public/img/banner-store-new.png"
+            alt="Mỹ phẩm thiên nhiên Lành & Thật"
+          />
+        </div>
+      </div>
+      <div class="container">
         <div class="main-content">
-            <aside class="sidebar">
-                <h3>Tìm cửa hàng Cỏ Mềm</h3>
-                <ul>
-                    <li><label><input type="checkbox"> Tỉnh/Thành phố</label></li>
-                    <li><label><input type="checkbox"> Quận/Huyện</label></li>
-                </ul>
-                <h3>Cỏ Mềm chào đón bạn ghé thăm:</h3>
-                <div class="shop-list">
-                    <ul>
-                        <li>243 Thống Nhất, Dĩ An, Bình Dương</li>
-                        <li>108 Bến Hoàng Minh, Hải Nam</li>
-                        <li>209 Xuyết, Phú Nhuận, Hồ Chí Minh</li>
-                        <li>223 Trần Hưng Đạo, Nam Định</li>
-                        <li>330 Hoàng Diệu, Đà Nẵng</li>
-                        <li>22 Nguyễn Văn Tiếp, Tiền Giang</li>
-                        <li>...và nhiều địa chỉ khác</li>
-                    </ul>
+          <aside class="sidebar">
+            <h3>Tìm cửa hàng Cỏ Mềm</h3>
+            <ul>
+              <li>
+                <label><input type="checkbox" /> Tỉnh/Thành phố</label>
+              </li>
+              <li>
+                <label><input type="checkbox" /> Quận/Huyện</label>
+              </li>
+            </ul>
+            <h3>Cỏ Mềm chào đón bạn ghé thăm:</h3>
+            <div class="shop-list">
+              <ul>
+                <li>243 Thống Nhất, Dĩ An, Bình Dương</li>
+                <li>108 Bến Hoàng Minh, Hải Nam</li>
+                <li>209 Xuyết, Phú Nhuận, Hồ Chí Minh</li>
+                <li>223 Trần Hưng Đạo, Nam Định</li>
+                <li>330 Hoàng Diệu, Đà Nẵng</li>
+                <li>22 Nguyễn Văn Tiếp, Tiền Giang</li>
+                <li>...và nhiều địa chỉ khác</li>
+              </ul>
+            </div>
+          </aside>
+          <section class="shop-grid">
+            <h3>Có 79 cửa hàng trên toàn quốc</h3>
+            <div class="shops">
+              <!-- Shop Card Example -->
+              <div class="shop-card">
+                <img
+                  src="../../public/img/CH01_sp.webp"
+                  alt="Cửa hàng Cỏ Mềm"
+                />
+                <div class="info">
+                  <div class="phone">0977806245</div>
+                  <div class="name">Cỏ Mềm Phú Yên</div>
+                  <div class="address">243 Thống Nhất, Dĩ An, Bình Dương</div>
                 </div>
-            </aside>
-            <section class="shop-grid">
-                <h3>Có 79 cửa hàng trên toàn quốc</h3>
-                <div class="shops">
-                    <!-- Shop Card Example -->
-                    <div class="shop-card">
-                        <img src="../../public/img/CH01_sp.webp" alt="Cửa hàng Cỏ Mềm">
-                        <div class="info">
-                            <div class="phone">0977806245</div>
-                            <div class="name">Cỏ Mềm Phú Yên</div>
-                            <div class="address">243 Thống Nhất, Dĩ An, Bình Dương</div>
-                        </div>
-                    </div>
-                    <div class="shop-card">
-                        <img src="../../public/img/CH02_sp.webp" alt="Cửa hàng Cỏ Mềm">
-                        <div class="info">
-                            <div class="phone">0915052431</div>
-                            <div class="name">Cỏ Mềm Long Thành, Đồng Nai</div>
-                            <div class="address">243 Thống Nhất, Long Thành, Đồng Nai</div>
-                        </div>
-                    </div>
-                    <!-- ...Thêm các shop-card khác tương tự... -->
+              </div>
+              <div class="shop-card">
+                <img
+                  src="../../public/img/CH02_sp.webp"
+                  alt="Cửa hàng Cỏ Mềm"
+                />
+                <div class="info">
+                  <div class="phone">0915052431</div>
+                  <div class="name">Cỏ Mềm Long Thành, Đồng Nai</div>
+                  <div class="address">
+                    243 Thống Nhất, Long Thành, Đồng Nai
+                  </div>
                 </div>
-                <div class="pagination">
-                    <button class="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                </div>
-            </section>
+              </div>
+              <!-- ...Thêm các shop-card khác tương tự... -->
+            </div>
+            <div class="pagination">
+              <button class="active">1</button>
+              <button>2</button>
+              <button>3</button>
+            </div>
+          </section>
         </div>
-        </div>
+      </div>
     </div>
 
     <footer>
-        <div class="footer-content">
-            <div>
-                <b>Về Cỏ Mềm</b><br>
-                Chuyên gia Cỏ<br>
-                Với hơn mấy<br>
-                Tuyển dụng
-            </div>
-            <div>
-                <b>Hoạt động cộng đồng</b><br>
-                Xây trường cho trẻ em<br>
-                Tình thương<br>
-                Chung tay chống dịch COVID
-            </div>
-            <div>
-                <b>Hướng dẫn mua hàng</b><br>
-                Chính sách mua hàng<br>
-                Chính sách bảo hành<br>
-                Chính sách đổi trả<br>
-                Chính sách bảo mật thông tin
-            </div>
-            <div>
-                <b>Thông tin liên hệ</b><br>
-                facebook@comem.vn<br>
-                1800 668 686<br>
-                <button style="background:#388e3c;color:#fff;border:none;padding:8px 16px;border-radius:4px;margin-top:8px;">Hệ thống cửa hàng</button>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
+      <div class="footer-content">
+        <div>
+          <b>Về Cỏ Mềm</b><br />
+          Chuyên gia Cỏ<br />
+          Với hơn mấy<br />
+          Tuyển dụng
         </div>
-        <div class="footer-bottom">
-            Công ty cổ phần Mỹ phẩm Thiên nhiên Cỏ Mềm<br>
-            Địa chỉ: Số 10 ngõ 100 Nguyễn Xiển, Hà Nội<br>
-            SĐT: 1800 668 686 | Email: info@comem.vn<br>
-            <br>
-            <small>© 2025 Cỏ Mềm. Tất cả quyền được bảo lưu.</small>
+        <div>
+          <b>Hoạt động cộng đồng</b><br />
+          Xây trường cho trẻ em<br />
+          Tình thương<br />
+          Chung tay chống dịch COVID
         </div>
+        <div>
+          <b>Hướng dẫn mua hàng</b><br />
+          Chính sách mua hàng<br />
+          Chính sách bảo hành<br />
+          Chính sách đổi trả<br />
+          Chính sách bảo mật thông tin
+        </div>
+        <div>
+          <b>Thông tin liên hệ</b><br />
+          facebook@comem.vn<br />
+          1800 668 686<br />
+          <button
+            style="
+              background: #388e3c;
+              color: #fff;
+              border: none;
+              padding: 8px 16px;
+              border-radius: 4px;
+              margin-top: 8px;
+            "
+          >
+            Hệ thống cửa hàng
+          </button>
+          <div class="social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        Công ty cổ phần Mỹ phẩm Thiên nhiên Cỏ Mềm<br />
+        Địa chỉ: Số 10 ngõ 100 Nguyễn Xiển, Hà Nội<br />
+        SĐT: 1800 668 686 | Email: info@comem.vn<br />
+        <br />
+        <small>© 2025 Cỏ Mềm. Tất cả quyền được bảo lưu.</small>
+      </div>
     </footer>
-</body>
+  </body>
 </html>
