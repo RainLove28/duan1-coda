@@ -134,16 +134,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add to cart functionality
+
     const addToCartBtn = document.querySelector('.add-to-cart-btn');
+    
+    // Function to show custom white notification
+    function showWhiteNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            color: #333;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            text-align: center;
+            min-width: 300px;
+            border: 2px solid #28a745;
+        `;
+        notification.textContent = message;
+        
+        // Add to body
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                document.body.removeChild(notification);
+            }
+        }, 3000);
+    }
     
     if (addToCartBtn) {
         addToCartBtn.addEventListener('click', function() {
             const quantity = qtyInput ? qtyInput.value : 1;
             const productName = document.querySelector('.product-title').textContent;
             
-            // Here you would typically send this data to your backend
-            alert(`Đã thêm ${quantity} sản phẩm "${productName}" vào giỏ hàng!`);
+            showWhiteNotification(`Đã thêm ${quantity} sản phẩm "${productName}" vào giỏ hàng!`);
         });
     }
 
@@ -155,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const productItem = this.closest('.product-item');
             const productName = productItem.querySelector('.product-name').textContent;
-            alert(`Mua ngay sản phẩm: ${productName}`);
+            showWhiteNotification(`Mua ngay sản phẩm: ${productName}`);
         });
     });
     
@@ -163,7 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const productItem = this.closest('.product-item');
             const productName = productItem.querySelector('.product-name').textContent;
-            alert(`Xem chi tiết sản phẩm: ${productName}`);
+            showWhiteNotification(`Xem chi tiết sản phẩm: ${productName}`);
         });
     });
 
@@ -172,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (writeReviewBtn) {
         writeReviewBtn.addEventListener('click', function() {
-            alert('Chức năng viết đánh giá sẽ được triển khai!');
+            showWhiteNotification('Chức năng viết đánh giá sẽ được triển khai!');
         });
     }
 

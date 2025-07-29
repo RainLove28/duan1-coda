@@ -1,8 +1,18 @@
 
+/* Reset any potential header conflicts */
+.header,
+.header-top,
+.header-bottom {
+  position: relative;
+  z-index: 1000;
+}
+
 .breadcrumb {
   background-color: #f8f9fa;
   padding: 10px 0;
   border-bottom: 1px solid #e9ecef;
+  clear: both;
+  margin-top: 0;
 }
 
 .breadcrumb-list {
@@ -42,7 +52,30 @@
   padding: 40px 0;
 }
 
-.container {
+/* Product specific container - avoid conflicts with main site */
+.product-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Ensure product details don't interfere with header */
+.product-detail-container,
+.product-description-section,
+.related-products-section,
+.more-products-section,
+.reviews-section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Override any global container styles within product sections */
+.breadcrumb .product-container,
+.product-detail-container .product-container,
+.product-description-section .product-container,
+.related-products-section .product-container,
+.more-products-section .product-container,
+.reviews-section .product-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
