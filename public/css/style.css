@@ -907,16 +907,21 @@
   padding: 20px;
 }
 
-.home-resources-item-2 .home-product:nth-child(2) img,
+.home-resources-item-2 .home-product:nth-child(2) img
+ {
+  position: absolute;
+  bottom: -75px;
+  left: 30px;
+}
 .home-resources-item-2 .home-product:nth-child(4) img {
   position: absolute;
-  bottom: -50px;
+  bottom: -40px;
   left: 30px;
 }
 
 .home-resources-item-2 .resources-title-1 {
   position: absolute;
-  bottom: 150px;
+  bottom: 80px;
   left: 0px;
   padding: 20px;
 }
