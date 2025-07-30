@@ -911,17 +911,12 @@
   left: 30px;
 }
 
-.home-resources-item-2 .resources-title-1 {
+.home-resources-item-2 .resources-title-1,.home-resources-item-2 .resources-title-3 {
   position: absolute;
-  bottom: 35%;
+  bottom: 20%;
   left: 0px;
   padding: 20px;
 }
 
-.home-resources-item-2 .resources-title-3 {
-  position: absolute;
-  bottom: 35%;
-  left: 0px;
-  padding: 20px;
-}
+
 
