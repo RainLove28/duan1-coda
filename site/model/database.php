@@ -1,65 +1,52 @@
 <?php
-class Database {
-    private $host = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "duancoda";
-    private $conn;
+class Database
+{
+    private $db_host;
+    private $db_name;
+    private $db_user;
+    private $db_pass;
+    public $connection;
 
-    public static $instance;
-
-    public static function getInstance() {
-        if (!self::$instance) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
+    public function __construct($db_host, $db_name, $db_user, $db_pass)
+    {
+        $this->db_host = $db_host;
+        $this->db_name = $db_name;
+        $this->db_user = $db_user;
+        $this->db_pass = $db_pass;
     }
 
-    public function __construct() {
+    public function contect()
+    {
         try {
-            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database;charset=utf8mb4", $this->username, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $dsn = "mysql:host=$this->db_host; dbname=$this->db_name;charset=utf8"; // Chuỗi kết connect
+            $this->connection = new PDO($dsn, $this->db_user, $this->db_pass);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "Connection successful!\n";
         } catch (PDOException $e) {
-            error_log("Database connection failed: " . $e->getMessage());
-            die("Database connection failed. Please check your configuration.");
+            echo "Connection failed: " . $e->getMessage() . "\n";
+            die();
         }
     }
 
-    public function execute($sql, $params = []) {
-        try {
-            $stmt = $this->conn->prepare($sql);
-            return $stmt->execute($params);
-        } catch (PDOException $e) {
-            error_log("SQL execute error: " . $e->getMessage() . " - SQL: " . $sql);
-            return false;
+    public function disconnect() {
+        if($this->connection != null) {
+            $this->connection = null;
         }
     }
 
-    public function getAll($sql, $params = []) {
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($params);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("SQL getAll error: " . $e->getMessage() . " - SQL: " . $sql);
-            return [];
-        }
+    public function getAllProducts()
+    {
+        $query = "SELECT * FROM `products`";
+        $stmt = $this->connection->query($query);
+        $products = $stmt->fetchAll();
+        return $products;
     }
 
-    public function getOne($sql, $params = []) {
-        try {
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute($params);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            error_log("SQL getOne error: " . $e->getMessage() . " - SQL: " . $sql);
-            return false;
-        }
-    }
-    public function getConnection() {
-        return $this->conn;
+    public function getProductDetail($id)
+    {
+        $query = "SELECT * FROM `products` WHERE id = " . $id;
+        $stmt = $this->connection->query($query);
+        $product = $stmt->fetch();
+        return $product;
     }
 }
-?>
