@@ -2054,7 +2054,7 @@
                                 <li><a href="">- Combo chăm sóc da</a></li>
                                 <li><a href="">- Combo chăm sóc tóc</a></li>
                                 <li><a href="">- Combo chăm sóc môi</a></li>
-                                <li><a href="">- Combo khác</a></li>
+                                <li><a href="">- Combo khác</a></li>    
                                 <li><a href="">- Black Green Day</a></li>
                             </ul>
                         </li>
@@ -2186,14 +2186,14 @@
                 <!-- Main content -->
                 <section class="sale-content">
                     <div class="sale-title">
-                        <img src="../../public/img/icon-sale.png" alt="" style="height: 32px;vertical-align: middle;">
+                        <img src="../../public/img/son-duong-moi.webp" alt="" style="height: 32px;vertical-align: middle;">
                         <span>KHUYẾN MẠI VÀ COMBO</span>
                     </div>
                     <div class="sale-products">
                         <!-- Một sản phẩm -->
                         <div class="sale-product">
                             <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/sp1.webp" alt="">
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
                             <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
                             <div class="sale-product-price">
                                 <span class="price">460.000đ</span>
@@ -2201,7 +2201,69 @@
                             </div>
                         </div>
                         <!-- Lặp lại các sản phẩm khác -->
-                        <!-- ... -->
+                       <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
+                        <div class="sale-product">
+                            <div class="sale-badge">-13%</div>
+                            <img src="../../public/img/son-duong-moi.webp" alt="">
+                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
+                            <div class="sale-product-price">
+                                <span class="price">460.000đ</span>
+                                <span class="old-price">530.000</span>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -2210,6 +2272,19 @@
 </body>
 <script src="../../public/JS/header.js"></script>
 <script>
+     // Mở menu Sale khi vào trang sale
+    document.querySelectorAll('.sidebar-menu > li').forEach(function(li) {
+        var title = li.querySelector('.sidebar-title-sale > a');
+        var ul = li.querySelector('ul');
+        var img = li.querySelector('.toggle-menu img');
+        if (title && title.textContent.trim().toLowerCase() === 'sale') {
+            if (ul) ul.classList.remove('hidden');
+            if (img) img.src = "../../public/img/Vector1.png";
+        } else {
+            if (ul) ul.classList.add('hidden');
+            if (img) img.src = "../../public/img/Vector.png";
+        }
+    });
     document.querySelectorAll('.sidebar-title-sale .toggle-menu').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
             e.preventDefault();
