@@ -6,18 +6,18 @@ error_reporting(E_ALL);
 
 $baseUrl = "http://" . $_SERVER['SERVER_NAME'] . dirname($_SERVER["REQUEST_URI"] . '?') . '/';
 //var_dump($_SESSION['userInfo']);
-require_once 'model/Database.php';
+require_once 'site/model/database.php';
 // khai báo các thông số kết nối
 $db_host = "localhost";
-$db_name = "php1";
+$db_name = "duancoda";
 $db_user = "root";
-$db_pass = "";
+$db_pass = "raindepzai";
 
 $db = new Database($db_host, $db_name, $db_user, $db_pass);
 $db->contect();
 
 // Chèn file SiteController.php có class SiteController
-require_once 'Controller/SiteController.php';
+require_once 'site/controller/SiteController.php';
 // khởi tạo đối tượng controller từ lớp SiteController. Đây chính là bộ điều khiển
 $controller = new SiteController($baseUrl, $db);
 

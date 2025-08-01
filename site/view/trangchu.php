@@ -63,7 +63,7 @@
             <a href="/profile"><i class="fas fa-user"></i></a>
           </div>
           <div class="cart">
-            <a href="/cart" class="cart-link">
+            <a href="giohang.html" class="cart-link">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </div>
@@ -1866,7 +1866,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Về Aura Beauty</a>
+            <a href="vecomem.html">Về Aura Beauty</a>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Khác</a>

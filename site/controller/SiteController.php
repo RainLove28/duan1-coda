@@ -18,7 +18,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
-        include 'Views/home.php';
+        include 'Views/trangchu.php';
     }
 
     public function cart()
@@ -28,7 +28,7 @@ class SiteController
         $cart->addToCart();
         //var_dump($_SESSION['cart']);
         // sau đó gán data vào tầng View
-        include 'Views/cart.php';
+        include 'Views/giohang.php';
     }
 
     public function checkout()

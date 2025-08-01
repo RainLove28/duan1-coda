@@ -42,6 +42,15 @@ class Database
         return $products;
     }
 
+    // Lấy sản ơhaamr theo danh mục
+    public function getProductsByCategoryId($madm, $limit = 10)
+{
+    $query = "SELECT * FROM `products` WHERE `MaDM` = ? ORDER BY `created_at` DESC LIMIT ?";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute([$madm, $limit]);
+    return $stmt->fetchAll();
+}
+
     public function getProductDetail($id)
     {
         $query = "SELECT * FROM `products` WHERE id = " . $id;
