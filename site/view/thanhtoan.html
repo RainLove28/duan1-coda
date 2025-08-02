@@ -85,23 +85,32 @@
   <div class="checkout-main">
     <!-- Thông tin nhận hàng -->
     <div class="checkout-left">
-      <div class="checkout-title">Thông tin nhận hàng</div>
-      <label class="form-label">Họ và Tên</label>
-      <input type="text" class="form-control mb-2" placeholder="Họ và Tên">
-      <label class="form-label">Số điện thoại</label>
-      <input type="text" class="form-control mb-2" placeholder="Số điện thoại">
-      <div class="checkout-title mt-4">Thông tin địa chỉ</div>
-      <label class="form-label">Tỉnh/Thành phố</label>
-      <input type="text" class="form-control mb-2" placeholder="Tỉnh/Thành phố">
-      <label class="form-label">Ghi Chú</label>
-      <textarea class="form-control mb-2" rows="3" placeholder="Ghi Chú"></textarea>
+  <div class="checkout-title">Thông tin nhận hàng</div>
+  <form method="post" action="../model/sendmail.php">
+    <label class="form-label">Họ và Tên</label>
+    <input type="text" class="form-control mb-2" name="fullname" placeholder="Họ và Tên" required>
+    <label class="form-label">Số điện thoại</label>
+    <input type="text" class="form-control mb-2" name="phone" placeholder="Số điện thoại" required>
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control mb-2" name="email" placeholder="Email" required>
+    <div class="checkout-title mt-4">Thông tin địa chỉ</div>
+    <label class="form-label">Tỉnh/Thành phố</label>
+    <input type="text" class="form-control mb-2" name="address" placeholder="Tỉnh/Thành phố">
+    <label class="form-label">Ghi Chú</label>
+    <textarea class="form-control mb-2" rows="3" name="note" placeholder="Ghi Chú"></textarea>
+    <!-- Thanh toán + tổng tiền -->
+    <div class="checkout-center">
+      <!-- ...các dòng tổng tiền, phương thức thanh toán... -->
+      <button class="btn-order mt-2" type="submit">ĐẶT HÀNG</button>
     </div>
+  </form>
+</div>
     <!-- Thanh toán + tổng tiền -->
     <div class="checkout-center">
       <div class="checkout-title"></div>
-      <div class="pay-method"><img src="../../public/group84.png" style="height:28px;"> <input type="radio" name="pay" checked> <label>Thanh toán tiền mặt</label></div>
-      <div class="pay-method"><img src="../../public/group87.png" style="height:28px;"> <input type="radio" name="pay"> <label>VN Pay</label></div>
-      <div class="pay-method"><img src="../../public/group89.png" style="height:28px;"> <input type="radio" name="pay"> <label>Apple Pay</label></div>
+      <div class="pay-method"><img src="../../public/group84.png" style="height:28px;"> <input type="radio" name="pay_method" value="COD" checked> <label>Thanh toán tiền mặt</label></div>
+      <div class="pay-method"><img src="../../public/group87.png" style="height:28px;"> <input type="radio" name="pay_method" value="VNPay"> <label>VN Pay</label></div>
+      <div class="pay-method"><img src="../../public/group89.png" style="height:28px;"> <input type="radio" name="pay_method" value="ApplePay"> <label>Apple Pay</label></div>
       <div class="d-flex justify-content-between mb-2 mt-4">
         <span class="summary-label">Tổng tiền hàng</span>
         <span class="summary-value">395.000đ</span>
@@ -121,7 +130,8 @@
       <div class="mb-2" style="font-size:13px;color:#888;">
         Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý và tuân theo <a href="#" style="color:#388e1c;">Điều khoản Aura Beauty</a>
       </div>
-      <button class="btn-order mt-2">ĐẶT HÀNG</button>
+      <!-- Đặt nút submit ở đây để gửi form -->
+      
     </div>
     <!-- Giỏ hàng -->
     <div class="checkout-right">
@@ -145,3 +155,4 @@
   </div>
 </div>
 </body>
+</html>

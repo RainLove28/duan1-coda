@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+  <div id="header"></div>
 <div class="cart-main">
   <div class="cart-left">
     <div class="cart-table">
@@ -89,5 +90,13 @@
         <span class="summary-label">Cần thanh toán</span>
         <span class="summary-total">395.000 đ</span>
       </div>
-      <button class="btn-buy">Mua Hàng</button>
+      <button class="btn-buy" onclick="window.location.href='thanhtoan.html'">Mua Hàng</button>
     </div>
+  <script>
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('header').innerHTML = data;
+    });
+</script>
+  </body>
