@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Hệ thống cửa hàng Cỏ Mềm</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,17 +20,17 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="../../public/css/style.css" />
-    <link rel="stylesheet" href="../../public/css/sale.css" />
+    <link rel="stylesheet" href="../public/css/shop.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+
 </head>
 
 <body>
-    <div class="Container-fluid">
-        <!-- header navbar -->
+    <header>
         <div class="header" id="navbar">
             <div class="header-top">
                 <div class="header-top-left">
-                    <a href="trangchu.html"><img src="../../public/img/logo.png" alt="Logo" /></a>
+                    <a href="trangchu.html"><img src="../public/img/logo.png" alt="Logo" /></a>
                 </div>
                 <div class="header-top-main">
                     <div class="menu">
@@ -72,7 +72,7 @@
             <div class="header-bottom">
                 <ul class="pure-list" id="pure-list">
                     <li class="title-san-pham">
-                        <a href="sale.html">Sale</a>
+                        <a href="trangchu.html">Sale</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -101,8 +101,8 @@
                             <!-- Nội dung combo chăm sóc da -->
                             <div class="pure-item-right right-1">
                                 <div class="pure-item-right-content-skin">
-                                    <a href="product-details.html">
-                                        <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                                    <a>
+                                        <img src="../public/img/combo-cham-soc-da-1.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-da-1.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-da-1.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-da-1.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -153,7 +153,7 @@
                             <div class="pure-item-right right-2">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-toc.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-toc.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-toc.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -192,7 +192,7 @@
                             <div class="pure-item-right right-3">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                                        <img src="../public/img/Combo-cham-soc-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                                        <img src="../public/img/Combo-cham-soc-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-cham-soc-moi.webp" alt="" />
+                                        <img src="../public/img/combo-cham-soc-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -231,7 +231,7 @@
                             <div class="pure-item-right right-4">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-khac.webp" alt="" />
+                                        <img src="../public/img/combo-khac.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -243,7 +243,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-khac.webp" alt="" />
+                                        <img src="../public/img/combo-khac.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -255,7 +255,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/combo-khac.webp" alt="" />
+                                        <img src="../public/img/combo-khac.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -270,7 +270,7 @@
                             <div class="pure-item-right right-5">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/Combo-balack.webp" alt="" />
+                                        <img src="../public/img/Combo-balack.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -282,7 +282,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/Combo-balack.webp" alt="" />
+                                        <img src="../public/img/Combo-balack.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -294,7 +294,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/Combo-balack.webp" alt="" />
+                                        <img src="../public/img/Combo-balack.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -339,7 +339,7 @@
                             <div class="pure-item-right right-1">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-duong-moi.webp" alt="" />
+                                        <img src="../public/img/son-duong-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -351,7 +351,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-duong-moi.webp" alt="" />
+                                        <img src="../public/img/son-duong-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -363,7 +363,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-duong-moi.webp" alt="" />
+                                        <img src="../public/img/son-duong-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -375,7 +375,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-duong-moi.webp" alt="" />
+                                        <img src="../public/img/son-duong-moi.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -390,7 +390,7 @@
                             <div class="pure-item-right right-2">
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-mau.webp" alt="" />
+                                        <img src="../public/img/son-mau.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -402,7 +402,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-mau.webp" alt="" />
+                                        <img src="../public/img/son-mau.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -414,7 +414,7 @@
                                 </div>
                                 <div class="pure-item-right-content-skin">
                                     <a>
-                                        <img src="../../public/img/son-mau.webp" alt="" />
+                                        <img src="../public/img/son-mau.webp" alt="" />
                                     </a>
                                     <a href="">
                                         <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -548,7 +548,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="da.html">Da</a>
+                        <a href="trangchu.html">Da</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -751,7 +751,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="toc.html">Tóc</a>
+                        <a href="trangchu.html">Tóc</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -865,7 +865,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="LamDepDuongUong.html">Làm Đẹp Đường Uống</a>
+                        <a href="trangchu.html">Làm Đẹp Đường Uống</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -933,7 +933,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="CoThe.html">Cơ Thể</a>
+                        <a href="trangchu.html">Cơ Thể</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -1179,7 +1179,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="EmBe.html">Em Bé</a>
+                        <a href="trangchu.html">Em Bé</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -1293,7 +1293,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="HuongThom.html">Hương Thơm</a>
+                        <a href="trangchu.html">Hương Thơm</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -1539,7 +1539,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="QuaTang.html">Quà Tặng</a>
+                        <a href="trangchu.html">Quà Tặng</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -1712,7 +1712,7 @@
                         </div>
                     </li>
                     <li class="title-san-pham">
-                        <a href="BoSanPham.html">Bộ Sản Phẩm</a>
+                        <a href="trangchu.html">Bộ Sản Phẩm</a>
                         <div class="pure-item">
                             <div class="pure-item-left">
                                 <ul class="pure-list-item">
@@ -2034,272 +2034,219 @@
                 </ul>
             </div>
         </div>
-        <div class="sale-container">
-            <nav class="sale-breadcrumb">
-                <a href=""><i class="fas fa-house-user"></i></i> Trang Chủ</a>
-                <span>/</span>
-                <a href="">Sản phẩm</a>
-            </nav>
-            <div class="sale-main">
-                <!-- Sidebar -->
-                <aside class="sale-sidebar">
-                    <h3 class="sidebar-title">DANH MỤC SẢN PHẨM</h3>
-                    <ul class="sidebar-menu">
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Sale</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Combo chăm sóc da</a></li>
-                                <li><a href="">- Combo chăm sóc tóc</a></li>
-                                <li><a href="">- Combo chăm sóc môi</a></li>
-                                <li><a href="">- Combo khác</a></li>    
-                                <li><a href="">- Black Green Day</a></li>
-                            </ul>
-                        </li>
-                        <!-- Trang điểm -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Trang điểm</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Son dưỡng môi</a></li>
-                                <li><a href="">- Son màu</a></li>
-                                <li><a href="">- Tẩy da chết môi</a></li>
-                                <li><a href="">- Kem nền</a></li>
-                                <li><a href="">- Kem má</a></li>
-                            </ul>
-                        </li>
-                        <!-- Da -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Da</a>
-                                <a href="" class="toggle-menu"> <img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Tẩy trang</a></li>
-                                <li><a href="">- Toner xịt khoáng</a></li>
-                                <li><a href="">- Dưỡng da</a></li>
-                                <li><a href="">- Kem chống nắng</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tóc -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Tóc</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Sản phẩm gội đầu</a></li>
-                                <li><a href="">- Sản phẩm dưỡng tóc</a></li>
-                            </ul>
-                        </li>
-                        <!-- Làm đẹp đường uống -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Làm đẹp đường uống</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Làm đẹp đường uống</a></li>
-                            </ul>
-                        </li>
-                        <!-- Cơ thể -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Cơ thể</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Xà bông thiên nhiên</a></li>
-                                <li><a href="">- Sữa tắm thiên nhiên</a></li>
-                                <li><a href="">- Tẩy da chết body</a></li>
-                                <li><a href="">- Dưỡng thể</a></li>
-                                <li><a href="">- Chăm sóc răng miệng</a></li>
-                            </ul>
-                        </li>
-                        <!-- Em bé -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Em bé</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Tắm bé</a></li>
-                                <li><a href="">- Chăm sóc bé</a></li>
-                            </ul>
-                        </li>
-                        <!-- Hương thơm -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Hương thơm</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Tinh dầu nhỏ giọt nguyên chất</a></li>
-                                <li><a href="">- Tinh dầu trị liệu</a></li>
-                                <li><a href="">- Tinh dầu treo thông minh</a></li>
-                                <li><a href="">- Nước hoa khô</a></li>
-                                <li><a href="">- Nước hoa dạng xịt</a></li>
-                            </ul>
-                        </li>
-                        <!-- Qùa tặng -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Qùa tặng</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Dưới 300k</a></li>
-                                <li><a href="">- Dưới 500k</a></li>
-                                <li><a href="">- Dưới 1 triệu</a></li>
-                            </ul>
-                        </li>
-                        <!-- Bộ sản phẩm -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Bộ sản phẩm</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Bộ chăm da ngừa lão hóa</a></li>
-                                <li><a href="">- Bộ chăm sóc da Rau má</a></li>
-                                <li><a href="">- Bộ chăm sóc da Tơ tằm</a></li>
-                                <li><a href="">- Bộ chăm sóc da Sơ ri</a></li>
-                            </ul>
-                        </li>
-                        <!-- Khác -->
-                        <li class="active li-title">
-                            <div class="sidebar-title-sale">
-                                <a href="#">Khác</a>
-                                <a href="" class="toggle-menu"><img src="../../public/img/Vector.png" alt=""></a>
-                            </div>
-                            <ul class="hidden">
-                                <li><a href="">- Chăm sóc nhà cửa</a></li>
-                                <li><a href="">- Túi vải bảo vệ môi trường</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </aside>
-                <!-- Main content -->
-                <section class="sale-content">
-                    <div class="sale-title">
-                        <img src="../../public/img/son-duong-moi.webp" alt="" style="height: 32px;vertical-align: middle;">
-                        <span>KHUYẾN MẠI VÀ COMBO</span>
+    </header>
+    <div class="Container-fluid">
+        <div class="shop-info">
+            <div class="stats">
+                <div><b>79</b><br>Cửa hàng trên toàn quốc</div>
+                <div><b>5.000+</b><br>Khách được phục vụ mỗi ngày</div>
+                <div><b>9:00 - 21:30</b><br>Kể cả chủ nhật và ngày lễ</div>
+            </div>
+            <div class="banner">
+                <img src="../public/img/banner-store-new.png" alt="Mỹ phẩm thiên nhiên Lành & Thật">
+            </div>
+        </div>
+        <div class="container">
+            <div class="main-content">
+                <aside class="sidebar">
+                    <div class="store-finder">
+                        <h3 class="title">TÌM CỬA HÀNG CỎ MỀM</h3>
+
+                        <div class="select-wrapper">
+                            <select class="region-select">
+                                <option value="" disabled selected hidden>Tất cả vùng/miền</option>
+                                <option>Tất cả vùng/miền</option>
+                                <option>Miền Bắc</option>
+                                <option>Miền Trung</option>
+                                <option>Miền Nam</option>
+                            </select>
+
+                            <select>
+                                <option value="" disabled selected hidden>Tất cả tỉnh/TP</option>
+                                <option>Tất cả tỉnh/TP</option>
+                                <option>Hồ Chí Minh</option>
+                                <option>Hà Nội</option>
+                                <option>Đà Nẵng</option>
+                            </select>
+
+                            <select>
+                                <option>Tất cả Quận/Huyện</option>
+                                <option>Quận 1</option>
+                                <option>Quận 3</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="sale-products">
-                        <!-- Một sản phẩm -->
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
+                    <br>
+                    <h3>Cỏ Mềm chào đón bạn ghé thăm:</h3>
+                    <div class="shop-list">
+                        <ul>
+                            <li>243 Thống Nhất, Dĩ An, Bình Dương</li>
+                            <li>108 Bến Hoàng Minh, Hải Nam</li>
+                            <li>209 Xuyết, Phú Nhuận, Hồ Chí Minh</li>
+                            <li>223 Trần Hưng Đạo, Nam Định</li>
+                            <li>330 Hoàng Diệu, Đà Nẵng</li>
+                            <li>22 Nguyễn Văn Tiếp, Tiền Giang</li>
+                            <li>...và nhiều địa chỉ khác</li>
+                        </ul>
+                    </div>
+                </aside>
+                <section class="shop-grid">
+                    <h3>Có 79 cửa hàng trên toàn quốc</h3>
+                    <div class="shops">
+                        <!-- Shop Card Example -->
+                        <div class="shop-card">
+                            <img src="../public/img/CH01_sp.webp" alt="Cửa hàng Cỏ Mềm">
+                            <div class="info">
+                                <div class="phone">0977806245</div>
+                                <div class="name">Cỏ Mềm Phú Yên</div>
+                                <div class="address">243 Thống Nhất, Dĩ An, Bình Dương</div>
                             </div>
                         </div>
-                        <!-- Lặp lại các sản phẩm khác -->
-                       <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
+                        <div class="shop-card">
+                            <img src="../public/img/CH02_sp.webp" alt="Cửa hàng Cỏ Mềm">
+                            <div class="info">
+                                <div class="phone">0915052431</div>
+                                <div class="name">Cỏ Mềm Long Thành, Đồng Nai</div>
+                                <div class="address">243 Thống Nhất, Long Thành, Đồng Nai</div>
                             </div>
                         </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
-                        <div class="sale-product">
-                            <div class="sale-badge">-13%</div>
-                            <img src="../../public/img/son-duong-moi.webp" alt="">
-                            <div class="sale-product-title">Combo 3 bước làm sạch chiết xuất Rau ...</div>
-                            <div class="sale-product-price">
-                                <span class="price">460.000đ</span>
-                                <span class="old-price">530.000</span>
-                            </div>
-                        </div>
+                        <!-- ...Thêm các shop-card khác tương tự... -->
+                    </div>
+                    <div class="pagination">
+                        <button class="active">1</button>
+                        <button>2</button>
+                        <button>3</button>
                     </div>
                 </section>
             </div>
         </div>
     </div>
-</body>
-<script src="../../public/JS/header.js"></script>
-<script>
-     // Mở menu Sale khi vào trang sale
-    document.querySelectorAll('.sidebar-menu > li').forEach(function(li) {
-        var title = li.querySelector('.sidebar-title-sale > a');
-        var ul = li.querySelector('ul');
-        var img = li.querySelector('.toggle-menu img');
-        if (title && title.textContent.trim().toLowerCase() === 'sale') {
-            if (ul) ul.classList.remove('hidden');
-            if (img) img.src = "../../public/img/Vector1.png";
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <b>Về Cỏ Mềm</b><br>
+                Chuyên gia Cỏ<br>
+                Với hơn mấy<br>
+                Tuyển dụng
+            </div>
+            <div>
+                <b>Hoạt động cộng đồng</b><br>
+                Xây trường cho trẻ em<br>
+                Tình thương<br>
+                Chung tay chống dịch COVID
+
+            </div>
+            <div>
+                <b>Hướng dẫn mua hàng</b><br>
+                Chính sách mua hàng<br>
+                Chính sách bảo hành<br>
+                Chính sách đổi trả<br>
+                Chính sách bảo mật thông tin
+
+            </div>
+            <div>
+                <b>Thông tin liên hệ</b><br>
+                facebook@comem.vn<br>
+                1800 668 686<br>
+                <button
+                    style="background:#388e3c;color:#fff;border:none;padding:8px 16px;border-radius:4px;margin-top:8px;">Hệ
+                    thống cửa hàng</button>
+                <div class="social">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="subscribe" data-aos="fade-up" data-aos-delay="500">
+            <input type="email" placeholder="Đăng ký Email để nhận ưu đãi" />
+            <button>ĐĂNG KÝ</button>
+            <div>
+                <img src="../public/img/z6853888623115_10b88d062b43f9f96e180e01be5b8c58.jpg" alt="DMCA"
+                    class="dmca-badge">
+            </div>
+            <div>
+                <img src="../public/img/image-removebg-preview (2).png" alt="Bộ công thương" class="gov-badge" />
+            </div>
+            <div class="footer-text">
+                <span>
+                    Mỹ phẩm thiên nhiên
+                    <br>
+                    Lành và thật
+                </span>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Công ty cổ phần Mỹ phẩm Thiên nhiên Cỏ Mềm<br>
+            Địa chỉ: Số 10 ngõ 100 Nguyễn Xiển, Hà Nội<br>
+            SĐT: 1800 668 686 | Email: info@comem.vn<br>
+            <br>
+            <small>© 2025 Cỏ Mềm. Tất cả quyền được bảo lưu.</small>
+        </div>
+    </footer>
+    <script>
+    // Xử lý cuộn trang
+    let lastScrollTop = 0;
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (currentScroll > lastScrollTop) {
+            navbar.style.top = "-200px"; // Ẩn khi cuộn xuống
         } else {
-            if (ul) ul.classList.add('hidden');
-            if (img) img.src = "../../public/img/Vector.png";
+            navbar.style.top = "0"; // Hiện khi cuộn lên
         }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
     });
-    document.querySelectorAll('.sidebar-title-sale .toggle-menu').forEach(function (btn) {
-        btn.addEventListener('click', function (e) {
-            e.preventDefault();
-            var ul = btn.parentElement.nextElementSibling;
-            var img = btn.querySelector('img');
-            if (ul) {
-                ul.classList.toggle('hidden');
-                if (!ul.classList.contains('hidden')) {
-                    img.src = "../../public/img/Vector1.png"; // icon khi mở
-                } else {
-                    img.src = "../../public/img/Vector.png"; // icon khi đóng
-                }
+
+    // Hiển thị pure-item khi hover vào title-san-pham (menu cha)
+    document.querySelectorAll('.title-san-pham').forEach(item => { // Lặp qua từng menu cha
+        const pureItem = item.querySelector('.pure-item'); // Lấy menu con tương ứng
+        item.addEventListener('mouseenter', () => { // Khi hover vào menu cha
+            if (pureItem) {
+                pureItem.style.display = 'flex'; // Hiện menu con
+                // Luôn active li đầu và hiện sản phẩm đầu tiên
+                const lis = pureItem.querySelectorAll(
+                    '.pure-item-left ul li'); // Lấy tất cả mục bên trái
+                const rights = pureItem.querySelectorAll(
+                    '.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
+                lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
+                rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
+                const firstLi = pureItem.querySelector(
+                    '.pure-item-left ul li:first-child'); // Lấy li đầu tiên
+                const firstRight = pureItem.querySelector(
+                    '.pure-item-right.right-1'); // Lấy sản phẩm đầu tiên
+                if (firstLi) firstLi.classList.add('active'); // Active li đầu tiên
+                if (firstRight) firstRight.style.display = 'grid'; // Hiện sản phẩm đầu tiên
             }
         });
+        item.addEventListener('mouseleave', () => { // Khi rời chuột khỏi menu cha
+            if (pureItem) pureItem.style.display = 'none'; // Ẩn menu con
+        });
     });
-</script>
+
+    // Xử lý hover bên trong pure-item (menu con)
+    document.querySelectorAll('.pure-item').forEach(menu => { // Lặp qua từng menu con
+        const lis = menu.querySelectorAll('.pure-item-left ul li'); // Lấy tất cả mục bên trái
+        const rights = menu.querySelectorAll('.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
+
+        // Xử lý hover từng li bên trái
+        lis.forEach((li, idx) => { // Lặp qua từng li bên trái
+            li.addEventListener('mouseenter', function() { // Khi hover vào từng li
+                rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
+                const right = menu.querySelector('.pure-item-right.right-' + (idx +
+                    1)); // Lấy sản phẩm tương ứng
+                if (right) right.style.display = 'grid'; // Hiện sản phẩm tương ứng
+                lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
+                li.classList.add('active'); // Active li đang hover
+            });
+        });
+    });
+    </script>
+</body>
 
 </html>
