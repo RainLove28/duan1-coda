@@ -18,8 +18,11 @@ $productController->renderHeader();
         case 'vecomem':
             require_once("view/vecomem.php");
             break;
-             case 'giohang':
+        case 'giohang':
             require_once("view/giohang.php");
+            break;
+            case 'thanhtoan':
+            require_once("view/thanhtoan.php");
             break;
         case 'product':           
            if (isset($_GET['category'])) {

@@ -55,7 +55,7 @@
     <div class="Container-fluid">
         <div class="sale-container">
             <nav class="sale-breadcrumb">
-                <a href=""><i class="fas fa-house-user"></i></i> Trang Chủ</a>
+                <a href="?page=home"><i class="fas fa-house-user"></i></i> Trang Chủ</a>
                 <span>/</span>
                 <a href="">Sản phẩm</a>
             </nav>
