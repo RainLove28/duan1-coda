@@ -61,13 +61,6 @@ public function getProById($id){
     
 //     return Database::getInstance()->execute($sql, $params);
 // }
-public function getProductById($id) {
-    $sql="SELECT * FROM SanPham WHERE MaSP=$id";
-    
-    
-    return Database::getInstance()->getOne($sql);
-  
-}
 // public function getRelatedProducts($idDanhMuc, $currentProductId) {
 //     $sql = "SELECT * FROM sanpham WHERE idDanhMuc = ? AND id != ? LIMIT 4";
 //     return Database::getInstance()->getAll($sql, [$idDanhMuc, $currentProductId]);

@@ -22,7 +22,7 @@ class ProductController{
     public function productDetail() {
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
-            $products = $this->productModel->getProductById($id);
+            $products = $this->productModel->getProById($id);
             
             if ($products) {
                 require_once("view/product-details.php");
@@ -89,18 +89,18 @@ class ProductController{
         require_once("view/header.php");
     }
     public function proDetail($id) {
-        $product = $this->productModel->getProById($id);
-        if (!$product) {
-            echo "Sản phẩm không tồn tại!";
-            return;
-        }
-        $relatedProducts = $this->productModel->getRelatedProducts($product['idDanhMuc'], $id);
+        // $product = $this->productModel->getProById($id);
+        // if (!$product) {
+        //     echo "Sản phẩm không tồn tại!";
+        //     return;
+        // }
+        // $relatedProducts = $this->productModel->getRelatedProducts($product['idDanhMuc'], $id);
     
         // debug
         // var_dump($relatedProducts); exit;
     
         // require đúng đường dẫn
-        require_once __DIR__ . 'view/product-details.php';
+        require_once  'view/product-details.php';
     }
     
 }
