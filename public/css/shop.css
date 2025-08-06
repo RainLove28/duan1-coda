@@ -87,7 +87,7 @@ body {
         }
         .shop-card img {
             width: 100%;
-            height: 200px;
+            height: 120px;
             object-fit: cover;
         }
         .shop-card .info {
@@ -128,7 +128,13 @@ body {
             color: #fff;
         }
         footer {
-            background: #f5f5f5;
+             background-image: repeating-linear-gradient(
+    45deg,
+    #3e6807,
+    #4a7305 10px,
+    #3e6807 10px,
+    #3e6807 10px
+  );
             padding: 32px 0 16px 0;
             margin-top: 48px;
         }
@@ -139,13 +145,14 @@ body {
             width: 1200px;
             margin: 0 auto;
             font-size: 15px;
+            color: #fff;
         }
         .footer-content div {
             flex: 1;
         }
         .footer-bottom {
             text-align: center;
-            color: #888;
+            color: #fffefe;
             font-size: 13px;
             margin-top: 16px;
         }
@@ -153,7 +160,7 @@ body {
             margin-top: 8px;
         }
         .social a {
-            color: #388e3c;
+            color: #ffffff;
             margin-right: 8px;
             font-size: 20px;
         }
@@ -241,4 +248,47 @@ select {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 10px 5px;
+}
+.dmca-badge,
+.gov-badge {
+  margin-top: 10px;
+  max-height: 80px;
+}
+.subscribe {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  
+}
+.subscribe input[type="email"] {
+  padding: 12px 16px;
+  border-radius: 6px 0 0 6px;
+  border: none;
+  width: 320px;
+  font-size: 16px;
+}
+
+.subscribe button {
+  padding: 12px 32px;
+  border-radius: 0 6px 6px 0;
+  border: none;
+  background: #ffd966;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+.subscribe div {
+    padding: 0 30px;
+}
+.subscribe .footer-text {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  max-width: 260px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 260px;  
 }

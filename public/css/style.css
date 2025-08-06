@@ -173,9 +173,10 @@
 }
 
 .pure-item-left ul li a {
-  color: #3d640f;
+  color: #68762b;
   font-family: "Inter", serif;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .fa-greater-than {
@@ -258,7 +259,7 @@
   text-decoration: none;
   font-family: "Inter", serif;
   font-size: 16px;
-  color: #3d640f;
+  color: #222;
   margin-top: 5px;
   font-weight: normal;
 }
@@ -272,7 +273,7 @@
 
 .pure-item-price-info {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
   margin-top: 10px;
   font-family: "Inter", serif;
@@ -281,12 +282,14 @@
 .pure-item-price-info .price {
   font-size: 16px;
   font-weight: bold;
-  color: #3d640f;
+  color: #90c54b;
 }
 
 .pure-item-price-info .old-price {
   text-decoration: line-through;
   color: #999;
+  font-weight: 400;
+  margin-left: 15px;
 }
 
 .pure-item {

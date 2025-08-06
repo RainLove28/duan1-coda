@@ -20,8 +20,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../../public/css/style.css" />
-    <link rel="stylesheet" href="../../public/css/footer.css" />
+  <link rel="stylesheet" href="<?= $baseUrl ?>public/css/style.css" />
+    <link rel="stylesheet" href="<?= $baseUrl ?>public/css/footer.css" />
 </head>
 <style></style>
 
@@ -31,7 +31,7 @@
     <div class="header" id="navbar">
       <div class="header-top">
         <div class="header-top-left">
-          <a href="trangchu.html"><img src="../../public/img/logo.png" alt="Logo" /></a>
+          <a href="<?= $baseUrl ?>"><img src="<?= $baseUrl ?>public/img/logo.png" alt="Logo" /></a>
         </div>
         <div class="header-top-main">
           <div class="menu">
@@ -60,10 +60,10 @@
             <a href="/cart"><i class="fas fa-heart"></i></a>
           </div>
           <div class="cart">
-            <a href="/profile"><i class="fas fa-user"></i></a>
+            <a href="<?= $baseUrl ?>admin/simple_login.php"><i class="fas fa-user"></i></a>
           </div>
           <div class="cart">
-            <a href="/cart" class="cart-link">
+            <a href="giohang.html" class="cart-link">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </div>
@@ -103,7 +103,7 @@
               <div class="pure-item-right right-1">
                 <div class="pure-item-right-content-skin">
                   <a href="product-details.html">
-                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -127,7 +127,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -139,7 +139,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -154,7 +154,7 @@
               <div class="pure-item-right right-2">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-toc.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -166,7 +166,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-toc.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-toc.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-toc.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -193,7 +193,7 @@
               <div class="pure-item-right right-3">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/Combo-cham-soc-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -205,7 +205,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/Combo-cham-soc-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/Combo-cham-soc-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-cham-soc-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-cham-soc-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -232,7 +232,7 @@
               <div class="pure-item-right right-4">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-khac.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-khac.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -244,7 +244,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-khac.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-khac.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -256,7 +256,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/combo-khac.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/combo-khac.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -271,7 +271,7 @@
               <div class="pure-item-right right-5">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/Combo-balack.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -283,7 +283,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/Combo-balack.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -295,7 +295,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/Combo-balack.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/Combo-balack.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -340,7 +340,7 @@
               <div class="pure-item-right right-1">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-duong-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -352,7 +352,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-duong-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -364,7 +364,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-duong-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -376,7 +376,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-duong-moi.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-duong-moi.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
@@ -391,7 +391,7 @@
               <div class="pure-item-right right-2">
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-mau.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-mau.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -403,7 +403,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-mau.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-mau.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -415,7 +415,7 @@
                 </div>
                 <div class="pure-item-right-content-skin">
                   <a>
-                    <img src="../../public/img/son-mau.webp" alt="" />
+                    <img src="<?= $baseUrl ?>public/img/son-mau.webp" alt="" />
                   </a>
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
@@ -1866,7 +1866,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Về Aura Beauty</a>
+            <a href="vecomem.html">Về Aura Beauty</a>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Khác</a>
@@ -1984,19 +1984,19 @@
     <section>
       <div class="slideshow-container">
         <div class="mySlides">
-          <img src="../../public/img/banner-1.webp" alt="Slide 1" />
+          <img src="<?= $baseUrl ?>public/img/banner-1.webp" alt="Slide 1" />
         </div>
         <div class="mySlides">
-          <img src="../../public/img/banner-2.webp" alt="Slide 2" />
+          <img src="<?= $baseUrl ?>public/img/banner-2.webp" alt="Slide 2" />
         </div>
         <div class="mySlides">
-          <img src="../../public/img/banner-3.webp" alt="Slide 3" />
+          <img src="<?= $baseUrl ?>public/img/banner-3.webp" alt="Slide 3" />
         </div>
         <div class="mySlides">
-          <img src="../../public/img/banner-4.webp" alt="Slide 4" />
+          <img src="<?= $baseUrl ?>public/img/banner-4.webp" alt="Slide 4" />
         </div>
         <div class="mySlides">
-          <img src="../../public/img/banner-5.webp" alt="Slide 5" />
+          <img src="<?= $baseUrl ?>public/img/banner-5.webp" alt="Slide 5" />
         </div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -2007,7 +2007,7 @@
       <div class="banner-sub">
         <div class="banner-sub-item-1">
           <a href="trangchu.html">
-            <img src="../../public/img/sub-1.png" alt="Banner Sub 1" />
+            <img src="<?= $baseUrl ?>public/img/sub-1.png" alt="Banner Sub 1" />
             <div class="banner-sub-item-1-content">
               <span>Ship COD toàn quốc</span>
               <span>Thanh toán khi nhận hàng. Phí 20 - 25k</span>
@@ -2016,7 +2016,7 @@
         </div>
         <div class="banner-sub-item-1">
           <a href="trangchu.html">
-            <img src="../../public/img/sub-2.png" alt="Banner Sub 1" />
+            <img src="<?= $baseUrl ?>public/img/sub-2.png" alt="Banner Sub 1" />
             <div class="banner-sub-item-1-content">
               <span>Miễn phí đổi - trả</span>
               <span>Đối với sản phẩm lỗi sản xuất hoặc vận chuyển.</span>
@@ -2026,7 +2026,7 @@
         </div>
         <div class="banner-sub-item-1">
           <a href="trangchu.html">
-            <img src="../../public/img/sub-3.png" alt="Banner Sub 1" />
+            <img src="<?= $baseUrl ?>public/img/sub-3.png" alt="Banner Sub 1" />
             <div class="banner-sub-item-1-content">
               <span>Ưu đãi thành viên</span>
               <span>Đăng ký thành viên nhận nhiều ưu đãi lớn.</span>
@@ -2036,7 +2036,7 @@
         </div>
         <div class="banner-sub-item-1">
           <a href="trangchu.html">
-            <img src="../../public/img/sub-4.png" alt="Banner Sub 1" />
+            <img src="<?= $baseUrl ?>public/img/sub-4.png" alt="Banner Sub 1" />
             <div class="banner-sub-item-1-content">
               <span>Ưu đãi combo</span>
               <span>Mua theo combo càng mua càng rẻ.</span>
@@ -2050,14 +2050,14 @@
     <!-- CARD mới nhất-->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/icon-san-pham-moi-ra-mat.png" alt="">
+        <img src="<?= $baseUrl ?>public/img/icon-san-pham-moi-ra-mat.png" alt="">
         <h2 class="card-title">Sản phẩm mới ra mắt</h2>
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <a href="product-details.html"> <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" /></a>
+            <a href="product-details.html"> <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" /></a>
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2067,7 +2067,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2077,7 +2077,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2087,7 +2087,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2097,7 +2097,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2107,7 +2107,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2117,7 +2117,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2127,7 +2127,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2146,21 +2146,21 @@
     <section>
       <div class="banner-secondary">
         <div class="banner-secondary-item">
-          <img src="../../public/img/banner-6.webp" alt="">
-          <img src="../../public/img/banner-7.webp" alt="">
+          <img src="<?= $baseUrl ?>public/img/banner-6.webp" alt="">
+          <img src="<?= $baseUrl ?>public/img/banner-7.webp" alt="">
         </div>
     </section>
     <!-- CARD bán chạy -->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/ban-chay.jpg" alt="">
+        <img src="<?= $baseUrl ?>public/img/ban-chay.jpg" alt="">
         <h2 class="card-title">Sản phẩm bán chạy nhất</h2>
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2170,7 +2170,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2180,7 +2180,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2190,7 +2190,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2200,7 +2200,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2210,7 +2210,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2220,7 +2220,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2230,7 +2230,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2248,17 +2248,17 @@
     <!-- CARD chăm sóc da -->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/da.png" alt="">
+        <img src="<?= $baseUrl ?>public/img/da.png" alt="">
         <h2 class="card-title">Chăm sóc da</h2>
       </div>
       <div class="banner-cham-soc-da">
-        <img src="../../public/img/home-banner-cham-soc-da-pc_27.webp" alt="">
+        <img src="<?= $baseUrl ?>public/img/home-banner-cham-soc-da-pc_27.webp" alt="">
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2268,7 +2268,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2278,7 +2278,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2288,7 +2288,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2298,7 +2298,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2308,7 +2308,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2318,7 +2318,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2328,7 +2328,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2346,14 +2346,14 @@
     <!-- CARD khuyến mãi và combo -->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/khuyen-mai.png" alt="">
+        <img src="<?= $baseUrl ?>public/img/khuyen-mai.png" alt="">
         <h2 class="card-title">Khuyễn mãi và combo</h2>
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2363,7 +2363,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2373,7 +2373,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2383,7 +2383,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2393,7 +2393,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2403,7 +2403,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2413,7 +2413,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2423,7 +2423,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2441,14 +2441,14 @@
     <!-- CARD Qùa tặng -->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/qua-tang.webp" alt="">
+        <img src="<?= $baseUrl ?>public/img/qua-tang.webp" alt="">
         <h2 class="card-title">Quà tặng</h2>
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2458,7 +2458,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2468,7 +2468,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2478,7 +2478,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2488,7 +2488,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2498,7 +2498,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2508,7 +2508,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2518,7 +2518,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2536,17 +2536,17 @@
     <!-- CARD chăm son môi -->
     <section class="card-section">
       <div class="card-headerr ">
-        <img src="../../public/img/son-moi.jpg" alt="">
+        <img src="<?= $baseUrl ?>public/img/son-moi.jpg" alt="">
         <h2 class="card-title">Son môi</h2>
       </div>
       <div class="banner-son-moi">
-        <img src="../../public/img/banner-son-moi.webp" alt="">
+        <img src="<?= $baseUrl ?>public/img/banner-son-moi.webp" alt="">
       </div>
       <div class="slider-container">
         <div div class="slide slide-track">
           <!-- 7 sản phẩm -->
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2556,7 +2556,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2566,7 +2566,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2576,7 +2576,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2586,7 +2586,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2596,7 +2596,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2606,7 +2606,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2616,7 +2616,7 @@
             </div>
           </div>
           <div class="product">
-            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <img src="<?= $baseUrl ?>public/img/combo-cham-soc-da-1.webp" alt="1" />
             <div class="card-item-content">
               <h3>Sữa rửa mặt bọt tơ tăm</h3>
               <div class="price-product">
@@ -2634,7 +2634,7 @@
     <section>
       <div class="home-abouts">
         <div class="home-abouts-item-1">
-          <img src="../../public/img/banner-about.webp" alt="Chuyện của cỏ" />
+          <img src="<?= $baseUrl ?>public/img/banner-about.webp" alt="Chuyện của cỏ" />
         </div>
         <div class="home-abouts-item-2">
           <h2>Chuyện của cỏ</h2>
@@ -2649,11 +2649,11 @@
           </div>
           <div class="home-abouts-item-3">
             <div class="home-abouts-item-3-1">
-              <img src="../../public/img/nhamay2.webp" alt="Chuyện của cỏ" />
+              <img src="<?= $baseUrl ?>public/img/nhamay2.webp" alt="Chuyện của cỏ" />
               <h3>Nhà máy sản xuất Cỏ Mềm sản xuất mỹ phẩm theo tiêu chuẩn cGMP</h3>
             </div>
             <div class="home-abouts-item-3-1">
-              <img src="../../public/img/thuong_hieu.webp" alt="Chuyện của cỏ" />
+              <img src="<?= $baseUrl ?>public/img/thuong_hieu.webp" alt="Chuyện của cỏ" />
               <h3>Giải Thưởng “THƯƠNG HIỆU TRUYỀN CẢM HỨNG” CHÂU Á APEA 2021 Gọi Tên Cỏ Mềm</h3>
             </div>
           </div>
@@ -2670,7 +2670,7 @@
         </div>
         <div class="home-resources-item-2">
           <div class="home-product">
-            <img src="../../public/img/banner-home-1.webp" alt="">
+            <img src="<?= $baseUrl ?>public/img/banner-home-1.webp" alt="">
             <div class="resources-title">
               <h3>LÁ BẠC HÀ</h3>
               <p>Lá Bạc hà được sử dụng trong các sản phẩm mỹ phẩm như: cao dược liệu để gội đầu, lá tắm cho trẻ em,
@@ -2688,10 +2688,10 @@
                 kem dưỡng...
               </p>
             </div>
-            <img src="../../public/img/cam_m_m.webp" alt="">
+            <img src="<?= $baseUrl ?>public/img/cam_m_m.webp" alt="">
           </div>
           <div class="home-product">
-            <img src="../../public/img/dau-qua-bo_m.webp" alt="">
+            <img src="<?= $baseUrl ?>public/img/dau-qua-bo_m.webp" alt="">
             <div class="resources-title-2">
               <h3>DẦU QUẢ BƠ</h3>
               <p>Được chiết từ thịt quả bơ chín ngay sau khi thu hoạch bằng phương pháp ép lạnh, phương pháp này giữ
@@ -2709,7 +2709,7 @@
                 sóc cá nhân.
               </p>
             </div>
-            <img src="../../public/img/dau-dua_89_m.webp" alt="">
+            <img src="<?= $baseUrl ?>public/img/dau-dua_89_m.webp" alt="">
           </div>
         </div>
       </div>
@@ -2718,7 +2718,7 @@
   <footer class="footer">
   <div class="footer-container">
     <div class="footer-section logo-contact" data-aos="fade-up">
-      <img src="../../public/img/logo.png" alt="Aura Beauty" class="logo" />
+      <img src="<?= $baseUrl ?>public/img/logo.png" alt="Aura Beauty" class="logo" />
       <p><i class="fas fa-map-marker-alt"></i> 862 Nguyễn Ảnh Thủ, Quận 1,<br>TP.HCM</p>
       <p><i class="fas fa-phone-alt"></i> (096) 1367 862</p>
       <p><i class="fas fa-envelope"></i> AuraBeauty@gmail.vn</p>
@@ -2750,14 +2750,14 @@
       <p>Chính sách bảo hành</p>
       <p>Chính sách đổi trả và hoàn tiền</p>
       <p>Chính sách bảo mật thông tin</p>
-      <img src="../../public/img/z6853888623115_10b88d062b43f9f96e180e01be5b8c58.jpg" alt="DMCA" class="dmca-badge">
+      <img src="<?= $baseUrl ?>public/img/z6853888623115_10b88d062b43f9f96e180e01be5b8c58.jpg" alt="DMCA" class="dmca-badge">
     </div>
 
     <div class="footer-section" data-aos="fade-up" data-aos-delay="400">
       <h4>Thông tin liên hệ</h4>
       <p><a href="mailto:cskh.so@comem.vn">cskh.so@comem.vn</a></p>
       <p>0828001501</p>
-      <img src="../../public/img/image-removebg-preview (2).png" alt="Bộ công thương" class="gov-badge" />
+      <img src="<?= $baseUrl ?>public/img/image-removebg-preview (2).png" alt="Bộ công thương" class="gov-badge" />
     </div>
   </div>
 
@@ -2769,7 +2769,7 @@
   </div>
 </body>
 
-<script src="../../public/JS/header.js"></script>
+<script src="<?= $baseUrl ?>public/JS/header.js"></script>
 <script>
   // Slider banner
   let slideIndex = 1;
@@ -2809,4 +2809,5 @@
 
 </script>
 
+</body>
 </html>

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hệ thống cửa hàng Cỏ Mềm</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-     <!-- Font -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+      <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -19,16 +19,14 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet" />
-    <link rel="stylesheet" href="../../public/css/shop.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
-    
+  <link rel="stylesheet" href="<?= $baseUrl ?>public/css/style.css" />
 </head>
 <body>
-<header>
+     <!-- header navbar -->
     <div class="header" id="navbar">
       <div class="header-top">
         <div class="header-top-left">
-          <a href="trangchu.html"><img src="../../public/img/logo.png" alt="Logo" /></a>
+          <a href="<?= $baseUrl ?>"><img src="<?= $baseUrl ?>public/img/logo.png" alt="Logo" /></a>
         </div>
         <div class="header-top-main">
           <div class="menu">
@@ -49,7 +47,7 @@
         </div>
         <div class="header-top-right">
           <div class="cart">
-            <a href="/cart" class="cart-link">
+            <a href="shop.html" class="cart-link">
               <i class="fas fa-home"></i>
               <span>Hệ thống cửa hàng</span></a>
           </div>
@@ -57,10 +55,17 @@
             <a href="/cart"><i class="fas fa-heart"></i></a>
           </div>
           <div class="cart">
-            <a href="/profile"><i class="fas fa-user"></i></a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="<?= $baseUrl ?>?page=dashboard" title="<?= htmlspecialchars($_SESSION['user']['HoTen']) ?>">
+                    <i class="fas fa-user"></i>
+                    <span><?= htmlspecialchars($_SESSION['user']['HoTen']) ?></span>
+                </a>
+            <?php else: ?>
+                <a href="<?= $baseUrl ?>login.php"><i class="fas fa-user"></i></a>
+            <?php endif; ?>
           </div>
           <div class="cart">
-            <a href="/cart" class="cart-link">
+            <a href="giohang.html" class="cart-link">
               <i class="fas fa-shopping-cart"></i>
             </a>
           </div>
@@ -70,7 +75,7 @@
       <div class="header-bottom">
         <ul class="pure-list" id="pure-list">
           <li class="title-san-pham">
-            <a href="trangchu.html">Sale</a>
+            <a href="product.html">Sale</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -99,7 +104,7 @@
               <!-- Nội dung combo chăm sóc da -->
               <div class="pure-item-right right-1">
                 <div class="pure-item-right-content-skin">
-                  <a>
+                  <a href="product-details.html">
                     <img src="../../public/img/combo-cham-soc-da-1.webp" alt="" />
                   </a>
                   <a href="">
@@ -543,7 +548,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Da</a>
+            <a href="da.html">Da</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -739,7 +744,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Tóc</a>
+            <a href="toc.html">Tóc</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -849,7 +854,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Làm Đẹp Đường Uống</a>
+            <a href="LamDepDuongUong.html">Làm Đẹp Đường Uống</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -913,7 +918,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Cơ Thể</a>
+            <a href="CoThe.html">Cơ Thể</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -961,7 +966,7 @@
                     <p>Combo Kem Dưỡng Ẩm, Serum tơ tằm...</p>
                   </a>
                   <div class="pure-item-price-info">
-         <span class="price">1.200.000đ</span>
+                    <span class="price">1.200.000đ</span>
                     <span class="old-price">1.500.000đ</span>
                   </div>
                 </div>
@@ -1152,7 +1157,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Em Bé</a>
+            <a href="EmBe.html">Em Bé</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -1262,7 +1267,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Hương Thơm</a>
+            <a href="HuongThom.html">Hương Thơm</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -1480,7 +1485,7 @@
                   <a href="">
                     <p>Combo Gội xả thảo dược Tóc Mây</p>
                   </a>
-<div class="pure-item-price-info">
+                  <div class="pure-item-price-info">
                     <span class="price">1.200.000đ</span>
                     <span class="old-price">1.500.000đ</span>
                   </div>
@@ -1501,7 +1506,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Quà Tặng</a>
+            <a href="QuaTang.html">Quà Tặng</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -1666,7 +1671,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Bộ Sản Phẩm</a>
+            <a href="BoSanPham.html">Bộ Sản Phẩm</a>
             <div class="pure-item">
               <div class="pure-item-left">
                 <ul class="pure-list-item">
@@ -1863,7 +1868,7 @@
             </div>
           </li>
           <li class="title-san-pham">
-            <a href="trangchu.html">Về Aura Beauty</a>
+            <a href="vecomem.html">Về Aura Beauty</a>
           </li>
           <li class="title-san-pham">
             <a href="trangchu.html">Khác</a>
@@ -1959,7 +1964,7 @@
                     <span class="old-price">1.500.000đ</span>
                   </div>
                 </div>
-                 <div class="pure-item-right-content-skin">
+                <div class="pure-item-right-content-skin">
                   <a>
                     <img src="https://media.comem.vn/uploads/2025/06/combo-cham-soc-da-ban-ngay-da-dau-mun_sp.webp"
                       alt="" />
@@ -1977,210 +1982,5 @@
         </ul>
       </div>
     </div>
-    </header>
-    <div class="Container-fluid">
-        <div class="shop-info">
-            <div class="stats">
-                <div><b>79</b><br>Cửa hàng trên toàn quốc</div>
-                <div><b>5.000+</b><br>Khách được phục vụ mỗi ngày</div>
-                <div><b>9:00 - 21:30</b><br>Kể cả chủ nhật và ngày lễ</div>
-            </div>
-            <div class="banner">
-                <img src="../../public/img/banner-store-new.png" alt="Mỹ phẩm thiên nhiên Lành & Thật">
-            </div>
-        </div>
-        <div class="container">
-        <div class="main-content">
-            <aside class="sidebar">
-                <div class="store-finder">
-  <h3 class="title">TÌM CỬA HÀNG CỎ MỀM</h3>
-
-  <div class="select-wrapper">
-    <select class="region-select">
-    <option value="" disabled selected hidden>Tất cả vùng/miền</option>
-    <option>Tất cả vùng/miền</option>
-    <option>Miền Bắc</option>
-    <option>Miền Trung</option>
-    <option>Miền Nam</option>
-  </select>
-
-            <select>
-                <option value="" disabled selected hidden>Tất cả tỉnh/TP</option>
-                <option>Tất cả tỉnh/TP</option>
-                <option>Hồ Chí Minh</option>
-                <option>Hà Nội</option>
-                <option>Đà Nẵng</option>
-             </select>
-
-                <select>
-                    <option>Tất cả Quận/Huyện</option>
-                    <option>Quận 1</option>
-                    <option>Quận 3</option>
-                </select>
-             </div>
-            </div>
-            <br>
-                <h3>Cỏ Mềm chào đón bạn ghé thăm:</h3>
-                <div class="shop-list">
-                    <ul>
-                        <li>243 Thống Nhất, Dĩ An, Bình Dương</li>
-                        <li>108 Bến Hoàng Minh, Hải Nam</li>
-                        <li>209 Xuyết, Phú Nhuận, Hồ Chí Minh</li>
-                        <li>223 Trần Hưng Đạo, Nam Định</li>
-                        <li>330 Hoàng Diệu, Đà Nẵng</li>
-                        <li>22 Nguyễn Văn Tiếp, Tiền Giang</li>
-                        <li>...và nhiều địa chỉ khác</li>
-                    </ul>
-                </div>
-            </aside>
-            <section class="shop-grid">
-                <h3>Có 79 cửa hàng trên toàn quốc</h3>
-                <div class="shops">
-                    <!-- Shop Card Example -->
-                    <div class="shop-card">
-                        <img src="../../public/img/CH01_sp.webp" alt="Cửa hàng Cỏ Mềm">
-                        <div class="info">
-                            <div class="phone">0977806245</div>
-                            <div class="name">Cỏ Mềm Phú Yên</div>
-                            <div class="address">243 Thống Nhất, Dĩ An, Bình Dương</div>
-                        </div>
-                    </div>
-                    <div class="shop-card">
-                        <img src="../../public/img/CH02_sp.webp" alt="Cửa hàng Cỏ Mềm">
-                        <div class="info">
-                            <div class="phone">0915052431</div>
-                            <div class="name">Cỏ Mềm Long Thành, Đồng Nai</div>
-                            <div class="address">243 Thống Nhất, Long Thành, Đồng Nai</div>
-                        </div>
-                    </div>
-                    <!-- ...Thêm các shop-card khác tương tự... -->
-                </div>
-                <div class="pagination">
-                    <button class="active">1</button>
-                    <button>2</button>
-                    <button>3</button>
-                </div>
-            </section>
-        </div>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div>
-                <b>Về Cỏ Mềm</b><br>
-                Chuyên gia Cỏ<br>
-                Với hơn mấy<br>
-                Tuyển dụng
-            </div>
-            <div>
-                <b>Hoạt động cộng đồng</b><br>
-                Xây trường cho trẻ em<br>
-                Tình thương<br>
-                Chung tay chống dịch COVID
-                 
-            </div>
-            <div>
-                <b>Hướng dẫn mua hàng</b><br>
-                Chính sách mua hàng<br>
-                Chính sách bảo hành<br>
-                Chính sách đổi trả<br>
-                Chính sách bảo mật thông tin
-                
-            </div>
-            <div>
-                <b>Thông tin liên hệ</b><br>
-                facebook@comem.vn<br>
-                1800 668 686<br>
-                <button style="background:#388e3c;color:#fff;border:none;padding:8px 16px;border-radius:4px;margin-top:8px;">Hệ thống cửa hàng</button>
-                <div class="social">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-                
-            </div>
-            
-        </div>
-        <div class="subscribe" data-aos="fade-up" data-aos-delay="500">
-                  <input type="email" placeholder="Đăng ký Email để nhận ưu đãi" />
-                  <button>ĐĂNG KÝ</button>
-                  <div>
-                    <img src="../../public/img/z6853888623115_10b88d062b43f9f96e180e01be5b8c58.jpg" alt="DMCA" class="dmca-badge">
-                  </div>
-                  <div>
-                  <img src="../../public/img/image-removebg-preview (2).png" alt="Bộ công thương" class="gov-badge" />
-                </div>
-                <div class="footer-text">
-                  <span>
-                    Mỹ phẩm thiên nhiên
-                    <br>
-                    Lành và thật
-                  </span>
-                </div>
-                </div>
-        <div class="footer-bottom">
-            Công ty cổ phần Mỹ phẩm Thiên nhiên Cỏ Mềm<br>
-            Địa chỉ: Số 10 ngõ 100 Nguyễn Xiển, Hà Nội<br>
-            SĐT: 1800 668 686 | Email: info@comem.vn<br>
-            <br>
-            <small>© 2025 Cỏ Mềm. Tất cả quyền được bảo lưu.</small>
-        </div>
-    </footer>
-    <script>
-        // Xử lý cuộn trang
-  let lastScrollTop = 0;
-  const navbar = document.getElementById('navbar');
-
-  window.addEventListener('scroll', function () {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (currentScroll > lastScrollTop) {
-      navbar.style.top = "-200px"; // Ẩn khi cuộn xuống
-    } else {
-      navbar.style.top = "0";      // Hiện khi cuộn lên
-    }
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  });
-
-  // Hiển thị pure-item khi hover vào title-san-pham (menu cha)
-  document.querySelectorAll('.title-san-pham').forEach(item => { // Lặp qua từng menu cha
-    const pureItem = item.querySelector('.pure-item'); // Lấy menu con tương ứng
-    item.addEventListener('mouseenter', () => { // Khi hover vào menu cha
-      if (pureItem) {
-        pureItem.style.display = 'flex'; // Hiện menu con
-        // Luôn active li đầu và hiện sản phẩm đầu tiên
-        const lis = pureItem.querySelectorAll('.pure-item-left ul li'); // Lấy tất cả mục bên trái
-        const rights = pureItem.querySelectorAll('.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
-        lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
-        rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
-        const firstLi = pureItem.querySelector('.pure-item-left ul li:first-child'); // Lấy li đầu tiên
-        const firstRight = pureItem.querySelector('.pure-item-right.right-1'); // Lấy sản phẩm đầu tiên
-        if (firstLi) firstLi.classList.add('active'); // Active li đầu tiên
-        if (firstRight) firstRight.style.display = 'grid'; // Hiện sản phẩm đầu tiên
-      }
-    });
-    item.addEventListener('mouseleave', () => { // Khi rời chuột khỏi menu cha
-      if (pureItem) pureItem.style.display = 'none'; // Ẩn menu con
-    });
-  });
-
-  // Xử lý hover bên trong pure-item (menu con)
-  document.querySelectorAll('.pure-item').forEach(menu => { // Lặp qua từng menu con
-    const lis = menu.querySelectorAll('.pure-item-left ul li'); // Lấy tất cả mục bên trái
-    const rights = menu.querySelectorAll('.pure-item-right'); // Lấy tất cả phần sản phẩm bên phải
-
-    // Xử lý hover từng li bên trái
-    lis.forEach((li, idx) => { // Lặp qua từng li bên trái
-      li.addEventListener('mouseenter', function () { // Khi hover vào từng li
-        rights.forEach(r => r.style.display = 'none'); // Ẩn tất cả sản phẩm bên phải
-        const right = menu.querySelector('.pure-item-right.right-' + (idx + 1)); // Lấy sản phẩm tương ứng
-        if (right) right.style.display = 'grid'; // Hiện sản phẩm tương ứng
-        lis.forEach(l => l.classList.remove('active')); // Bỏ active tất cả li
-        li.classList.add('active'); // Active li đang hover
-      });
-    });
-  });
-    </script>
 </body>
 </html>
