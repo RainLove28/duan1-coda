@@ -7,7 +7,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'duan1');
 define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_PASS', '220401');
 
 // Cấu hình ứng dụng
 define('APP_NAME', 'Quản lý Cửa hàng');
