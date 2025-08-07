@@ -59,7 +59,7 @@
                         <a href="/cart"><i class="fas fa-heart"></i></a>
                     </div>
                     <div class="cart">
-                        <a href="?page=login.php"><i class="fas fa-user"></i></a>
+                        <a href="?page=ChiTietTaiKhoan.php"><i class="fas fa-user"></i></a>
                     </div>
                     <div class="cart">
                         <a href="?page=giohang" class="cart-link">

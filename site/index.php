@@ -41,6 +41,9 @@ if ($page === 'login.php') {
             $productController->productDetail();
             $productController->proDetail($id);
             break;
+        case 'ChiTietTaiKhoan.php':
+            require_once("view/ChiTietTaiKhoan.php");
+            break;
         // case "registerpage":
         //     require_once('controller/UserController.php');
         //     $userController = new UserController();

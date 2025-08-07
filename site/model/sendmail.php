@@ -37,13 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'duonggialinh0@gmail.com'; // 🔒 Gmail của bạn
-        $mail->Password   = 'sfla eklz cjuv ahjn';   // 🔑 Mật khẩu ứng dụng
+        $mail->Username   = 'sivam.7e@gmail.com'; // 🔒 Gmail của bạn
+        $mail->Password   = 'lfee ghmu rchv wkkr';   // 🔑 Mật khẩu ứng dụng
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
 
         //Recipients
-        $mail->setFrom('yourgmail@gmail.com', 'Aura Beauty');
+        $mail->setFrom('sivam.7e@gmail.com', 'Aura Beauty');
         $mail->addAddress($email, $fullname);
 
         //Content
@@ -57,3 +57,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Gửi email thất bại: {$mail->ErrorInfo}'); history.back();</script>";
     }
 }
+?>

@@ -13,7 +13,7 @@ public function getHotPro(){
 }
 //Ham lay san pham theo id ma danh muc
 public function getProByCate($id){
-     $sql = "SELECT * FROM SanPham Where idDanhMuc=$id";
+     $sql = "SELECT * FROM sanpham Where idDanhMuc=$id";
      return Database::getInstance()->getAll($sql);
 }
 
@@ -21,13 +21,13 @@ public function getProByCate($id){
 public function getProByCateName($tenDM){
     $sql = "
         SELECT sp.* 
-        FROM SanPham sp
-        JOIN DanhMuc dm ON sp.MaDM = dm.MaDM
+        FROM sanpham sp
+        JOIN danhmuc dm ON sp.MaDM = dm.MaDM
         WHERE dm.MaDM = (
-            SELECT MaDM FROM DanhMuc WHERE TenDM = ? LIMIT 1
+            SELECT MaDM FROM danhmuc WHERE TenDM = ? LIMIT 1
         )
         OR dm.MaDMCha = (
-            SELECT MaDM FROM DanhMuc WHERE TenDM = ? LIMIT 1
+            SELECT MaDM FROM danhmuc WHERE TenDM = ? LIMIT 1
         )
     ";
     return Database::getInstance()->getAll($sql, [$tenDM, $tenDM]);
@@ -45,7 +45,7 @@ public function getProByCateName($tenDM){
 //     return Database::getInstance()->execute($sql,$params);
 // }
 public function getProById($id){
-    $sql="SELECT * FROM SanPham WHERE MaSP=$id";
+    $sql="SELECT * FROM sanpham WHERE MaSP=$id";
     return Database::getInstance()->getOne($sql);
 }
 // public function editPro($data){
@@ -62,7 +62,7 @@ public function getProById($id){
 //     return Database::getInstance()->execute($sql, $params);
 // }
 public function getProductById($id) {
-    $sql="SELECT * FROM SanPham WHERE MaSP=$id";
+    $sql="SELECT * FROM sanpham WHERE MaSP=$id";
     
     
     return Database::getInstance()->getOne($sql);
