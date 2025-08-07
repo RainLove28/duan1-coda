@@ -1,4 +1,11 @@
+
 /* Reset any potential header conflicts */
+.header,
+.header-top,
+.header-bottom {
+  position: relative;
+  z-index: 1000;
+}
 
 .breadcrumb {
   background-color: #f8f9fa;
@@ -92,6 +99,7 @@
   padding: 0 15px;
 }
 
+
 .product-images {
   position: relative;
 }
@@ -165,6 +173,7 @@
   height: 100%;
   object-fit: cover;
 }
+
 
 .product-info {
   padding-left: 30px;
