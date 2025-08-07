@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
-      <!-- Font -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trang chủ</title>
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -20,9 +21,13 @@
     href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="../../public/css/style.css" />
+    <link rel="stylesheet" href="../../public/css/footer.css" />
 </head>
+<style></style>
+
 <body>
-     <!-- header navbar -->
+  <div class="Container-fluid">
+    <!-- header navbar -->
     <div class="header" id="navbar">
       <div class="header-top">
         <div class="header-top-left">
@@ -1975,5 +1980,833 @@
         </ul>
       </div>
     </div>
+    <!-- slide -->
+    <section>
+      <div class="slideshow-container">
+        <div class="mySlides">
+          <img src="../../public/img/banner-1.webp" alt="Slide 1" />
+        </div>
+        <div class="mySlides">
+          <img src="../../public/img/banner-2.webp" alt="Slide 2" />
+        </div>
+        <div class="mySlides">
+          <img src="../../public/img/banner-3.webp" alt="Slide 3" />
+        </div>
+        <div class="mySlides">
+          <img src="../../public/img/banner-4.webp" alt="Slide 4" />
+        </div>
+        <div class="mySlides">
+          <img src="../../public/img/banner-5.webp" alt="Slide 5" />
+        </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+    </section>
+    <!-- Start banner sub -->
+    <section>
+      <div class="banner-sub">
+        <div class="banner-sub-item-1">
+          <a href="trangchu.html">
+            <img src="../../public/img/sub-1.png" alt="Banner Sub 1" />
+            <div class="banner-sub-item-1-content">
+              <span>Ship COD toàn quốc</span>
+              <span>Thanh toán khi nhận hàng. Phí 20 - 25k</span>
+            </div>
+          </a>
+        </div>
+        <div class="banner-sub-item-1">
+          <a href="trangchu.html">
+            <img src="../../public/img/sub-2.png" alt="Banner Sub 1" />
+            <div class="banner-sub-item-1-content">
+              <span>Miễn phí đổi - trả</span>
+              <span>Đối với sản phẩm lỗi sản xuất hoặc vận chuyển.</span>
+
+            </div>
+          </a>
+        </div>
+        <div class="banner-sub-item-1">
+          <a href="trangchu.html">
+            <img src="../../public/img/sub-3.png" alt="Banner Sub 1" />
+            <div class="banner-sub-item-1-content">
+              <span>Ưu đãi thành viên</span>
+              <span>Đăng ký thành viên nhận nhiều ưu đãi lớn.</span>
+
+            </div>
+          </a>
+        </div>
+        <div class="banner-sub-item-1">
+          <a href="trangchu.html">
+            <img src="../../public/img/sub-4.png" alt="Banner Sub 1" />
+            <div class="banner-sub-item-1-content">
+              <span>Ưu đãi combo</span>
+              <span>Mua theo combo càng mua càng rẻ.</span>
+
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARD mới nhất-->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/icon-san-pham-moi-ra-mat.png" alt="">
+        <h2 class="card-title">Sản phẩm mới ra mắt</h2>
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <a href="product-details.html"> <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" /></a>
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- BANNER SECONDARY -->
+    <section>
+      <div class="banner-secondary">
+        <div class="banner-secondary-item">
+          <img src="../../public/img/banner-6.webp" alt="">
+          <img src="../../public/img/banner-7.webp" alt="">
+        </div>
+    </section>
+    <!-- CARD bán chạy -->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/ban-chay.jpg" alt="">
+        <h2 class="card-title">Sản phẩm bán chạy nhất</h2>
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- CARD chăm sóc da -->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/da.png" alt="">
+        <h2 class="card-title">Chăm sóc da</h2>
+      </div>
+      <div class="banner-cham-soc-da">
+        <img src="../../public/img/home-banner-cham-soc-da-pc_27.webp" alt="">
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- CARD khuyến mãi và combo -->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/khuyen-mai.png" alt="">
+        <h2 class="card-title">Khuyễn mãi và combo</h2>
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- CARD Qùa tặng -->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/qua-tang.webp" alt="">
+        <h2 class="card-title">Quà tặng</h2>
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- CARD chăm son môi -->
+    <section class="card-section">
+      <div class="card-headerr ">
+        <img src="../../public/img/son-moi.jpg" alt="">
+        <h2 class="card-title">Son môi</h2>
+      </div>
+      <div class="banner-son-moi">
+        <img src="../../public/img/banner-son-moi.webp" alt="">
+      </div>
+      <div class="slider-container">
+        <div div class="slide slide-track">
+          <!-- 7 sản phẩm -->
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+          <div class="product">
+            <img src="../../public/img/combo-cham-soc-da-1.webp" alt="1" />
+            <div class="card-item-content">
+              <h3>Sữa rửa mặt bọt tơ tăm</h3>
+              <div class="price-product">
+                <span class="Newprice">1.200.000đ</span>
+                <span class="Oldprice">1.300.000đ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="prev-1" onclick="prevSlide(this)">❮</button>
+        <button class="next-1" onclick="nextSlide(this)">❯</button>
+      </div>
+    </section>
+    <!-- Chuyện của cỏ -->
+    <section>
+      <div class="home-abouts">
+        <div class="home-abouts-item-1">
+          <img src="../../public/img/banner-about.webp" alt="Chuyện của cỏ" />
+        </div>
+        <div class="home-abouts-item-2">
+          <h2>Chuyện của cỏ</h2>
+          <div class="home-abouts-item-content">
+            <h3>Tôi bắt đầu Ước mơ Xanh của mình, nghiên cứu những sản phẩm thuần tuý, tối giản, chỉ tập trung vào mục
+              đính sử dụng của chính nó.</h3>
+            <p>Nghĩa là nước giặt thì chỉ cần giặt sạch, chứ không cần phải nhiều bọt. Nghĩa là dưỡng da dưỡng tóc thì
+              để da tóc khoẻ từ gốc chứ không cần cảm giác giả mướt tay từ silicon. Tôi từ chối mọi sản phẩm chứa hạt vi
+              nhựa, chỉ dùng cafe xay mịn và muối biển để tẩy tế bào chết. Tôi không dùng những hoá chất tẩy rửa mà thay
+              bằng xà bông dầu dừa và quả bồ hòn xưa cũ...</p>
+            <a href="trangchu.html">XEM THÊM</a>
+          </div>
+          <div class="home-abouts-item-3">
+            <div class="home-abouts-item-3-1">
+              <img src="../../public/img/nhamay2.webp" alt="Chuyện của cỏ" />
+              <h3>Nhà máy sản xuất Cỏ Mềm sản xuất mỹ phẩm theo tiêu chuẩn cGMP</h3>
+            </div>
+            <div class="home-abouts-item-3-1">
+              <img src="../../public/img/thuong_hieu.webp" alt="Chuyện của cỏ" />
+              <h3>Giải Thưởng “THƯƠNG HIỆU TRUYỀN CẢM HỨNG” CHÂU Á APEA 2021 Gọi Tên Cỏ Mềm</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- banner-->
+    <section>
+      <div class="home-resources">
+        <div class="home-resources-item-1">
+          <h3>100% Minh bạch nguyên liệu</h3>
+          <p>Sản phẩm an LÀNH - Con người chân THẬT</p>
+          <a href="trangchu.html">XEM THÊM</a>
+        </div>
+        <div class="home-resources-item-2">
+          <div class="home-product">
+            <img src="../../public/img/banner-home-1.webp" alt="">
+            <div class="resources-title">
+              <h3>LÁ BẠC HÀ</h3>
+              <p>Lá Bạc hà được sử dụng trong các sản phẩm mỹ phẩm như: cao dược liệu để gội đầu, lá tắm cho trẻ em,
+                nước
+                súc miệng...
+              </p>
+            </div>
+          </div>
+          <div class="home-product">
+            <div class="resources-title-1">
+              <h3>TINH DẦU CAM NGỌT</h3>
+              <p>Tinh dầu Cam ngọt được sử dụng trong mỹ phẩm như một thành phần làm thơm, giải tỏa căng thẳng: sáp
+                thơm,
+                tinh dầu treo,
+                kem dưỡng...
+              </p>
+            </div>
+            <img src="../../public/img/cam_m_m.webp" alt="">
+          </div>
+          <div class="home-product">
+            <img src="../../public/img/dau-qua-bo_m.webp" alt="">
+            <div class="resources-title-2">
+              <h3>DẦU QUẢ BƠ</h3>
+              <p>Được chiết từ thịt quả bơ chín ngay sau khi thu hoạch bằng phương pháp ép lạnh, phương pháp này giữ
+                được
+                nguyên dinh
+                dưỡng tốt trong dầu.
+              </p>
+            </div>
+          </div>
+          <div class="home-product">
+            <div class="resources-title-3">
+              <h3>DẦU DỨA</h3>
+              <p>Dầu dừa được chiết xuất từ phần cùi trắng của quả dừa, có thể được tìm thấy trong nhiều loại mỹ phẩm và
+                sản phẩm chăm
+                sóc cá nhân.
+              </p>
+            </div>
+            <img src="../../public/img/dau-dua_89_m.webp" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
+  <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section logo-contact" data-aos="fade-up">
+      <img src="../../public/img/logo.png" alt="Aura Beauty" class="logo" />
+      <p><i class="fas fa-map-marker-alt"></i> 862 Nguyễn Ảnh Thủ, Quận 1,<br>TP.HCM</p>
+      <p><i class="fas fa-phone-alt"></i> (096) 1367 862</p>
+      <p><i class="fas fa-envelope"></i> AuraBeauty@gmail.vn</p>
+      <div class="social-icons">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-pinterest-p"></i>
+      </div>
+    </div>
+
+    <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
+      <h4>Về Aura Beauty</h4>
+      <p>Câu chuyện thương hiệu</p>
+      <p>Về nhà máy</p>
+      <p>Tuyển dụng</p>
+    </div>
+
+    <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
+      <h4>Hoạt động cộng đồng</h4>
+      <p>Xây dựng cho trẻ em</p>
+      <p>Trồng rừng</p>
+      <p>Chung tay phòng chống COVID</p>
+    </div>
+
+    <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
+      <h4>Hướng dẫn mua hàng</h4>
+      <p>Chính sách mua hàng và thanh toán</p>
+      <p>Chính sách bảo hành</p>
+      <p>Chính sách đổi trả và hoàn tiền</p>
+      <p>Chính sách bảo mật thông tin</p>
+      <img src="../../public/img/z6853888623115_10b88d062b43f9f96e180e01be5b8c58.jpg" alt="DMCA" class="dmca-badge">
+    </div>
+
+    <div class="footer-section" data-aos="fade-up" data-aos-delay="400">
+      <h4>Thông tin liên hệ</h4>
+      <p><a href="mailto:cskh.so@comem.vn">cskh.so@comem.vn</a></p>
+      <p>0828001501</p>
+      <img src="../../public/img/image-removebg-preview (2).png" alt="Bộ công thương" class="gov-badge" />
+    </div>
+  </div>
+
+  <div class="subscribe" data-aos="fade-up" data-aos-delay="500">
+    <input type="email" placeholder="Đăng ký Email để nhận ưu đãi" />
+    <button>ĐĂNG KÝ</button>
+  </div>
+</footer>
+  </div>
 </body>
+
+<script src="../../public/JS/header.js"></script>
+<script>
+  // Slider banner
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  // Next/previous controls
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  // Hiển thị slide hiện tại
+  function showSlides(n) {
+    let i;
+    const slides = document.getElementsByClassName("mySlides");
+
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    // Ẩn tất cả các slide
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+
+    // Hiện slide tương ứng
+    slides[slideIndex - 1].style.display = "block";
+  }
+
+  // Tự động chuyển slide mỗi 5 giây (nếu muốn)
+  setInterval(() => {
+    plusSlides(1);
+  }, 3000);
+
+
+</script>
+
 </html>

@@ -1,54 +1,61 @@
 <?php
-   class Database{
-       private $host = "localhost";
-       private $username = "root";
-       private $password = "raindepzai";
-       private $database = "duancoda";
-       private $conn;
+class Database
+{
+    private $db_host;
+    private $db_name;
+    private $db_user;
+    private $db_pass;
+    public $connection;
 
+    public function __construct($db_host, $db_name, $db_user, $db_pass)
+    {
+        $this->db_host = $db_host;
+        $this->db_name = $db_name;
+        $this->db_user = $db_user;
+        $this->db_pass = $db_pass;
+    }
 
-       //Kiểm tra database đã tạo chưa, để tạo mới Database
-       public static $instance;
-       public static function getInstance(){
-           if(!self::$instance){
-               self::$instance = new Database();
-           }
-           return self::$instance;
-       }
-      
-       public function __construct(){
-           try{
-               // Tạo kết nối đến database theo phương thức PDO
-               $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
-               $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               // echo "Connect thành công";
-           }catch(PDOException $e){
-               echo "Connection failed: ".$e->getMessage();
-           }
-       }
-       // Dùng cho câu lệnh SQL dạng INSERT, UPDATE hoặc DELETE
-       public function execute($sql, $params = []) {
+    public function contect()
+    {
         try {
-            $stmt = $this->conn->prepare($sql);
-            return $stmt->execute($params);
+            $dsn = "mysql:host=$this->db_host; dbname=$this->db_name;charset=utf8"; // Chuỗi kết connect
+            $this->connection = new PDO($dsn, $this->db_user, $this->db_pass);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "Connection successful!\n";
         } catch (PDOException $e) {
-            die("Lỗi SQL: " . $e->getMessage()); // In ra lỗi chi tiết
+            echo "Connection failed: " . $e->getMessage() . "\n";
+            die();
         }
     }
-       //Dùng cho câu lệnh SELECT
-       public function getAll($sql, $params = []){
-           $stmt = $this->conn->prepare($sql);
-           $stmt->execute($params);
-           //Lấy tất cả dữ liệu
-           return $stmt->fetchAll(PDO::FETCH_ASSOC);
-       }
 
+    public function disconnect() {
+        if($this->connection != null) {
+            $this->connection = null;
+        }
+    }
 
-       public function getOne($sql){
-           $stmt = $this->conn->prepare($sql);
-           $stmt->execute();
-           //Lấy 1 dữ liệu
-           return $stmt->fetch();
-       }
-   }   
-?>
+    public function getAllProducts()
+    {
+        $query = "SELECT * FROM `products`";
+        $stmt = $this->connection->query($query);
+        $products = $stmt->fetchAll();
+        return $products;
+    }
+
+    // Lấy sản ơhaamr theo danh mục
+    public function getProductsByCategoryId($madm, $limit = 10)
+{
+    $query = "SELECT * FROM `products` WHERE `MaDM` = ? ORDER BY `created_at` DESC LIMIT ?";
+    $stmt = $this->connection->prepare($query);
+    $stmt->execute([$madm, $limit]);
+    return $stmt->fetchAll();
+}
+
+    public function getProductDetail($id)
+    {
+        $query = "SELECT * FROM `products` WHERE id = " . $id;
+        $stmt = $this->connection->query($query);
+        $product = $stmt->fetch();
+        return $product;
+    }
+}

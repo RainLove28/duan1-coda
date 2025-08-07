@@ -1,6 +1,6 @@
 <?php
-require "site/model/User.php";
-require "site/model/Cart.php";
+require "Model/User.php";
+require "Model/Cart.php";
 class SiteController
 {
     public $baseUrl;
@@ -18,7 +18,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
-        include 'site/view/trangchu.php';
+        include 'Views/trangchu.php';
     }
 
     public function cart()
@@ -28,7 +28,7 @@ class SiteController
         $cart->addToCart();
         //var_dump($_SESSION['cart']);
         // sau đó gán data vào tầng View
-        include 'view/giohang.php';
+        include 'Views/giohang.php';
     }
 
     public function checkout()
@@ -36,7 +36,7 @@ class SiteController
         if (isset($_SESSION['cart']) && count($_SESSION['cart'])) {
             $baseUrl = $this->baseUrl;
             // sau đó gán data vào tầng View
-            include 'view/checkout.php';
+            include 'Views/checkout.php';
         } else {
             header("Location: index.php");
             exit;
@@ -143,7 +143,7 @@ class SiteController
         } else {
             $info = "<span style='color:red'>Chữ ký không hợp lệ</span>";
         }
-        include 'view/thankyou.php';
+        include 'Views/thankyou.php';
     }
 
     public function removeItemCart()
@@ -162,7 +162,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
-        include 'view/product.php';
+        include 'Views/product.php';
     }
 
     // hàm index sẽ gọi trang sản phẩm
@@ -173,7 +173,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $product = $this->db->getProductDetail($id);
         // sau đó gán data vào tầng View
-        include 'view/product_detail.php';
+        include 'Views/product_detail.php';
     }
 
     public function login()
@@ -197,7 +197,7 @@ class SiteController
                 }
             }
         }
-        include 'view/login.php';
+        include 'Views/login.php';
     }
 
     public function register()
@@ -230,7 +230,7 @@ class SiteController
             }
         }
 
-        include 'view/login.php';
+        include 'Views/login.php';
     }
 
     public function logout()
