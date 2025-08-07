@@ -25,7 +25,7 @@
   justify-content: space-between;
   align-items: center;
   width: 95%;
-  margin: -30px auto;
+  margin: -20px auto;
 }
 
 .header-top-left {
@@ -173,9 +173,10 @@
 }
 
 .pure-item-left ul li a {
-  color: #3d640f;
+  color: #68762b;
   font-family: "Inter", serif;
   font-size: 16px;
+  font-weight: normal;
 }
 
 .fa-greater-than {
@@ -248,6 +249,18 @@
   border: 1px solid #ddd;
   padding: 10px;
   border-radius: 10px;
+  position: relative;
+}
+.sale-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #ff8c1a;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 4px;
 }
 
 .pure-item-right-content-skin:hover {
@@ -255,12 +268,26 @@
 }
 
 .pure-item-right-content-skin p {
-  text-decoration: none;
-  font-family: "Inter", serif;
+  min-height: 40px;
   font-size: 16px;
+  font-weight: bold;
   color: #3d640f;
-  margin-top: 5px;
-  font-weight: normal;
+  margin: 10px 0;
+  font-family: "Inter", serif;
+  text-align: left;
+  display: -webkit-box;
+  /* Quan trọng */
+  -webkit-box-orient: vertical;
+  /* Quan trọng */
+  -webkit-line-clamp: 2;
+  /* Số dòng muốn hiển thị */
+  overflow: hidden;
+  /* Ẩn phần dư */
+  text-overflow: ellipsis;
+  /* Hiện ... */
+  line-height: 1.4em;
+  max-height: 2.8em;
+  /* line-height * 2 */
 }
 
 .pure-item-right-content-skin img {
@@ -272,7 +299,7 @@
 
 .pure-item-price-info {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
   margin-top: 10px;
   font-family: "Inter", serif;
@@ -281,12 +308,14 @@
 .pure-item-price-info .price {
   font-size: 16px;
   font-weight: bold;
-  color: #3d640f;
+  color: #d35400;
 }
 
 .pure-item-price-info .old-price {
-  text-decoration: line-through;
+  font-size: 14px;
   color: #999;
+  text-decoration: line-through;
+  margin-left: 10px;
 }
 
 .pure-item {
@@ -485,7 +514,7 @@
   max-width: 80%;
   margin: auto;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
   margin-top: 30px;
 }
 
@@ -517,6 +546,7 @@
 
 .product img {
   width: 100%;
+  height: 250px;
 }
 
 .card-item-content {
@@ -908,22 +938,17 @@
   bottom: -22%;
   left: 30px;
 }
+
 .home-resources-item-2 .home-product:nth-child(4) img {
   position: absolute;
   bottom: -10%;
   left: 30px;
 }
 
-.home-resources-item-2 .resources-title-1 {
-  position: absolute;
-  bottom: 80px;
-  left: 0px;
-  padding: 20px;
-}
-
+.home-resources-item-2 .resources-title-1,
 .home-resources-item-2 .resources-title-3 {
   position: absolute;
-  bottom: 100px;
+  bottom: 20%;
   left: 0px;
   padding: 20px;
 }
