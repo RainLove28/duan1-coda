@@ -81,7 +81,7 @@
 </head>
 <body>
 <div class="container-fluid">
-  <a href="giohang.html" class="back-link"><img src="../../public/group90.png" style="height:18px;vertical-align:middle;margin-right:4px;">Quay lại</a>
+  <a href="giohang.html" class="back-link"><img src="../public/group90.png" style="height:18px;vertical-align:middle;margin-right:4px;">Quay lại</a>
   <div class="checkout-main">
     <!-- Thông tin nhận hàng -->
     <div class="checkout-left">
@@ -108,9 +108,9 @@
     <!-- Thanh toán + tổng tiền -->
     <div class="checkout-center">
       <div class="checkout-title"></div>
-      <div class="pay-method"><img src="../../public/group84.png" style="height:28px;"> <input type="radio" name="pay_method" value="COD" checked> <label>Thanh toán tiền mặt</label></div>
-      <div class="pay-method"><img src="../../public/group87.png" style="height:28px;"> <input type="radio" name="pay_method" value="VNPay"> <label>VN Pay</label></div>
-      <div class="pay-method"><img src="../../public/group89.png" style="height:28px;"> <input type="radio" name="pay_method" value="ApplePay"> <label>Apple Pay</label></div>
+      <div class="pay-method"><img src="../public/img/m.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="COD" checked> <label>Thanh toán tiền mặt</label></div>
+      <div class="pay-method"><img src="../public/img/b.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="VNPay"> <label>VN Pay</label></div>
+      <div class="pay-method"><img src="../public/img/n.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="ApplePay"> <label>Apple Pay</label></div>
       <div class="d-flex justify-content-between mb-2 mt-4">
         <span class="summary-label">Tổng tiền hàng</span>
         <span class="summary-value">395.000đ</span>
@@ -138,7 +138,7 @@
       <div class="cart-box">
         <div class="cart-title">Giỏ hàng của bạn</div>
         <div class="cart-row">
-          <img src="https://comem.vn/images/products/serum-sam-1700.jpg" class="cart-img" alt="Sữa Chống Nắng">
+          <img src="../public/img/sp-1.webp" class="cart-img" alt="Sữa Chống Nắng">
           <div class="cart-info">
             <div class="cart-name">Sữa Chống Nắng Sơ-ri Vitamin C Sáng Hồng SPF 50+ PA++++</div>
             <div class="cart-qty">
