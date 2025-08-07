@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: 'Inter',serif;
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+  background: #3E6907;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-panel {
+  flex: 1;
+  color: white;
+  display: flex;
+   align-items: flex-end;
+  padding-right: 65%; 
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.left-panel .logo h1 {
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.left-panel .logo p {
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.right-panel {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    width: 700px ;           
+    max-width: 90vw;        
+    min-height: 800px ;
+    background: white;
+    border-radius: 30px;
+    padding: 40px ;          
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 520px;       /* tăng chiều rộng form */
+    background: white;
+    padding: 90px 40px;     /* tăng padding */
+    border-radius: 16px;    /* bo góc lớn hơn */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.brand-name {
+  text-align: center;
+  color: #3E6907;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tablink {
+  padding: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #999;
+}
+
+.tablink.active {
+  color: #e53935;
+  border-bottom: 2px solid #e53935;
+  font-weight: bold;
+}
+
+.form label {
+  display: block;
+  margin: 15px 0 8px;
+  font-weight: 500;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s;
+}
+
+.form input:focus {
+  border-color: #4caf50;
+}
+
+.checkbox {
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox input {
+  margin-right: 8px;
+}
+
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.login-options .checkbox {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.login-options .checkbox input {
+  margin-right: 6px;
+}
+
+.login-options .forgot-password {
+  color: #4285f4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.login-options .forgot-password:hover {
+  color: #1a73e8;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn.register {
+  background-color: #e53935;
+  color: white;
+}
+
+.btn.register:hover {
+  background-color: #c62828;
+}
+
+.btn.login {
+  background-color: #e53935;
+  color: white;
+}
+.btn.register:hover {
+  background-color: #c62828;
+} 
+.btn.google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #4285f4;
+  color: #4285f4;
+}
+
+.btn.google img {
+  height: 20px;
+  margin-right: 8px;
+}
+
+.otp-timer {
+  font-size: 12px;
+  color: red;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+/* gửi OTP */
+.otp-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.otp-group input {
+  flex: 1;
+}
+
+#resend-btn {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 13px;
+  cursor: not-allowed;
+  padding: 0;
+}
+
+#resend-btn.enabled {
+  color: #4caf50;
+  cursor: pointer;
+  font-weight: bold;
+}

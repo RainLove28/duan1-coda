@@ -3,7 +3,7 @@
        private $host = "localhost";
        private $username = "root";
        private $password = "";
-       private $database = "duan1-coda";
+       private $database = "assignment";
        private $conn;
 
 
@@ -44,9 +44,11 @@
        }
 
 
-       public function getOne($sql, $params = []){
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute($params);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+       public function getOne($sql){
+           $stmt = $this->conn->prepare($sql);
+           $stmt->execute();
+           //Lấy 1 dữ liệu
+           return $stmt->fetch();
        }
-   }
+   }   
+?>

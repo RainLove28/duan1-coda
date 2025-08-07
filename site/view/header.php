@@ -21,6 +21,7 @@
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="../public/css/style.css" />
+    <link rel="stylesheet" href="/New folder/duan1-coda/public/css/login.css" />
 </head>
 
 <body>
@@ -58,7 +59,7 @@
                         <a href="/cart"><i class="fas fa-heart"></i></a>
                     </div>
                     <div class="cart">
-                        <a href="/profile"><i class="fas fa-user"></i></a>
+                        <a href="?page=login.php"><i class="fas fa-user"></i></a>
                     </div>
                     <div class="cart">
                         <a href="?page=giohang" class="cart-link">

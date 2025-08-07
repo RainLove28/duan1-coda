@@ -3,14 +3,21 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-    $page= $_GET['page'] ?? 'home';
-    require_once('controller/ProductController.php');
-     $productController = new ProductController();
-     // Gọi header (bao gồm cả dữ liệu sản phẩm cho menu)
-$productController->renderHeader();
+
+$page = $_GET['page'] ?? 'home';
+
+require_once('controller/ProductController.php');
+$productController = new ProductController();
+
+if ($page === 'login.php') {
+    require_once("view/login.php");
+    // KHÔNG gọi header/footer ở đây
+} else {
+    $productController->renderHeader();
     switch($page){
-        case 'home':  
-            $productController -> renderHome();
+        case 'home':
+            echo "<script>console.log(" . json_encode("test 02") . ");</script>";
+            $productController->renderHome();
             break;
         case 'shop':
             require_once("view/shop.php");
@@ -21,19 +28,19 @@ $productController->renderHeader();
         case 'giohang':
             require_once("view/giohang.php");
             break;
-            case 'thanhtoan':
+        case 'thanhtoan':
             require_once("view/thanhtoan.php");
             break;
         case 'product':           
-           if (isset($_GET['category'])) {
-        $productController->renderProductByCategory($_GET['category']);
-    }
-             break;
+            if (isset($_GET['category'])) {
+                $productController->renderProductByCategory($_GET['category']);
+            }
+            break;
         case 'product-details':
-            $id=$_GET['id'];         
-            $productController -> productDetail();
-            $productController -> proDetail($id);
-             break;
+            $id = $_GET['id'];         
+            $productController->productDetail();
+            $productController->proDetail($id);
+            break;
         // case "registerpage":
         //     require_once('controller/UserController.php');
         //     $userController = new UserController();
@@ -65,5 +72,6 @@ $productController->renderHeader();
         
     }
     require_once("view/footer.php");
-
+}
 ?>
+<link rel="stylesheet" href="../public/css/login.css" />

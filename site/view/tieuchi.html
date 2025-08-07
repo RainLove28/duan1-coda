@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tiêu chí phát triển sản phẩm Cỏ Mềm</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      background: #fafaf6;
+      margin: 0;
+      padding: 0;
+      color: #2d3a1f;
+    }
+    .title-section {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .title-section h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #6B9D3F;
+      letter-spacing: 1px;
+    }
+    .title-section p {
+      font-size: 16px;
+      color: #8cae5a;
+      font-weight: 500;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+  .criteria-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+  }
+  .criteria-box {
+    background: #fff;
+    border: 2px solid #6B9D3F;
+    border-radius: 18px;
+    padding: 32px 28px 28px 28px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 380px;
+  }
+  .criteria-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #388e1c;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .criteria-list {
+    font-size: 18px;
+    color: #2d3a1f;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .criteria-img {
+  width: 100%;
+  max-width: none;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  margin-top: 0;
+  margin-bottom: 0;
+  align-self: stretch;
+  display: block;
+}
+  /* Box đầu chiếm 2 cột, chia chữ và hình */
+  .criteria-box.top {
+    grid-column: 1 / span 2;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    min-height: 320px;
+    padding: 32px 32px 32px 32px;
+  }
+  .criteria-box.top .criteria-content {
+    flex: 1;
+    margin-right: 32px;
+  }
+  .criteria-box.top .criteria-img {
+  width: 320px;
+  height: 180px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-left: 32px;
+}
+  /* Hai box dưới */
+  .criteria-box.bottom {
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  @media (max-width: 900px) {
+  .criteria-img,
+  .criteria-box.top .criteria-img {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+<body>
+    <div data-include="../../site/view/header.html"></div>
+  <div class="title-section">
+    <h2>TIÊU CHÍ</h2>
+    <p>PHÁT TRIỂN SẢN PHẨM CỦA CỎ MỀM</p>
+ <div class="criteria-grid">
+  <!-- Ô trên cùng, chiếm 2 cột -->
+  <div class="criteria-box top">
+    <div class="criteria-content">
+      <div class="criteria-title">AN TOÀN</div>
+      <div class="criteria-list">
+        1. Không sử dụng thành phần có hại hoặc có nguy cơ gây hại cho sức khỏe con người và môi trường.<br>
+        2. Nguyên liệu nguồn gốc thiên nhiên (NOI) chiếm 70–100%. Phần lớn có thành phần thiên nhiên trên 90%.
+      </div>
+    </div>
+    <img class="criteria-img" src="https://comem.vn/images/tieu_chi/tieu_chi.jpg" alt="An toàn" style="width: 500px; height: 300px;">
+  </div>
+  <!-- Hai ô dưới -->
+  <div class="criteria-box bottom">
+    <div>
+      <div class="criteria-title">HIỆU QUẢ</div>
+      <div class="criteria-list">
+        3. 100% sản phẩm được nghiên cứu thử nghiệm in-vitro và in-vivo đạt hiệu quả lâm sàng.<br>
+        4. Kết hợp Thảo mộc, Dược liệu truyền thống với Khoa học hiện đại.
+      </div>
+    </div>
+    <img class="criteria-img" src="https://comem.vn/images/tieu_chi/tieu_chi_1.jpg" alt="Hiệu quả">
+  </div>
+  <div class="criteria-box bottom">
+    <div>
+      <div class="criteria-title">BỀN VỮNG</div>
+      <div class="criteria-list">
+        5. Tối đa nguyên liệu bản địa để phát huy yếu tố: Thiên nhiên, chất lượng ổn định, giảm khí thải vận chuyển.<br>
+        6. Tối thiểu rác thải. Sử dụng bao bì dễ phân hủy hoặc bao bì có thể tái chế.
+      </div>
+    </div>
+    <img class="criteria-img" src="https://comem.vn/images/tieu_chi/tieu_chi_2.jpg" alt="Bền vững">
+  </div>
+</div>
+<script src="../../site/view/include.js"></script>
+</body>
