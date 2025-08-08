@@ -225,6 +225,8 @@ if (isset($_POST['resend_otp'])) {
             } else if (tab === 'forgot') {
                 document.getElementById("forgot-form").classList.remove("hidden");
                 document.querySelector(".tablink:nth-child(3)").classList.add("active");
+                // Clear form khi chuyển đến tab forgot
+                clearForgotPasswordForm();
             }
         }
 
@@ -334,6 +336,9 @@ if (isset($_POST['resend_otp'])) {
             .then(data => {
                 if (data.success) {
                     alert(data.message);
+                    // Clear tất cả form fields
+                    clearForgotPasswordForm();
+                    // Chuyển về tab login
                     switchTab('login');
                 } else {
                     alert(data.message);
@@ -343,6 +348,29 @@ if (isset($_POST['resend_otp'])) {
                 console.error('Error:', error);
                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
             });
+        }
+
+        // Function để clear form quên mật khẩu
+        function clearForgotPasswordForm() {
+            // Clear input fields
+            document.getElementById('forgot-username').value = '';
+            document.getElementById('forgot-email').value = '';
+            document.getElementById('otp-input').value = '';
+            document.getElementById('new-password').value = '';
+            document.getElementById('confirm-password').value = '';
+            
+            // Ẩn các section
+            document.getElementById('otp-section').style.display = 'none';
+            document.getElementById('password-section').style.display = 'none';
+            
+            // Reset countdown
+            if (window.countdownTimer) {
+                clearInterval(window.countdownTimer);
+            }
+            const resendBtn = document.getElementById("resend-btn");
+            resendBtn.textContent = "Gửi lại mã";
+            resendBtn.disabled = false;
+            resendBtn.classList.add("enabled");
         }
 
         // Countdown timer
@@ -355,11 +383,11 @@ if (isset($_POST['resend_otp'])) {
             resendBtn.classList.remove("enabled");
             countdown = 60;
             countdownSpan.textContent = countdown;
-            const timer = setInterval(() => {
+            window.countdownTimer = setInterval(() => {
                 countdown--;
                 countdownSpan.textContent = countdown;
                 if (countdown <= 0) {
-                    clearInterval(timer);
+                    clearInterval(window.countdownTimer);
                     resendBtn.textContent = "Gửi lại mã";
                     resendBtn.disabled = false;
                     resendBtn.classList.add("enabled");

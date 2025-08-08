@@ -6,6 +6,15 @@ if (session_status() === PHP_SESSION_NONE) {
 // Debug: Kiểm tra session
 error_log("Session data: " . print_r($_SESSION, true));
 
+// Xử lý logout
+if (isset($_POST['logout'])) {
+    // Xóa tất cả session
+    session_destroy();
+    // Sử dụng JavaScript redirect thay vì PHP header để tránh lỗi "headers already sent"
+    echo "<script>window.location.href = 'index.php?page=login.php';</script>";
+    exit;
+}
+
 // Tạm thời bỏ qua session check để test
 /*
 // Kiểm tra user đã đăng nhập chưa
@@ -55,7 +64,7 @@ $message = '';
 $message_type = '';
 
 // Xử lý form submit
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['logout'])) {
     $fullname = filter_input(INPUT_POST, 'fullname', FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $mobile = filter_input(INPUT_POST, 'mobile', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -210,6 +219,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 .sidebar ul li a.active {
     background-color: #667eea;
     color: white;
+}
+
+/* Logout button style */
+.logout-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
 }
 
 /* Main content */
@@ -429,8 +459,14 @@ main {
                 <li><a href="#">Ngân Hàng</a></li>
                 <li><a href="#">Cài Đặt Thông Báo</a></li>
                 <li><a href="#">Nhật Ký Thiệp Lì Xì</a></li>
-                <li><a href="index.php?page=logout">Thoát</a></li>
             </ul>
+            
+            <!-- Form logout -->
+            <form method="POST" style="margin-top: 1rem;">
+                <button type="submit" name="logout" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </form>
         </aside>
         
         <main>
@@ -586,6 +622,16 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('active');
         });
     });
+
+    // Logout confirmation
+    const logoutBtn = document.querySelector('.logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+            if (!confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                e.preventDefault();
+            }
+        });
+    }
 });
 
 // Helper functions

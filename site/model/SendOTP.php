@@ -27,24 +27,104 @@ function sendOTPEmail($to_email, $otp) {
 
         //Content
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         $mail->Subject = "Mã OTP đặt lại mật khẩu - Aura Beauty";
         $mail->Body = "
-        <html>
+        <!DOCTYPE html>
+        <html lang='vi'>
         <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <title>Mã OTP đặt lại mật khẩu</title>
+            <style>
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    background-color: #ffffff;
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                }
+                .header {
+                    text-align: center;
+                    border-bottom: 2px solid #3E6907;
+                    padding-bottom: 20px;
+                    margin-bottom: 30px;
+                }
+                .header h2 {
+                    color: #3E6907;
+                    margin: 0;
+                    font-size: 28px;
+                }
+                .otp-container {
+                    text-align: center;
+                    background-color: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 8px;
+                    margin: 20px 0;
+                }
+                .otp-code {
+                    font-size: 32px;
+                    font-weight: bold;
+                    color: #e53935;
+                    letter-spacing: 5px;
+                    font-family: 'Courier New', monospace;
+                }
+                .footer {
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 1px solid #eee;
+                    text-align: center;
+                    color: #666;
+                }
+                .warning {
+                    background-color: #fff3cd;
+                    border: 1px solid #ffeaa7;
+                    color: #856404;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin: 20px 0;
+                }
+            </style>
         </head>
         <body>
-            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;'>
-                <h2 style='color: #3E6907;'>Aura Beauty</h2>
-                <h3>Mã OTP đặt lại mật khẩu</h3>
+            <div class='container'>
+                <div class='header'>
+                    <h2>🌟 Aura Beauty</h2>
+                </div>
+                
+                <h3 style='color: #333; margin-bottom: 20px;'>🔐 Mã OTP đặt lại mật khẩu</h3>
+                
                 <p>Xin chào,</p>
-                <p>Bạn đã yêu cầu đặt lại mật khẩu cho tài khoản Aura Beauty.</p>
-                <p>Mã OTP của bạn là: <strong style='font-size: 24px; color: #e53935;'>{$otp}</strong></p>
-                <p>Mã này có hiệu lực trong 5 phút.</p>
-                <p>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.</p>
-                <br>
-                <p>Trân trọng,</p>
-                <p>Đội ngũ Aura Beauty</p>
+                
+                <p>Bạn đã yêu cầu đặt lại mật khẩu cho tài khoản <strong>Aura Beauty</strong>.</p>
+                
+                <div class='otp-container'>
+                    <p style='margin-bottom: 10px; color: #666;'>Mã OTP của bạn:</p>
+                    <div class='otp-code'>{$otp}</div>
+                    <p style='margin-top: 10px; color: #666; font-size: 14px;'>Mã này có hiệu lực trong <strong>1 phút</strong></p>
+                </div>
+                
+                <div class='warning'>
+                    <strong>⚠️ Lưu ý quan trọng:</strong><br>
+                    • Không chia sẻ mã OTP này với bất kỳ ai<br>
+                    • Mã OTP sẽ tự động hết hạn sau 1 phút<br>
+                    • Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này
+                </div>
+                
+                <div class='footer'>
+                    <p><strong>Trân trọng,</strong></p>
+                    <p>Đội ngũ Aura Beauty</p>
+                    <p style='font-size: 12px; color: #999;'>Email này được gửi tự động, vui lòng không trả lời</p>
+                </div>
             </div>
         </body>
         </html>
@@ -79,6 +159,7 @@ function sendEmail($to_email, $subject, $body) {
 
         //Content
         $mail->isHTML(true);
+        $mail->CharSet = 'UTF-8';
         $mail->Subject = $subject;
         $mail->Body    = $body;
 

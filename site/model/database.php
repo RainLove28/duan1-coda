@@ -1,8 +1,8 @@
 <?php
    class Database{
-       private $host = "localhost";
+       private $host = "mysql";
        private $username = "root";
-       private $password = "";
+       private $password = "root";
        private $database = "duan1-coda";
        private $conn;
 
