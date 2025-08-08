@@ -25,6 +25,6 @@ create table users
 create index idx_otp
     on users (otp, otp_expires_at);
 
-INSERT INTO `duan1-coda`.users (id, username, password, fullname, email, mobile, address, image, birthday, role, otp, otp_expires_at, created_at, updated_at) VALUES (1, 'admin', '$2y$10$nfDtsJM3MsJJESeANqBK7.i5l4ksvzH2VT19OrjDDUbKl7DiNiGL2', 'Administrator', 'phuochhps40071@gmail.com', null, null, null, null, 'admin', null, null, '2025-08-07 16:20:42', '2025-08-07 18:26:31');
+INSERT INTO `duan1-coda`.users (id, username, password, fullname, email, mobile, address, image, birthday, role, otp, otp_expires_at, created_at, updated_at) VALUES (1, 'admin', '$2y$10$nfDtsJM3MsJJESeANqBK7.i5l4ksvzH2VT19OrjDDUbKl7DiNiGL2', 'Administrator', 'ikuysle@outlook.com', null, null, null, null, 'admin', null, null, '2025-08-07 16:20:42', '2025-08-07 18:26:31');
 INSERT INTO `duan1-coda`.users (id, username, password, fullname, email, mobile, address, image, birthday, role, otp, otp_expires_at, created_at, updated_at) VALUES (2, 'user1', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Test User', 'user@example.com', null, null, null, null, 'user', null, null, '2025-08-07 16:20:42', '2025-08-07 16:20:42');
 
