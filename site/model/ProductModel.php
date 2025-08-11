@@ -12,10 +12,10 @@ public function getHotPro(){
  return Database::getInstance()->getAll($sql);
 }
 //Ham lay san pham theo id ma danh muc
-public function getProByCate($id){
-     $sql = "SELECT * FROM sanpham Where idDanhMuc=$id";
-     return Database::getInstance()->getAll($sql);
-}
+// public function getProByCate($id){
+//      $sql = "SELECT * FROM sanpham Where idDanhMuc=$id";
+//      return Database::getInstance()->getAll($sql);
+// }
 
 // Ham lay san pham theo ten danh muc
 public function getProByCateName($tenDM){
@@ -33,9 +33,15 @@ public function getProByCateName($tenDM){
     return Database::getInstance()->getAll($sql, [$tenDM, $tenDM]);
 }
 
-
-
-
+// Ham tim kiem san pham
+public function searchProductByNameOrCategory($keyword) {
+    $sql = "SELECT sp.*
+            FROM sanpham sp
+            JOIN danhmuc dm ON sp.MaDM = dm.MaDM
+            WHERE sp.TenSanPham LIKE ? OR dm.TenDM LIKE ?";
+    $param = ["%$keyword%", "%$keyword%"];
+    return Database::getInstance()->getAll($sql, $param);
+}
 
 // public function addPro($data){
     

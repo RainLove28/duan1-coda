@@ -196,8 +196,6 @@
     .btn-buy:hover {
         background: #2e6d17;
     }
-
-   
     </style>
 </head>
 
@@ -211,8 +209,7 @@
                 </div>
                 <div class="cart-row">
                     <input type="checkbox" class="cart-checkbox" checked>
-                    <img src="../public/img/ban-chay.jpg" class="cart-img"
-                        alt="Sữa Chống Nắng">
+                    <img src="../public/img/ban-chay.jpg" class="cart-img" alt="Sữa Chống Nắng">
                     <div class="cart-info">
                         <div class="cart-name">Sữa Chống Nắng Sơ-ri Vitamin C Sáng Hồng SPF 50+ PA++++</div>
                         <div style="color:#888;font-size:15px;">50+ PA++++</div>
@@ -250,9 +247,9 @@
                     <span class="summary-label">Cần thanh toán</span>
                     <span class="summary-total">395.000 đ</span>
                 </div>
-          <a href="?page=thanhtoan">
-            <button class="btn-buy">Thanh toán</button>
-          </a>
+                <a href="?page=thanhtoan">
+                    <button class="btn-buy">Thanh toán</button>
+                </a>
             </div>
-            </div>
+        </div>
 </body>

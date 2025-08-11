@@ -44,10 +44,12 @@
                         <span>|</span>
                         <a href="?page=product&category=Sản phẩm gội đầu">Dầu Gội</a>
                     </div>
-                    <div class="search-box">
-                        <input type="text" placeholder="Tìm sản phẩm, danh mục mong muốn ..." />
-                        <button><i class="fa fa-search"></i></button>
-                    </div>
+                    <form class="search-box" method="GET" action="index.php">
+                        <input type="hidden" name="page" value="filter">
+                        <input type="text" name="keyword" placeholder="Tìm sản phẩm, danh mục mong muốn ..."
+                            value="<?= $_GET['keyword'] ?? '' ?>">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
                 <div class="header-top-right">
                     <div class="cart">

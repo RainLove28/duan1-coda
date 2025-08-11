@@ -94,14 +94,32 @@ class ProductController{
             echo "Sản phẩm không tồn tại!";
             return;
         }
-        $relatedProducts = $this->productModel->getRelatedProducts($product['idDanhMuc'], $id);
+        // $relatedProducts = $this->productModel->getRelatedProducts($product['idDanhMuc'], $id);
     
         // debug
         // var_dump($relatedProducts); exit;
     
         // require đúng đường dẫn
-        require_once __DIR__ . 'view/product-details.php';
+        require_once  'view/product-details.php';
     }
+
+
+    // Tạo phương thức tìm kiếm sản phẩm
+    public function filterProduct() {
+    $keyword = $_GET['keyword'] ?? '';
+
+    // Nếu không có từ khóa, chuyển về trang sản phẩm
+    if (empty($keyword)) {
+        header("Location: index.php?page=product");
+        exit;
+    }
+
+    // Gọi hàm tìm kiếm từ Model
+    $products = $this->productModel->searchProductByNameOrCategory($keyword);
+
+    // Dùng view riêng
+    require_once "view/filter.php";
+}
     
 }
 

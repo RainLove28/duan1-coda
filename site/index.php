@@ -16,12 +16,14 @@ if ($page === 'login.php') {
     $productController->renderHeader();
     switch($page){
         case 'home':
-            echo "<script>console.log(" . json_encode("test 02") . ");</script>";
             $productController->renderHome();
             break;
         case 'shop':
             require_once("view/shop.php");
             break;
+        case 'filter':
+        $productController->filterProduct();
+        break;
         case 'vecomem':
             require_once("view/vecomem.php");
             break;
