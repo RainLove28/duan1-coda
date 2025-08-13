@@ -76,6 +76,7 @@
             font-family: Inter, sans-serif;
             transition: background 0.2s, color 0.2s;
             text-decoration: none;
+            position: relative;
         }
 
         .dashboard-link .arrow {
@@ -110,10 +111,55 @@
             border-radius: 0 0 8px 8px;
             box-shadow: 0 2px 8px rgba(44,204,113,0.08);
             position: static;
+            overflow: hidden;
         }
 
         .dashboard-item.open .dropdown-menu {
             display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        /* Sub-menu styling */
+        .sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+
+        .nav-item:hover .sub-menu {
+            display: block;
+        }
+
+        .sub-menu .nav-link {
+            font-size: 14px;
+            padding: 8px 15px;
+            color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            margin-bottom: 2px;
+        }
+
+        .sub-menu .nav-link:hover,
+        .sub-menu .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .dropdown-menu .nav-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 400px;
+            }
         }
 
         .dropdown-menu .nav-item {
@@ -939,15 +985,24 @@
             <div class="sidebar-header">
                 <i class="fas fa-cogs fa-2x" style="color: white;"></i>
                 <h2>Admin Panel</h2>
+                <div style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.2); margin-top: 10px;">
+                    <div style="color: rgba(255,255,255,0.8); font-size: 12px;">Xin chào,</div>
+                    <div style="color: white; font-weight: 600; font-size: 14px;">
+                        <?php echo htmlspecialchars($_SESSION['user']['fullname'] ?? $_SESSION['user']['username'] ?? 'Admin'); ?>
+                    </div>
+                    <a href="logout.php" style="color: rgba(255,255,255,0.7); font-size: 12px; text-decoration: none; margin-top: 5px; display: inline-block;">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                </div>
             </div>
             <ul class="nav-menu">
     <li class="nav-item dashboard-item">
-        <a href="index.php?page=dashboard" class="nav-link dashboard-link <?= in_array(($_GET['page'] ?? 'dashboard'), ['dashboard', 'User', 'Category', 'product', 'order_list', 'inventory', 'Comment']) ? ' active' : '' ?>">
+        <a href="index.php?page=dashboard" class="nav-link dashboard-link <?= in_array(($_GET['page'] ?? 'dashboard'), ['dashboard', 'user_list', 'Category', 'product', 'order_list', 'inventory', 'comment_list', 'voucher_list']) ? ' active' : '' ?>">
             <i class="fas fa-tachometer-alt"></i> Dashboard <span class="arrow"></span>
         </a>
         <ul class="dropdown-menu">
             <li class="nav-item">
-                <a href="index.php?page=User" class="nav-link<?= ($_GET['page'] ?? '') == 'User' ? ' active' : '' ?>">
+                <a href="index.php?page=user_list" class="nav-link<?= ($_GET['page'] ?? '') == 'user_list' ? ' active' : '' ?>">
                     <i class="fas fa-users"></i> Quản lý Người dùng
                 </a>
             </li>
@@ -972,12 +1027,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.php?page=Comment" class="nav-link<?= ($_GET['page'] ?? '') == 'Comment' ? ' active' : '' ?>">
+                <a href="index.php?page=comment_list" class="nav-link<?= ($_GET['page'] ?? '') == 'comment_list' ? ' active' : '' ?>">
                     <i class="fas fa-comments"></i> Quản lý Bình luận
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.php?page=Voucher" class="nav-link<?= ($_GET['page'] ?? '') == 'Voucher' ? ' active' : '' ?>">
+                <a href="index.php?page=voucher_list" class="nav-link<?= ($_GET['page'] ?? '') == 'voucher_list' ? ' active' : '' ?>">
                     <i class="fas fa-tags"></i> Quản lý Voucher
                 </a>
             </li>
@@ -1058,25 +1113,42 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
     var dashboardItem = document.querySelector('.dashboard-item');
     var dashboardLink = document.querySelector('.dashboard-link');
+    var dropdownMenu = document.querySelector('.dropdown-menu');
     
+    // Xử lý click vào main dashboard link
     dashboardLink.addEventListener('click', function(e) {
-        // Kiểm tra xem có đang ở trang dashboard không
-        var currentPage = '<?= $_GET['page'] ?? 'dashboard' ?>';
-        
-        if (currentPage === 'dashboard') {
-            // Nếu đang ở dashboard, chỉ toggle dropdown
-            e.preventDefault();
-            dashboardItem.classList.toggle('open');
-        } else {
-            // Nếu không ở dashboard, cho phép điều hướng về dashboard
-            // Không cần preventDefault, để link hoạt động bình thường
+        e.preventDefault(); // Luôn prevent để chỉ toggle dropdown
+        e.stopPropagation();
+        dashboardItem.classList.toggle('open');
+    });
+    
+    // Ngăn dropdown đóng khi click vào dropdown menu area
+    if (dropdownMenu) {
+        dropdownMenu.addEventListener('click', function(e) {
+            e.stopPropagation(); // Ngăn event bubble lên parent
+        });
+    }
+    
+    // Đóng dropdown khi click ra ngoài
+    document.addEventListener('click', function(e) {
+        if (!dashboardItem.contains(e.target)) {
+            dashboardItem.classList.remove('open');
         }
     });
     
     // Tự động mở dropdown nếu đang ở trang con
     var currentPage = '<?= $_GET['page'] ?? 'dashboard' ?>';
-    if (["User","Category","product","order_list","inventory","Comment"].includes(currentPage)) {
+    if (["user_list","Category","product","order_list","inventory","comment_list","voucher_list"].includes(currentPage)) {
         dashboardItem.classList.add('open');
     }
+    
+    // Xử lý hover để cải thiện UX
+    dashboardItem.addEventListener('mouseenter', function() {
+        // Có thể thêm hover effect nếu cần
+    });
+    
+    dashboardItem.addEventListener('mouseleave', function() {
+        // Có thể thêm hover effect nếu cần
+    });
 });
 </script>

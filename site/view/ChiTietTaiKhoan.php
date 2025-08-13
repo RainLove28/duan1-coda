@@ -3,61 +3,45 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Kiểm tra user đã đăng nhập chưa
+if (!isset($_SESSION['user']) || !is_array($_SESSION['user']) || empty($_SESSION['user']['id'])) {
+    // Chưa đăng nhập, redirect về trang login
+    header('Location: index.php?page=login');
+    exit;
+}
+
+// Lấy user_id từ session
+$user_id = $_SESSION['user']['id'];
+
 // Debug: Kiểm tra session
-error_log("Session data: " . print_r($_SESSION, true));
+error_log("Session user data: " . print_r($_SESSION['user'], true));
 
 // Xử lý logout
 if (isset($_POST['logout'])) {
     // Xóa tất cả session
     session_destroy();
-    // Sử dụng JavaScript redirect thay vì PHP header để tránh lỗi "headers already sent"
-    echo "<script>window.location.href = 'index.php?page=login.php';</script>";
+    // Redirect về trang chủ
+    echo "<script>window.location.href = 'index.php?page=home';</script>";
     exit;
 }
-
-// Tạm thời bỏ qua session check để test
-/*
-// Kiểm tra user đã đăng nhập chưa
-if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
-    // Nếu chưa đăng nhập, redirect về login
-    header('Location: index.php?page=login.php');
-    exit;
-}
-
-// Kiểm tra user_id có tồn tại không
-if (!isset($_SESSION['user_id'])) {
-    error_log("User ID not found in session");
-    header('Location: index.php?page=login.php');
-    exit;
-}
-*/
-
-// Tạm thời set user_id = 1 để test
-$user_id = 1;
 
 require_once __DIR__ . '/../model/database.php';
 
 $db = Database::getInstance();
 
-// Lấy thông tin user
+// Lấy thông tin user từ database
 $sql = "SELECT * FROM users WHERE id = ?";
 $user = $db->getOne($sql, [$user_id]);
 
 // Debug: Kiểm tra user data
-error_log("User data: " . print_r($user, true));
+error_log("User data from DB: " . print_r($user, true));
 
 if (!$user) {
-    error_log("User not found in database");
-    // Tạo user test nếu không có
-    $user = [
-        'id' => 1,
-        'username' => 'admin',
-        'fullname' => 'Administrator',
-        'email' => 'ikuysle@outlook.com',
-        'mobile' => '(+84) 374 411 689',
-        'address' => '340/5c, Đường Nguyễn Bình, ...',
-        'gender' => 'Nam'
-    ];
+    error_log("User not found in database with ID: $user_id");
+    // Nếu không tìm thấy user trong DB, xóa session và redirect
+    session_destroy();
+    header('Location: index.php?page=login');
+    exit;
 }
 
 $message = '';
@@ -93,8 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['logout'])) {
                 $message = 'Cập nhật thông tin thành công!';
                 $message_type = 'success';
                 
-                // Refresh user data
+                // Refresh user data từ database
                 $user = $db->getOne($sql, [$user_id]);
+                
+                // Cập nhật lại session với thông tin mới
+                $_SESSION['user'] = $user;
+                
+                error_log("Updated session data: " . print_r($_SESSION['user'], true));
             } else {
                 $message = 'Có lỗi xảy ra. Vui lòng thử lại!';
                 $message_type = 'error';
@@ -253,9 +242,57 @@ main {
 .profile-title {
     font-size: 1.8rem;
     color: #333;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     border-bottom: 2px solid #667eea;
     padding-bottom: 0.5rem;
+}
+
+.profile-subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* User Summary */
+.user-summary {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-item i {
+    width: 20px;
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+.summary-item div {
+    flex: 1;
+}
+
+.summary-item strong {
+    display: inline-block;
+    width: 140px;
+    color: #333;
+    font-weight: 600;
+}
+
+.summary-item span {
+    color: #666;
 }
 
 /* Messages */
@@ -449,7 +486,14 @@ main {
         <aside class="sidebar">
             <div class="user-info">
                 <img src="https://via.placeholder.com/50" alt="User Avatar">
-                <span><?php echo htmlspecialchars($user['username']); ?></span>
+                <div>
+                    <div style="font-weight: 600; color: #333;">
+                        <?php echo htmlspecialchars($user['fullname'] ?? $user['username']); ?>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        @<?php echo htmlspecialchars($user['username']); ?>
+                    </div>
+                </div>
             </div>
             <ul>
                 <li><a href="#" class="active">Hồ Sơ</a></li>
@@ -471,6 +515,39 @@ main {
         
         <main>
             <h2 class="profile-title">Hồ Sơ Của Tôi</h2>
+            <p class="profile-subtitle">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
+            
+            <!-- User Summary Info -->
+            <div class="user-summary">
+                <div class="summary-item">
+                    <i class="fas fa-user-circle"></i>
+                    <div>
+                        <strong>Họ tên:</strong>
+                        <span><?php echo htmlspecialchars($user['fullname'] ?? 'Chưa cập nhật'); ?></span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email:</strong>
+                        <span><?php echo htmlspecialchars($user['email'] ?? 'Chưa cập nhật'); ?></span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <strong>Số điện thoại:</strong>
+                        <span><?php echo htmlspecialchars($user['mobile'] ?? 'Chưa cập nhật'); ?></span>
+                    </div>
+                </div>
+                <div class="summary-item">
+                    <i class="fas fa-calendar"></i>
+                    <div>
+                        <strong>Ngày tham gia:</strong>
+                        <span><?php echo isset($user['created_at']) ? date('d/m/Y', strtotime($user['created_at'])) : 'Không xác định'; ?></span>
+                    </div>
+                </div>
+            </div>
             
             <?php if ($message): ?>
                 <div class="message <?php echo $message_type; ?>">
@@ -482,6 +559,19 @@ main {
                 <div class="form-group">
                     <label for="username">Tên đăng nhập</label>
                     <input type="text" id="username" value="<?php echo htmlspecialchars($user['username']); ?>" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Trạng thái tài khoản</label>
+                    <div style="padding: 0.75rem; background: <?php echo ($user['status'] ?? 'inactive') === 'active' ? '#d4edda' : '#fff3cd'; ?>; 
+                         border-radius: 5px; border: 1px solid <?php echo ($user['status'] ?? 'inactive') === 'active' ? '#c3e6cb' : '#ffeaa7'; ?>;">
+                        <i class="fas fa-<?php echo ($user['status'] ?? 'inactive') === 'active' ? 'check-circle' : 'exclamation-triangle'; ?>" 
+                           style="color: <?php echo ($user['status'] ?? 'inactive') === 'active' ? '#28a745' : '#856404'; ?>;"></i>
+                        <strong><?php echo ($user['status'] ?? 'inactive') === 'active' ? 'Tài khoản đã được xác thực' : 'Tài khoản chưa xác thực'; ?></strong>
+                        <small style="display: block; color: #666; margin-top: 5px;">
+                            <?php echo ($user['status'] ?? 'inactive') === 'active' ? 'Bạn có thể sử dụng đầy đủ các tính năng' : 'Vui lòng xác thực email để sử dụng đầy đủ tính năng'; ?>
+                        </small>
+                    </div>
                 </div>
                 
                 <div class="form-group">

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../site/model/config.php';
-require_once __DIR__ . '/../../site/model/database copy.php';
+require_once __DIR__ . '/../../site/model/database.php';
 
 /**
  * Base Controller - Lớp cha cho tất cả controller

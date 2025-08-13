@@ -14,10 +14,14 @@ class ProductController extends BaseController {
         $search = $_GET['search'] ?? '';
         
         if ($search) {
-            $sql = "SELECT * FROM sanpham WHERE TenSP LIKE ? ORDER BY MaSP DESC";
+            $sql = "SELECT sp.*, dm.TenDM as TenDanhMuc FROM sanpham sp 
+                    LEFT JOIN danhmuc dm ON sp.MaDM = dm.MaDM 
+                    WHERE sp.TenSanPham LIKE ? ORDER BY sp.MaSP DESC";
             $products = $this->getAll($sql, ['%' . $search . '%']);
         } else {
-            $sql = "SELECT * FROM sanpham ORDER BY MaSP DESC";
+            $sql = "SELECT sp.*, dm.TenDM as TenDanhMuc FROM sanpham sp 
+                    LEFT JOIN danhmuc dm ON sp.MaDM = dm.MaDM 
+                    ORDER BY sp.MaSP DESC";
             $products = $this->getAll($sql);
         }
         
@@ -27,7 +31,7 @@ class ProductController extends BaseController {
     public function renderAddProduct() {
         try {
             // Get categories for dropdown
-            $sql = "SELECT * FROM danhmuc ORDER BY TenDanhMuc";
+            $sql = "SELECT * FROM danhmuc ORDER BY TenDM";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -42,16 +46,16 @@ class ProductController extends BaseController {
     
     public function addProduct($data) {
         try {
-            // Thêm sản phẩm với số lượng ban đầu
+            // Thêm sản phẩm với số lượng ban đầu (1 = Còn hàng, 0 = Hết hàng)
             $quantity = intval($data['SoLuong'] ?? 0);
-            $status = $quantity > 0 ? 'Còn hàng' : 'Hết hàng';
+            $status = $quantity > 0 ? 1 : 0;
             
-            $sql = "INSERT INTO sanpham (TenSP, MoTa, Gia, SoLuong, HinhAnh, DanhMuc, TrangThai) 
+            $sql = "INSERT INTO sanpham (TenSanPham, MoTa, Gia, SoLuong, HinhAnh, MaDM, TrangThai) 
                     VALUES (:tenSP, :moTa, :gia, :soLuong, :hinhAnh, :danhMuc, :trangThai)";
             $stmt = $this->conn->prepare($sql);
             
             $stmt->execute([
-                ':tenSP' => $data['TenSP'] ?? '',
+                ':tenSP' => $data['TenSanPham'] ?? '',
                 ':moTa' => $data['MoTa'] ?? '',
                 ':gia' => $data['Gia'] ?? 0,
                 ':soLuong' => $quantity,
@@ -100,11 +104,11 @@ class ProductController extends BaseController {
     
     public function editProduct($data) {
         try {
-            // Xác định trạng thái dựa trên số lượng
+            // Xác định trạng thái dựa trên số lượng (1 = Còn hàng, 0 = Hết hàng)
             $quantity = intval($data['SoLuong'] ?? 0);
-            $status = $quantity > 0 ? 'Còn hàng' : 'Hết hàng';
+            $status = $quantity > 0 ? 1 : 0;
             
-            $sql = "UPDATE sanpham SET TenSP = :tenSP, MoTa = :moTa, Gia = :gia, SoLuong = :soLuong, DanhMuc = :danhMuc, TrangThai = :trangThai";
+            $sql = "UPDATE sanpham SET TenSanPham = :tenSP, MoTa = :moTa, Gia = :gia, SoLuong = :soLuong, MaDM = :danhMuc, TrangThai = :trangThai";
             
             // Only update image if new one is uploaded
             if (!empty($data['HinhAnh'])) {
@@ -116,7 +120,7 @@ class ProductController extends BaseController {
             $stmt = $this->conn->prepare($sql);
             
             $params = [
-                ':tenSP' => $data['TenSP'] ?? '',
+                ':tenSP' => $data['TenSanPham'] ?? '',
                 ':moTa' => $data['MoTa'] ?? '',
                 ':gia' => $data['Gia'] ?? 0,
                 ':soLuong' => $quantity,
@@ -223,7 +227,7 @@ class ProductController extends BaseController {
      */
     public function getStockInfo($productId) {
         try {
-            $sql = "SELECT MaSP, TenSP, SoLuong, TrangThai FROM sanpham WHERE MaSP = :id";
+            $sql = "SELECT MaSP, TenSanPham, SoLuong, TrangThai FROM sanpham WHERE MaSP = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $productId]);
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -244,7 +248,7 @@ class ProductController extends BaseController {
      */
     public function getLowStockProducts($threshold = 5) {
         try {
-            $sql = "SELECT MaSP, TenSP, SoLuong, TrangThai FROM sanpham 
+            $sql = "SELECT MaSP, TenSanPham, SoLuong, TrangThai FROM sanpham 
                     WHERE SoLuong <= :threshold AND TrangThai != 'Ngừng bán' 
                     ORDER BY SoLuong ASC";
             $stmt = $this->conn->prepare($sql);
@@ -252,6 +256,33 @@ class ProductController extends BaseController {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             return [];
+        }
+    }
+    
+    /**
+     * Render trang quản lý tồn kho
+     */
+    public function renderInventory() {
+        try {
+            // Lấy tất cả sản phẩm với thông tin tồn kho
+            $sql = "SELECT sp.MaSP, sp.TenSanPham, sp.SoLuong, sp.TrangThai, sp.Gia, 
+                           dm.TenDM as TenDanhMuc
+                    FROM sanpham sp 
+                    LEFT JOIN danhmuc dm ON sp.MaDM = dm.MaDM 
+                    ORDER BY sp.SoLuong ASC, sp.TenSanPham";
+            $products = $this->getAll($sql);
+            
+            // Thống kê tồn kho
+            $lowStockProducts = $this->getLowStockProducts(5);
+            $outOfStockProducts = array_filter($products, function($product) {
+                return $product['SoLuong'] <= 0;
+            });
+            
+            include __DIR__ . '/../view/inventory_list.php';
+        } catch (Exception $e) {
+            $_SESSION['error'] = 'Có lỗi xảy ra: ' . $e->getMessage();
+            header('Location: index.php?page=dashboard');
+            exit;
         }
     }
     
@@ -272,6 +303,88 @@ class ProductController extends BaseController {
         } catch (Exception $e) {
             return false;
         }
+    }
+    
+    public function updateStockManual() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                $productId = $_POST['MaSP'] ?? '';
+                $newStock = intval($_POST['SoLuong'] ?? 0);
+                $note = $_POST['GhiChu'] ?? '';
+                
+                if (empty($productId)) {
+                    $_SESSION['error'] = 'ID sản phẩm không hợp lệ';
+                    header('Location: index.php?page=inventory');
+                    return;
+                }
+                
+                // Cập nhật số lượng và trạng thái
+                $status = $newStock > 0 ? 1 : 0;
+                $sql = "UPDATE sanpham SET SoLuong = ?, TrangThai = ? WHERE MaSP = ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute([$newStock, $status, $productId]);
+                
+                $_SESSION['success'] = 'Cập nhật tồn kho thành công!';
+            } catch (Exception $e) {
+                $_SESSION['error'] = 'Có lỗi xảy ra: ' . $e->getMessage();
+            }
+        }
+        header('Location: index.php?page=inventory');
+    }
+    
+    public function addStock() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                $productId = $_POST['MaSP'] ?? '';
+                $addQuantity = intval($_POST['SoLuongThem'] ?? 0);
+                $note = $_POST['GhiChu'] ?? '';
+                
+                if (empty($productId) || $addQuantity <= 0) {
+                    $_SESSION['error'] = 'Thông tin không hợp lệ';
+                    header('Location: index.php?page=inventory');
+                    return;
+                }
+                
+                // Lấy số lượng hiện tại
+                $sql = "SELECT SoLuong FROM sanpham WHERE MaSP = ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute([$productId]);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                if (!$product) {
+                    $_SESSION['error'] = 'Sản phẩm không tồn tại';
+                    header('Location: index.php?page=inventory');
+                    return;
+                }
+                
+                // Cập nhật số lượng mới
+                $newStock = $product['SoLuong'] + $addQuantity;
+                $status = $newStock > 0 ? 1 : 0;
+                
+                $sql = "UPDATE sanpham SET SoLuong = ?, TrangThai = ? WHERE MaSP = ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute([$newStock, $status, $productId]);
+                
+                $_SESSION['success'] = "Nhập kho thành công! Đã thêm {$addQuantity} sản phẩm.";
+            } catch (Exception $e) {
+                $_SESSION['error'] = 'Có lỗi xảy ra: ' . $e->getMessage();
+            }
+        }
+        header('Location: index.php?page=inventory');
+    }
+    
+    public function updateAllStock() {
+        try {
+            // Cập nhật trạng thái tự động dựa trên số lượng
+            $sql = "UPDATE sanpham SET TrangThai = CASE WHEN SoLuong > 0 THEN 1 ELSE 0 END";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            
+            $_SESSION['success'] = 'Cập nhật trạng thái tồn kho tự động thành công!';
+        } catch (Exception $e) {
+            $_SESSION['error'] = 'Có lỗi xảy ra: ' . $e->getMessage();
+        }
+        header('Location: index.php?page=inventory');
     }
 }
 ?>

@@ -81,77 +81,95 @@
 </head>
 <body>
 <div class="container-fluid">
-  <a href="giohang.html" class="back-link"><img src="../public/group90.png" style="height:18px;vertical-align:middle;margin-right:4px;">Quay lại</a>
+  <a href="?page=giohang" class="back-link"><img src="../public/group90.png" style="height:18px;vertical-align:middle;margin-right:4px;">Quay lại</a>
   <div class="checkout-main">
-    <!-- Thông tin nhận hàng -->
-    <div class="checkout-left">
-  <div class="checkout-title">Thông tin nhận hàng</div>
-  <form method="post" action="../model/sendmail.php">
-    <label class="form-label">Họ và Tên</label>
-    <input type="text" class="form-control mb-2" name="fullname" placeholder="Họ và Tên" required>
-    <label class="form-label">Số điện thoại</label>
-    <input type="text" class="form-control mb-2" name="phone" placeholder="Số điện thoại" required>
-    <label class="form-label">Email</label>
-    <input type="email" class="form-control mb-2" name="email" placeholder="Email" required>
-    <div class="checkout-title mt-4">Thông tin địa chỉ</div>
-    <label class="form-label">Tỉnh/Thành phố</label>
-    <input type="text" class="form-control mb-2" name="address" placeholder="Tỉnh/Thành phố">
-    <label class="form-label">Ghi Chú</label>
-    <textarea class="form-control mb-2" rows="3" name="note" placeholder="Ghi Chú"></textarea>
-    <!-- Thanh toán + tổng tiền -->
-    <div class="checkout-center">
-      <!-- ...các dòng tổng tiền, phương thức thanh toán... -->
-      <button class="btn-order mt-2" type="submit">ĐẶT HÀNG</button>
-    </div>
-  </form>
-</div>
-    <!-- Thanh toán + tổng tiền -->
-    <div class="checkout-center">
-      <div class="checkout-title"></div>
-      <div class="pay-method"><img src="../public/img/m.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="COD" checked> <label>Thanh toán tiền mặt</label></div>
-      <div class="pay-method"><img src="../public/img/b.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="VNPay"> <label>VN Pay</label></div>
-      <div class="pay-method"><img src="../public/img/n.jpg" style="height:28px;"> <input type="radio" name="pay_method" value="ApplePay"> <label>Apple Pay</label></div>
-      <div class="d-flex justify-content-between mb-2 mt-4">
-        <span class="summary-label">Tổng tiền hàng</span>
-        <span class="summary-value">395.000đ</span>
-      </div>
-      <div class="d-flex justify-content-between mb-2">
-        <span class="summary-label">Tổng tiền phí vận chuyển</span>
-        <span class="summary-value">20.000đ</span>
-      </div>
-      <div class="d-flex justify-content-between mb-2">
-        <span class="summary-label">Tổng cộng Voucher giảm giá</span>
-        <span class="voucher-value">-79.000đ</span>
-      </div>
-      <div class="d-flex justify-content-between mb-2">
-        <span class="summary-label">Tổng thanh toán</span>
-        <span class="summary-total">336.000đ</span>
-      </div>
-      <div class="mb-2" style="font-size:13px;color:#888;">
-        Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý và tuân theo <a href="#" style="color:#388e1c;">Điều khoản Aura Beauty</a>
-      </div>
-      <!-- Đặt nút submit ở đây để gửi form -->
+    <!-- Form thanh toán -->
+    <form method="post" action="?page=createOrder">
+      <input type="hidden" name="total_price" value="<?= $totalPrice ?>">
       
-    </div>
-    <!-- Giỏ hàng -->
-    <div class="checkout-right">
-      <div class="cart-box">
-        <div class="cart-title">Giỏ hàng của bạn</div>
-        <div class="cart-row">
-          <img src="../public/img/sp-1.webp" class="cart-img" alt="Sữa Chống Nắng">
-          <div class="cart-info">
-            <div class="cart-name">Sữa Chống Nắng Sơ-ri Vitamin C Sáng Hồng SPF 50+ PA++++</div>
-            <div class="cart-qty">
-              <button class="qty-btn">-</button>
-              <input type="text" class="qty-input" value="1" readonly>
-              <button class="qty-btn">+</button>
-              <button class="cart-remove">&#10006; xóa</button>
-            </div>
-          </div>
-          <div class="cart-price">395.000đ</div>
+      <!-- Thông tin nhận hàng -->
+      <div class="checkout-left">
+        <div class="checkout-title">Thông tin nhận hàng</div>
+        
+        <label class="form-label">Họ và Tên</label>
+        <input type="text" class="form-control mb-2" name="receiver_name" placeholder="Họ và Tên" 
+               value="<?= isset($_SESSION['userInfo']) ? $_SESSION['userInfo']['fullname'] : '' ?>" required>
+               
+        <label class="form-label">Số điện thoại</label>
+        <input type="tel" class="form-control mb-2" name="receiver_mobile" placeholder="Số điện thoại" 
+               pattern="[0-9]{10,11}" title="Số điện thoại phải có 10-11 chữ số"
+               value="<?= isset($_SESSION['userInfo']) ? $_SESSION['userInfo']['mobile'] : '' ?>" required>
+               
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control mb-2" name="email" placeholder="Email" 
+               value="<?= isset($_SESSION['userInfo']) ? $_SESSION['userInfo']['email'] : '' ?>" required>
+               
+        <div class="checkout-title mt-4">Thông tin địa chỉ</div>
+        <label class="form-label">Địa chỉ nhận hàng</label>
+        <input type="text" class="form-control mb-2" name="receiver_address" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố" required>
+        
+        <label class="form-label">Ghi Chú</label>
+        <textarea class="form-control mb-2" rows="3" name="note" placeholder="Ghi chú cho đơn hàng (không bắt buộc)"></textarea>
+      </div>
+      <!-- Thanh toán + tổng tiền -->
+      <div class="checkout-center">
+        <div class="checkout-title">Phương thức thanh toán</div>
+        <div class="pay-method">
+          <img src="../public/img/m.jpg" style="height:28px;"> 
+          <input type="radio" name="payment_method" value="COD" checked> 
+          <label>Thanh toán tiền mặt khi nhận hàng</label>
+        </div>
+        <div class="pay-method">
+          <img src="../public/img/b.jpg" style="height:28px;"> 
+          <input type="radio" name="payment_method" value="VNPay"> 
+          <label>VN Pay</label>
+        </div>
+        <div class="pay-method">
+          <img src="../public/img/n.jpg" style="height:28px;"> 
+          <input type="radio" name="payment_method" value="ApplePay"> 
+          <label>Apple Pay</label>
+        </div>
+        
+        <div class="d-flex justify-content-between mb-2 mt-4">
+          <span class="summary-label">Tổng tiền hàng</span>
+          <span class="summary-value"><?= number_format($totalPrice, 0, ',', '.') ?>đ</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="summary-label">Phí vận chuyển</span>
+          <span class="summary-value">0đ</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="summary-label">Tổng thanh toán</span>
+          <span class="summary-total"><?= number_format($totalPrice, 0, ',', '.') ?>đ</span>
+        </div>
+        <div class="mb-2" style="font-size:13px;color:#888;">
+          Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý và tuân theo <a href="#" style="color:#388e1c;">Điều khoản Aura Beauty</a>
+        </div>
+        <button class="btn-order mt-2" type="submit">ĐẶT HÀNG</button>
+      </div>
+      <!-- Giỏ hàng -->
+      <div class="checkout-right">
+        <div class="cart-box">
+          <div class="cart-title">Giỏ hàng của bạn</div>
+          <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+            <?php foreach ($_SESSION['cart'] as $id => $item): ?>
+              <div class="cart-row">
+                <img src="../public/img/<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
+                <div class="cart-info">
+                  <div class="cart-name"><?= htmlspecialchars($item['name']) ?></div>
+                  <div class="cart-qty">
+                    <span>Số lượng: <?= $item['quantity'] ?></span>
+                  </div>
+                </div>
+                <div class="cart-price"><?= number_format($item['price'] * $item['quantity'], 0, ',', '.') ?>đ</div>
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <p>Giỏ hàng trống</p>
+          <?php endif; ?>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 </body>

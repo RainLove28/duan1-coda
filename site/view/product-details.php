@@ -32,6 +32,83 @@
 .main-image {
     border-radius: 0px;
 }
+
+/* Success Popup */
+.success-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    margin: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.popup-icon {
+    font-size: 48px;
+    color: #28a745;
+    margin-bottom: 15px;
+}
+
+.popup-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.popup-message {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.popup-btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.popup-btn.primary {
+    background: #007bff;
+    color: white;
+}
+
+.popup-btn.primary:hover {
+    background: #0056b3;
+}
+
+.popup-btn.secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.popup-btn.secondary:hover {
+    background: #545b62;
+}
 </style>
 
 <body>
@@ -80,12 +157,23 @@
 
                             <div class="product-quantity">
                                 <label>Số lượng:</label>
-                                <div class="quantity-controls">
-                                    <button class="qty-btn minus">-</button>
-                                    <input type="number" value="1" min="1" class="qty-input" />
-                                    <button class="qty-btn plus">+</button>
-                                    <button class="add-to-cart-btn">Thêm vào giỏ hàng</button>
-                                </div>
+                                <form method="POST" action="?page=cart" class="add-to-cart-form">
+                                    <div class="quantity-controls">
+                                        <button type="button" class="qty-btn minus">-</button>
+                                        <input type="number" name="quantity" value="1" min="1" max="<?= $products['SoLuong'] ?>" class="qty-input" />
+                                        <button type="button" class="qty-btn plus">+</button>
+                                        
+                                        <!-- Hidden inputs cho product info -->
+                                        <input type="hidden" name="id" value="<?= $products['MaSP'] ?>">
+                                        <input type="hidden" name="name" value="<?= htmlspecialchars($products['TenSanPham']) ?>">
+                                        <input type="hidden" name="image" value="<?= $products['HinhAnh'] ?>">
+                                        <input type="hidden" name="price" value="<?= $products['DonGia'] ?>">
+                                        
+                                        <button type="submit" name="addToCart" class="add-to-cart-btn" onclick="return handleAddToCart(event)">
+                                            <i class="fas fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
                             <div class="product-notice">
@@ -400,6 +488,79 @@
 
     <script src="../public/JS/product-details.js"></script>
     <script src="../public/JS/header.js"></script>
+    
+    <script>
+        // Xử lý nút tăng/giảm số lượng
+        document.addEventListener('DOMContentLoaded', function() {
+            const minusBtn = document.querySelector('.qty-btn.minus');
+            const plusBtn = document.querySelector('.qty-btn.plus');
+            const qtyInput = document.querySelector('.qty-input');
+            const maxQty = parseInt(qtyInput.getAttribute('max'));
+            
+            minusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(qtyInput.value);
+                if (currentValue > 1) {
+                    qtyInput.value = currentValue - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let currentValue = parseInt(qtyInput.value);
+                if (currentValue < maxQty) {
+                    qtyInput.value = currentValue + 1;
+                } else {
+                    alert('Không thể thêm quá số lượng tồn kho: ' + maxQty);
+                }
+            });
+            
+            // Kiểm tra input trực tiếp
+            qtyInput.addEventListener('input', function() {
+                let value = parseInt(this.value);
+                if (value < 1) {
+                    this.value = 1;
+                } else if (value > maxQty) {
+                    this.value = maxQty;
+                    alert('Không thể thêm quá số lượng tồn kho: ' + maxQty);
+                }
+            });
+        });
+        
+        // Xử lý thêm vào giỏ hàng với confirm
+        function handleAddToCart(event) {
+            const productName = document.querySelector('input[name="name"]').value;
+            const quantity = document.querySelector('input[name="quantity"]').value;
+            
+            // Hiển thị loading
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang thêm...';
+            btn.disabled = true;
+            
+            // Submit form sau 500ms để user thấy loading
+            setTimeout(function() {
+                // Submit form và redirect đến giỏ hàng
+                const form = btn.closest('form');
+                form.submit();
+            }, 500);
+            
+            return false; // Ngăn submit form ngay lập tức
+        }
+        
+        // Đóng popup
+        function closePopup() {
+            document.getElementById('successPopup').style.display = 'none';
+        }
+        
+        // Tự động đóng popup sau 10 giây
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('successPopup');
+            if (popup) {
+                setTimeout(function() {
+                    popup.style.display = 'none';
+                }, 10000);
+            }
+        });
+    </script>
 </body>
 
 </html>

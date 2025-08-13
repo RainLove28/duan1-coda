@@ -48,15 +48,15 @@
                         <?php foreach ($categories as $category): ?>
                             <?php
                             // Đếm số sản phẩm trong danh mục
-                            $countSql = "SELECT COUNT(*) FROM sanpham WHERE DanhMuc = :tenDanhMuc";
+                            $countSql = "SELECT COUNT(*) FROM sanpham WHERE MaDM = :maDM";
                             $countStmt = $this->conn->prepare($countSql);
-                            $countStmt->bindParam(':tenDanhMuc', $category['TenDanhMuc']);
+                            $countStmt->bindParam(':maDM', $category['MaDM']);
                             $countStmt->execute();
                             $productCount = $countStmt->fetchColumn();
                             ?>
                             <tr>
-                                <td><?= $category['MaDanhMuc'] ?></td>
-                                <td><?= htmlspecialchars($category['TenDanhMuc']) ?></td>
+                                <td><?= $category['MaDM'] ?></td>
+                                <td><?= htmlspecialchars($category['TenDM']) ?></td>
                                 <td><?= htmlspecialchars($category['MoTa'] ?? '') ?></td>
                                 <td>
                                     <span class="product-count">
@@ -65,11 +65,11 @@
                                 </td>
                                 <td class="action-buttons">
                                     <button class="btn btn-edit btn-sm" 
-                                            onclick="editCategory(<?= $category['MaDanhMuc'] ?>, '<?= htmlspecialchars($category['TenDanhMuc']) ?>', '<?= htmlspecialchars($category['MoTa'] ?? '') ?>')">
+                                            onclick="editCategory(<?= $category['MaDM'] ?>, '<?= htmlspecialchars($category['TenDM']) ?>', '<?= htmlspecialchars($category['MoTa'] ?? '') ?>')">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-delete btn-sm" 
-                                            onclick="confirmDelete('Category', <?= $category['MaDanhMuc'] ?>, '<?= htmlspecialchars($category['TenDanhMuc']) ?>')">
+                                            onclick="confirmDelete('Category', <?= $category['MaDM'] ?>, '<?= htmlspecialchars($category['TenDM']) ?>')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -93,11 +93,11 @@
             <h3><i class="fas fa-plus"></i> Thêm danh mục mới</h3>
             <span class="close" onclick="closeModal('addCategoryModal')">&times;</span>
         </div>
-        <form action="?page=addcate" method="post" enctype="multipart/form-data">
+        <form action="?page=addCate" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="TenDanhMuc">Tên danh mục <span class="required">*</span></label>
-                    <input type="text" id="TenDanhMuc" name="TenDanhMuc" required>
+                    <label for="TenDM">Tên danh mục <span class="required">*</span></label>
+                    <input type="text" id="TenDM" name="TenDM" required>
                 </div>
                 <div class="form-group">
                     <label for="MoTa">Mô tả</label>
@@ -119,12 +119,12 @@
             <h3><i class="fas fa-edit"></i> Chỉnh sửa danh mục</h3>
             <span class="close" onclick="closeModal('editCategoryModal')">&times;</span>
         </div>
-        <form method="post" action="index.php?page=editCategory" enctype="multipart/form-data">
+        <form method="post" action="index.php?page=editCate" enctype="multipart/form-data">
             <input type="hidden" id="editCategoryId" name="id">
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="editTenDanhMuc">Tên danh mục <span class="required">*</span></label>
-                    <input type="text" id="editTenDanhMuc" name="TenDanhMuc" required>
+                    <label for="editTenDM">Tên danh mục <span class="required">*</span></label>
+                    <input type="text" id="editTenDM" name="TenDM" required>
                 </div>
                 <div class="form-group">
                     <label for="editMoTa">Mô tả</label>
@@ -150,9 +150,9 @@
 </style>
 
 <script>
-function editCategory(id, tenDanhMuc, moTa) {
+function editCategory(id, tenDM, moTa) {
     document.getElementById('editCategoryId').value = id;
-    document.getElementById('editTenDanhMuc').value = tenDanhMuc;
+    document.getElementById('editTenDM').value = tenDM;
     document.getElementById('editMoTa').value = moTa;
     openModal('editCategoryModal');
 }
@@ -161,7 +161,7 @@ function confirmDelete(type, id, name) {
     if (confirm(`Bạn có chắc chắn muốn xóa danh mục "${name}"?`)) {
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = `index.php?page=deleteCategory`;
+        form.action = `index.php?page=DeleteCategory`;
         
         const input = document.createElement('input');
         input.type = 'hidden';

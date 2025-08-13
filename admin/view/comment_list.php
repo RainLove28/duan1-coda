@@ -40,9 +40,9 @@
                         <th>MaSP</th>
                         <th>MaTK</th>
                         <th>NoiDung</th>
-                        <th>DanhGia</th>
-                        <th>TrangThai</th>
-                        <th>NgayBinhLuan</th>
+                        <th>Ratting</th>
+                        <th>ThoiGian</th>
+                        <th>Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,12 +53,11 @@
                                 <td><?= $comment['MaSP'] ?></td>
                                 <td><?= $comment['MaTK'] ?></td>
                                 <td><?= htmlspecialchars($comment['NoiDung']) ?></td>
-                                <td><?= $comment['DanhGia'] ?></td>
-                                <td><?= $comment['TrangThai'] ?></td>
-                                <td><?= $comment['NgayBinhLuan'] ?></td>
+                                <td><?= $comment['Ratting'] ?></td>
+                                <td><?= $comment['ThoiGian'] ?></td>
                                  <td class="action-buttons">
                                     <button class="btn btn-edit btn-sm" 
-                                            onclick="editComment(<?= $comment['MaBL'] ?>, '<?= htmlspecialchars($comment['NoiDung']) ?>', <?= $comment['DanhGia'] ?>, '<?= $comment['TrangThai'] ?>', <?= $comment['MaTK'] ?>, <?= $comment['MaSP'] ?>)">
+                                            onclick="editComment(<?= $comment['MaBL'] ?>, '<?= htmlspecialchars($comment['NoiDung']) ?>', <?= $comment['Ratting'] ?>, <?= $comment['MaTK'] ?>, <?= $comment['MaSP'] ?>)">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-delete btn-sm" 
@@ -88,7 +87,7 @@
             <h3><i class="fas fa-plus"></i> Thêm Bình luận mới</h3>
             <span class="close" onclick="closeModal('addCommentModal')">&times;</span>
         </div>
-        <form action="index.php?page=addComment" method="post" enctype="multipart/form-data">
+        <form action="index.php?page=Comment&action=add" method="post" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="form-group">
                     <label for="MaSP">Mã sản phẩm <span class="required">*</span></label>
@@ -99,8 +98,8 @@
                     <textarea id="NoiDung" name="NoiDung" rows="4" placeholder="Nội dung bình luận..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="DanhGia">Đánh Giá</label>
-                    <select id="DanhGia" name="DanhGia">
+                    <label for="Ratting">Đánh Giá</label>
+                    <select id="Ratting" name="Ratting">
                         <option value="1">1 sao</option>
                         <option value="2">2 sao</option>
                         <option value="3">3 sao</option>
@@ -124,7 +123,7 @@
             <h3><i class="fas fa-edit"></i> Chỉnh sửa bình luận</h3>
             <span class="close" onclick="closeModal('editCommentModal')">&times;</span>
         </div>
-        <form method="post" action="index.php?page=editComment" enctype="multipart/form-data">
+        <form method="post" action="index.php?page=Comment&action=edit" enctype="multipart/form-data">
             <input type="hidden" id="editCommentId" name="id">
             <input type="hidden" id="editMaTK" name="MaTK">
             <input type="hidden" id="editMaSP" name="MaSP">
@@ -134,8 +133,8 @@
                     <textarea id="editNoiDung" name="NoiDung" rows="4" placeholder="Nội dung bình luận..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="editDanhGia">Đánh Giá</label>
-                    <select id="editDanhGia" name="DanhGia">
+                    <label for="editRatting">Đánh Giá</label>
+                    <select id="editRatting" name="Ratting">
                         <option value="1">1 sao</option>
                         <option value="2">2 sao</option>
                         <option value="3">3 sao</option>
@@ -143,13 +142,6 @@
                         <option value="5">5 sao</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="editTrangThai">Trạng Thái</label>
-                    <select id="editTrangThai" name="TrangThai">
-                        <option value="Chờ duyệt">Chờ duyệt</option>
-                        <option value="Hiển thị">Hiển thị</option>
-                        <option value="Không hoạt động">Không hoạt động</option>
-                    </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('editCommentModal')">Hủy</button>
@@ -170,11 +162,10 @@
 </style>
 
 <script>
-function editComment(id, noiDung, danhGia, trangThai, maTK, maSP) {
+function editComment(id, noiDung, ratting, maTK, maSP) {
     document.getElementById('editCommentId').value = id;
     document.getElementById('editNoiDung').value = noiDung;
-    document.getElementById('editDanhGia').value = danhGia;
-    document.getElementById('editTrangThai').value = trangThai;
+    document.getElementById('editRatting').value = ratting;
     document.getElementById('editMaTK').value = maTK;
     document.getElementById('editMaSP').value = maSP;
     openModal('editCommentModal');

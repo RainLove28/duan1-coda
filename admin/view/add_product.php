@@ -18,8 +18,8 @@
             <div class="form-container">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="TenSP">Tên sản phẩm <span class="required">*</span></label>
-                        <input type="text" id="TenSP" name="TenSP" required 
+                        <label for="TenSanPham">Tên sản phẩm <span class="required">*</span></label>
+                        <input type="text" id="TenSanPham" name="TenSanPham" required 
                                placeholder="Nhập tên sản phẩm">
                     </div>
                     <div class="form-group">
@@ -28,8 +28,8 @@
                             <option value="">Chọn danh mục</option>
                             <?php if (isset($categories) && !empty($categories)): ?>
                                 <?php foreach ($categories as $category): ?>
-                                    <option value="<?= htmlspecialchars($category['TenDanhMuc']) ?>">
-                                        <?= htmlspecialchars($category['TenDanhMuc']) ?>
+                                    <option value="<?= htmlspecialchars($category['MaDM']) ?>">
+                                        <?= htmlspecialchars($category['TenDM']) ?>
                                     </option>
                                 <?php endforeach; ?>
                             <?php else: ?>

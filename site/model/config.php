@@ -3,9 +3,12 @@
  * File cấu hình tập trung cho ứng dụng
  */
 
+// Cấu hình timezone
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 // Cấu hình database
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'duan1');
+define('DB_NAME', 'duan2');
 define('DB_USER', 'root');
 define('DB_PASS', '220401');
 

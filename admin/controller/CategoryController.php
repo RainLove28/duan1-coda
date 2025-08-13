@@ -7,14 +7,24 @@ class CategoryController extends BaseController {
         $search = $_GET['search'] ?? '';
         
         if ($search) {
-            $sql = "SELECT * FROM danhmuc WHERE TenDanhMuc LIKE ? ORDER BY MaDanhMuc DESC";
+            $sql = "SELECT * FROM danhmuc WHERE TenDM LIKE ? ORDER BY MaDM DESC";
             $categories = $this->getAll($sql, ['%' . $search . '%']);
         } else {
-            $sql = "SELECT * FROM danhmuc ORDER BY MaDanhMuc DESC";
+            $sql = "SELECT * FROM danhmuc ORDER BY MaDM DESC";
             $categories = $this->getAll($sql);
         }
         
         include __DIR__ . '/../view/category_list.php';
+    }
+    
+    public function renderAddCategory() {
+        // Redirect back to category list since we use modal
+        header('Location: index.php?page=Category');
+    }
+    
+    public function renderEditCategory($id) {
+        // Redirect back to category list since we use modal
+        header('Location: index.php?page=Category');
     }
     
     
@@ -22,20 +32,20 @@ class CategoryController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $this->sanitize($_POST);
             
-            if (!$this->validateRequired($data, ['TenDanhMuc'])) {
+            if (!$this->validateRequired($data, ['TenDM'])) {
                 $this->redirect('Category', 'Tên danh mục không được để trống', 'error');
             }
             
             // Kiểm tra trùng tên
-            $checkSql = "SELECT COUNT(*) as count FROM danhmuc WHERE TenDanhMuc = ?";
-            $result = $this->getOne($checkSql, [$data['TenDanhMuc']]);
+            $checkSql = "SELECT COUNT(*) as count FROM danhmuc WHERE TenDM = ?";
+            $result = $this->getOne($checkSql, [$data['TenDM']]);
             
             if ($result['count'] > 0) {
                 $this->redirect('Category', 'Tên danh mục đã tồn tại', 'error');
             }
             
-            $sql = "INSERT INTO danhmuc(TenDanhMuc, MoTa) VALUES(?, ?)";
-            $success = $this->execute($sql, [$data['TenDanhMuc'], $data['MoTa'] ?? '']);
+            $sql = "INSERT INTO danhmuc(TenDM, MoTa) VALUES(?, ?)";
+            $success = $this->execute($sql, [$data['TenDM'], $data['MoTa'] ?? '']);
             
             $message = $success ? 'Thêm danh mục thành công' : 'Thêm danh mục thất bại';
             $type = $success ? 'success' : 'error';
@@ -47,20 +57,20 @@ class CategoryController extends BaseController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $this->sanitize($_POST);
             
-            if (!$this->validateRequired($data, ['id', 'TenDanhMuc'])) {
+            if (!$this->validateRequired($data, ['id', 'TenDM'])) {
                 $this->redirect('Category', 'Thông tin không hợp lệ', 'error');
             }
             
             // Kiểm tra trùng tên (trừ bản ghi hiện tại)
-            $checkSql = "SELECT COUNT(*) as count FROM danhmuc WHERE TenDanhMuc = ? AND MaDanhMuc != ?";
-            $result = $this->getOne($checkSql, [$data['TenDanhMuc'], $data['id']]);
+            $checkSql = "SELECT COUNT(*) as count FROM danhmuc WHERE TenDM = ? AND MaDM != ?";
+            $result = $this->getOne($checkSql, [$data['TenDM'], $data['id']]);
             
             if ($result['count'] > 0) {
                 $this->redirect('Category', 'Tên danh mục đã tồn tại', 'error');
             }
             
-            $sql = "UPDATE danhmuc SET TenDanhMuc = ?, MoTa = ? WHERE MaDanhMuc = ?";
-            $success = $this->execute($sql, [$data['TenDanhMuc'], $data['MoTa'] ?? '', $data['id']]);
+            $sql = "UPDATE danhmuc SET TenDM = ?, MoTa = ? WHERE MaDM = ?";
+            $success = $this->execute($sql, [$data['TenDM'], $data['MoTa'] ?? '', $data['id']]);
             
             $message = $success ? 'Cập nhật danh mục thành công' : 'Cập nhật danh mục thất bại';
             $type = $success ? 'success' : 'error';
@@ -77,14 +87,14 @@ class CategoryController extends BaseController {
             }
             
             // Kiểm tra xem có sản phẩm nào thuộc danh mục này không
-            $checkSql = "SELECT COUNT(*) as count FROM sanpham WHERE DanhMuc = (SELECT TenDanhMuc FROM danhmuc WHERE MaDanhMuc = ?)";
+            $checkSql = "SELECT COUNT(*) as count FROM sanpham WHERE MaDM = ?";
             $result = $this->getOne($checkSql, [$data['id']]);
             
             if ($result['count'] > 0) {
                 $this->redirect('Category', 'Không thể xóa danh mục này vì còn sản phẩm thuộc danh mục', 'error');
             }
             
-            $sql = "DELETE FROM danhmuc WHERE MaDanhMuc = ?";
+            $sql = "DELETE FROM danhmuc WHERE MaDM = ?";
             $success = $this->execute($sql, [$data['id']]);
             
             $message = $success ? 'Xóa danh mục thành công' : 'Xóa danh mục thất bại';
@@ -94,12 +104,12 @@ class CategoryController extends BaseController {
     }
     
     public function getAllCategories() {
-        $sql = "SELECT * FROM danhmuc ORDER BY TenDanhMuc";
+        $sql = "SELECT * FROM danhmuc ORDER BY TenDM";
         return $this->getAll($sql);
     }
     
     public function getCategoryById($id) {
-        $sql = "SELECT * FROM danhmuc WHERE MaDanhMuc = ?";
+        $sql = "SELECT * FROM danhmuc WHERE MaDM = ?";
         return $this->getOne($sql, [$id]);
     }
 }

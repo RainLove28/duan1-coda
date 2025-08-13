@@ -35,6 +35,26 @@
             </div>
         </div>
         
+        <div class="stat-card orders">
+            <div class="stat-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="stat-content">
+                <h3><?= $totalOrders ?></h3>
+                <p>Đơn hàng</p>
+            </div>
+        </div>
+        
+        <div class="stat-card revenue">
+            <div class="stat-icon">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="stat-content">
+                <h3><?= number_format($totalRevenue, 0, ',', '.') ?>đ</h3>
+                <p>Doanh thu</p>
+            </div>
+        </div>
+        
         <div class="stat-card system">
             <div class="stat-icon">
                 <i class="fas fa-chart-line"></i>
@@ -60,12 +80,12 @@
                         <?php foreach ($recentUsers as $user): ?>
                             <div class="list-item">
                                 <div class="item-avatar">
-                                    <?= substr($user['HoTen'], 0, 1) ?>
+                                    <?= substr($user['fullname'] ?? '', 0, 1) ?>
                                 </div>
                                 <div class="item-content">
-                                    <div class="item-title"><?= htmlspecialchars($user['HoTen']) ?></div>
-                                    <div class="item-subtitle"><?= htmlspecialchars($user['Email']) ?></div>
-                                    <div class="item-time"><?= date('d/m/Y H:i', strtotime($user['NgayDangKy'])) ?></div>
+                                    <div class="item-title"><?= htmlspecialchars($user['fullname'] ?? '') ?></div>
+                                    <div class="item-subtitle"><?= htmlspecialchars($user['email'] ?? '') ?></div>
+                                    <div class="item-time"><?= date('d/m/Y H:i', strtotime($user['created_at'] ?? '')) ?></div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -89,15 +109,15 @@
                             <div class="list-item">
                                 <div class="item-image">
                                     <?php if (!empty($product['HinhAnh'])): ?>
-                                        <img src="../public/img/<?= $product['HinhAnh'] ?>" alt="<?= htmlspecialchars($product['TenSP']) ?>">
+                                        <img src="../public/img/<?= $product['HinhAnh'] ?>" alt="<?= htmlspecialchars($product['TenSanPham'] ?? '') ?>">
                                     <?php else: ?>
                                         <i class="fas fa-image"></i>
                                     <?php endif; ?>
                                 </div>
                                 <div class="item-content">
-                                    <div class="item-title"><?= htmlspecialchars($product['TenSP']) ?></div>
-                                    <div class="item-subtitle"><?= htmlspecialchars($product['DanhMuc']) ?></div>
-                                    <div class="item-price"><?= number_format($product['Gia']) ?> đ</div>
+                                    <div class="item-title"><?= htmlspecialchars($product['TenSanPham'] ?? '') ?></div>
+                                    <div class="item-subtitle"><?= htmlspecialchars($product['DanhMuc'] ?? '') ?></div>
+                                    <div class="item-price"><?= number_format($product['Gia'] ?? $product['DonGia'] ?? 0) ?> đ</div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -106,6 +126,48 @@
                     <p class="text-center">Chưa có sản phẩm nào</p>
                 <?php endif; ?>
             </div>
+        </div>
+    </div>
+    
+    <!-- Recent Orders -->
+    <div class="content-box">
+        <div class="box-header">
+            <h3><i class="fas fa-shopping-cart"></i> Đơn hàng gần đây</h3>
+            <a href="index.php?page=order_list" class="btn btn-sm btn-primary">Xem tất cả</a>
+        </div>
+        <div class="box-content">
+            <?php if (!empty($recentOrders)): ?>
+                <div class="table-responsive">
+                    <table class="mini-table">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Khách hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày đặt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($recentOrders as $order): ?>
+                                <tr>
+                                    <td>#<?= $order['MaDH'] ?></td>
+                                    <td><?= htmlspecialchars($order['TenKhachHang'] ?? 'N/A') ?></td>
+                                    <td><?= number_format($order['TongTien'] ?? 0, 0, ',', '.') ?>đ</td>
+                                    <td>
+                                        <span class="badge badge-<?= $order['TrangThai'] === 'completed' ? 'success' : ($order['TrangThai'] === 'pending' ? 'warning' : 'danger') ?>">
+                                            <?= ucfirst($order['TrangThai'] ?? 'pending') ?>
+                                        </span>
+                                    </td>
+                                    <td><?= date('d/m/Y', strtotime($order['NgayDat'])) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <p class="text-center">Chưa có đơn hàng nào</p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -416,6 +478,55 @@
     background: linear-gradient(135deg, #0984e3, #2d3436);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(116, 185, 255, 0.4);
+}
+
+/* Mini Table */
+.mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.mini-table th,
+.mini-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.mini-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.mini-table td {
+    color: #666;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-success {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-danger {
+    background: #f8d7da;
+    color: #721c24;
 }
 
 /* Responsive */

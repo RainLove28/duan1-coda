@@ -7,6 +7,41 @@
     <title>Document</title>
 </head>
 <style>
+/* Alert styles */
+.alert {
+    padding: 15px;
+    margin: 20px auto;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    max-width: 1200px;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert-dismissible {
+    position: relative;
+    padding-right: 35px;
+}
+.alert .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    color: inherit;
+    background: none;
+    border: none;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .product img {
     width: 100%;
     height: 250px;
@@ -58,6 +93,23 @@
 
 </html>
 <div class="Container-fluid">
+
+    <!-- Hiển thị thông báo thành công/lỗi -->
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success alert-dismissible">
+            <strong>Thành công!</strong> <?= $_SESSION['success'] ?>
+            <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+    
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger alert-dismissible">
+            <strong>Lỗi!</strong> <?= $_SESSION['error'] ?>
+            <button type="button" class="close" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 
     <!-- slide -->
     <section>

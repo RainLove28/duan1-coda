@@ -1,14 +1,44 @@
-<!DOCTYPE html>
-<html lang="vi">
+<?php
+// Thông báo thành công/lỗi
+if (isset($_SESSION['cart_message'])) {
+    $message = $_SESSION['cart_message'];
+    echo '<div class="alert alert-' . $message['type'] . '">';
+    echo '<i class="fas fa-check-circle"></i> ' . $message['message'];
+    echo '</div>';
+    unset($_SESSION['cart_message']);
+}
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Giỏ hàng</title>
-
-
-    <style>
+<style>
     body {
         background: #f7f7f7;
+    }
+    
+    /* Thông báo */
+    .alert {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .alert.success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .alert .close-btn {
+        margin-left: auto;
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: inherit;
     }
 
     /* .cart-main { display: flex; gap: 32px; max-width: 1200px; margin: 32px auto; } */
@@ -200,35 +230,62 @@
 </head>
 
 <body>
+    <!-- Thông báo thành công -->
+    <?php if (isset($_SESSION['cart_message'])): ?>
+        <div class="alert <?= $_SESSION['cart_message']['type'] ?>">
+            <i class="fas fa-check-circle"></i>
+            <?= $_SESSION['cart_message']['message'] ?>
+            <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+        </div>
+        <?php unset($_SESSION['cart_message']); ?>
+    <?php endif; ?>
+    
     <div class="cart-main">
         <div class="cart-left">
             <div class="cart-table">
                 <div class="cart-header">
                     <input type="checkbox" id="select-all" checked>
-                    <label for="select-all">Chọn tất cả (1)</label>
+                    <label for="select-all">Chọn tất cả (<?= isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?>)</label>
                 </div>
-                <div class="cart-row">
-                    <input type="checkbox" class="cart-checkbox" checked>
-                    <img src="../public/img/ban-chay.jpg" class="cart-img" alt="Sữa Chống Nắng">
-                    <div class="cart-info">
-                        <div class="cart-name">Sữa Chống Nắng Sơ-ri Vitamin C Sáng Hồng SPF 50+ PA++++</div>
-                        <div style="color:#888;font-size:15px;">50+ PA++++</div>
+                
+                <?php 
+                $totalPrice = 0;
+                if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): 
+                ?>
+                    <?php foreach ($_SESSION['cart'] as $id => $item): ?>
+                        <div class="cart-row">
+                            <input type="checkbox" class="cart-checkbox" checked>
+                            <img src="../public/img/<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
+                            <div class="cart-info">
+                                <div class="cart-name"><?= htmlspecialchars($item['name']) ?></div>
+                                <div style="color:#888;font-size:15px;">Mã SP: <?= $id ?></div>
+                            </div>
+                            <div class="cart-price"><?= number_format($item['price'], 0, ',', '.') ?> đ</div>
+                            <div class="cart-qty">
+                                <button class="qty-btn" onclick="changeQuantity(<?= $id ?>, -1)">-</button>
+                                <input type="text" id="qty-<?= $id ?>" class="qty-input" value="<?= $item['quantity'] ?>" readonly>
+                                <button class="qty-btn" onclick="changeQuantity(<?= $id ?>, 1)">+</button>
+                            </div>
+                            <div class="cart-total"><?= number_format($item['price'] * $item['quantity'], 0, ',', '.') ?> đ</div>
+                            <a href="?page=removeItemCart&id=<?= $id ?>">
+                                <button class="cart-remove">Xóa</button>
+                            </a>
+                        </div>
+                        <?php $totalPrice += $item['price'] * $item['quantity']; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="cart-row">
+                        <div style="text-align: center; padding: 40px; color: #888;">
+                            Giỏ hàng trống. <a href="?page=product">Tiếp tục mua sắm</a>
+                        </div>
                     </div>
-                    <div class="cart-price">395.000 đ</div>
-                    <div class="cart-qty">
-                        <button class="qty-btn">-</button>
-                        <input type="text" class="qty-input" value="1" readonly>
-                        <button class="qty-btn">+</button>
-                    </div>
-                    <div class="cart-total">395.000 đ</div>
-                    <button class="cart-remove">Xóa</button>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
         <div class="cart-right">
             <div class="cart-summary">
                 <div class="summary-row voucher-row">
-                    <span class="voucher-label">&#128176; Mã Voucher</span>
+                    <span class="voucher-label">🎁 Mã Voucher</span>
                     <select class="form-select voucher-select">
                         <option>--Chọn--</option>
                         <option>Giảm 10.000đ</option>
@@ -237,7 +294,7 @@
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Tổng tiền hàng</span>
-                    <span class="summary-value">395.000 đ</span>
+                    <span class="summary-value"><?= number_format($totalPrice, 0, ',', '.') ?> đ</span>
                 </div>
                 <div class="summary-row">
                     <span class="summary-label">Phí vận chuyển</span>
@@ -245,11 +302,37 @@
                 </div>
                 <div class="summary-row" style="border-top:1px solid #eee;padding-top:18px;">
                     <span class="summary-label">Cần thanh toán</span>
-                    <span class="summary-total">395.000 đ</span>
+                    <span class="summary-total"><?= number_format($totalPrice, 0, ',', '.') ?> đ</span>
                 </div>
-                <a href="?page=thanhtoan">
-                    <button class="btn-buy">Thanh toán</button>
-                </a>
+                <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
+                    <a href="?page=thanhtoan">
+                        <button class="btn-buy">Thanh toán</button>
+                    </a>
+                <?php else: ?>
+                    <a href="?page=product">
+                        <button class="btn-buy" style="background: #888;">Tiếp tục mua sắm</button>
+                    </a>
+                <?php endif; ?>
             </div>
         </div>
-</body>
+    </div>
+
+    <script>
+        function changeQuantity(productId, change) {
+            // Tìm input quantity của sản phẩm cụ thể
+            const quantityInput = document.querySelector(`#qty-${productId}`);
+            if (quantityInput) {
+                const currentQuantity = parseInt(quantityInput.value) || 0;
+                const newQuantity = currentQuantity + change;
+                
+                if (newQuantity > 0) {
+                    window.location.href = `?page=updateCartQuantity&id=${productId}&quantity=${newQuantity}`;
+                } else {
+                    // Nếu quantity = 0, xóa sản phẩm
+                    if (confirm('Bạn có muốn xóa sản phẩm này khỏi giỏ hàng?')) {
+                        window.location.href = `?page=removeItemCart&id=${productId}`;
+                    }
+                }
+            }
+        }
+    </script>

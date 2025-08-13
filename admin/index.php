@@ -1,7 +1,11 @@
 <?php
 session_start();
-if(!isset($_SESSION['khachhang']['vaitro']) || $_SESSION['khachhang']['vaitro']!=1){
-    header('Location: ../site/index.php?page=loginpage');
+
+// Kiểm tra đăng nhập admin
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    // Nếu chưa đăng nhập hoặc không phải admin, redirect về trang login
+    header('Location: ../site/index.php?page=login');
+    exit;
 }
 
 include_once('view/header.php');
@@ -9,6 +13,9 @@ require_once('controller/CategoryController.php');
 require_once('controller/ProductController.php');
 require_once('controller/UserController.php');
 require_once('controller/OrderController.php');
+require_once('controller/CommentController.php');
+require_once('controller/VoucherController.php');
+require_once('controller/InventoryController.php');
 $page = $_GET['page'] ?? 'dashboard';
 switch($page){
     
@@ -45,9 +52,10 @@ switch($page){
         
     case "editpro":
              $data = $_POST;
-             $data['HinhAnh'] = $_FILES['HinhAnh']['name'];
-            move_uploaded_file($_FILES['HinhAnh']['tmp_name'],"../public/img/".$_FILES['HinhAnh']['name']);
-            $data['id'] = $_GET['id'];
+             if (!empty($_FILES['HinhAnh']['name'])) {
+                 $data['HinhAnh'] = $_FILES['HinhAnh']['name'];
+                 move_uploaded_file($_FILES['HinhAnh']['tmp_name'],"../public/img/".$_FILES['HinhAnh']['name']);
+             }
             $productController = new ProductController();
             $productController->editProduct($data);
             break;
@@ -61,7 +69,7 @@ switch($page){
     // Quản lý danh mục
     case "Category":
         $categoryController = new CategoryController();
-        $categoryController->renderCategory();
+        $categoryController->index();
         break;
 
     case "addCategory":
@@ -70,20 +78,13 @@ switch($page){
         break;
     
     case "addCate":
-        $data = $_POST;
-        $data['HinhAnh'] = $_FILES['HinhAnh']['name'];
-        move_uploaded_file($_FILES['HinhAnh']['tmp_name'],"../public/img/".$_FILES['HinhAnh']['name']);
         $categoryController = new CategoryController();
-        $categoryController->addCate($data);
+        $categoryController->add();
         break;
 
     case "editCate":
-        $data = $_POST;
-        $data['HinhAnh'] = $_FILES['HinhAnh']['name'];
-        move_uploaded_file($_FILES['HinhAnh']['tmp_name'],"../public/img/".$_FILES['HinhAnh']['name']);
-        $data['id'] = $_GET['id'];
         $categoryController = new CategoryController();
-        $categoryController->editCate($data);
+        $categoryController->edit();
         break;
     
     case "editCategory":
@@ -93,15 +94,19 @@ switch($page){
         break;
 
     case "DeleteCategory":
-        $data['id'] = $_GET['id'];
         $categoryController = new CategoryController();
-        $categoryController->DeleteCategory($data);
+        $categoryController->delete();
         break;
         
     // Quản lý người dùng
     case "user_list":
         $userController = new UserController();
-        $userController->renderUserList();
+        $userController->index();
+        break;
+        
+    case "User":
+        $userController = new UserController();
+        $userController->index();
         break;
         
     case "add_user":
@@ -111,7 +116,7 @@ switch($page){
         
     case "add_user_process":
         $userController = new UserController();
-        $userController->addUser($_POST);
+        $userController->add();
         break;
         
     case "edit_user":
@@ -122,13 +127,12 @@ switch($page){
         
     case "edit_user_process":
         $userController = new UserController();
-        $userController->editUser($_POST);
+        $userController->edit();
         break;
         
     case "delete_user":
-        $id = $_GET['id'];
         $userController = new UserController();
-        $userController->deleteUser($id);
+        $userController->delete();
         break;
         
     case "toggle_user_status":
@@ -157,6 +161,92 @@ switch($page){
     case "export_orders":
         $orderController = new OrderController();
         $orderController->exportOrders();
+        break;
+        
+        // Quản lý tồn kho 
+    case "inventory":
+        $inventoryController = new InventoryController();
+        $action = $_GET['action'] ?? 'index';
+        
+        switch($action) {
+            case 'list':
+                $inventoryController->listAll();
+                break;
+            case 'addStock':
+                $inventoryController->addStock();
+                break;
+            case 'removeStock':
+                $inventoryController->removeStock();
+                break;
+            case 'updateStatus':
+                $inventoryController->updateAllStatus();
+                break;
+            default:
+                $inventoryController->index();
+                break;
+        }
+        break;    // Quản lý bình luận
+    case "comment_list":
+        $commentController = new CommentController();
+        $commentController->index();
+        break;
+        
+    case "Comment":
+        $commentController = new CommentController();
+        $action = $_GET['action'] ?? 'index';
+        
+        switch($action) {
+            case 'add':
+                $commentController->add();
+                break;
+            case 'edit':
+                $commentController->edit();
+                break;
+            case 'delete':
+                $commentController->delete();
+                break;
+            default:
+                $commentController->index();
+                break;
+        }
+        break;
+        
+    case "delete_comment":
+        $id = $_GET['id'];
+        $commentController = new CommentController();
+        $commentController->deleteComment($id);
+        break;
+        
+    case "toggle_comment_status":
+        $id = $_GET['id'];
+        $commentController = new CommentController();
+        $commentController->toggleCommentStatus($id);
+        break;
+        
+    // Quản lý voucher
+    case "voucher_list":
+        $voucherController = new VoucherController();
+        $voucherController->index();
+        break;
+        
+    case "Voucher":
+        $voucherController = new VoucherController();
+        $action = $_GET['action'] ?? 'index';
+        
+        switch($action) {
+            case 'add':
+                $voucherController->add();
+                break;
+            case 'edit':
+                $voucherController->edit();
+                break;
+            case 'delete':
+                $voucherController->delete();
+                break;
+            default:
+                $voucherController->index();
+                break;
+        }
         break;    
    
             

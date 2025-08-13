@@ -15,13 +15,17 @@ class Cart
 
     public function addToCart()
     {
-        if (isset($_POST['addToCart']) && ($_POST['addToCart'])) {
+        // Kiểm tra có POST addToCart không hoặc có id và quantity
+        $hasAddToCart = isset($_POST['addToCart']);
+        $hasProductData = isset($_POST['id']) && isset($_POST['quantity']);
+        
+        if ($hasAddToCart || $hasProductData) {
             //lấy giá trị
-            $name = $_POST['name'];
-            $image = $_POST['image'];
-            $price = $_POST['price'];
-            $id = $_POST['id'];
-            $quantity = $_POST['quantity'];
+            $name = $_POST['name'] ?? '';
+            $image = $_POST['image'] ?? '';
+            $price = $_POST['price'] ?? 0;
+            $id = $_POST['id'] ?? 0;
+            $quantity = $_POST['quantity'] ?? 1;
 
             //add vào giỏ hàng 
             // nếu giỏ hàng chưa có sản phẩm thì khởi tạo session giỏ hàng với mảng rỗng
@@ -38,7 +42,11 @@ class Cart
                     "quantity" => $quantity
                 ];
             }
+            
+            return true;
         }
+        
+        return false;
     }
 
     public function deleteItem($id)
@@ -46,49 +54,73 @@ class Cart
         //xoá 1 sản phẩm trong giỏ hàng
         if (isset($_SESSION['cart'][$id])) {
             unset($_SESSION['cart'][$id]);
+            return true;
         }
+        return false;
+    }
+
+    public function updateQuantity($id, $quantity)
+    {
+        // Cập nhật số lượng sản phẩm trong giỏ hàng
+        if (isset($_SESSION['cart'][$id]) && $quantity > 0) {
+            $_SESSION['cart'][$id]['quantity'] = (int)$quantity;
+            return true;
+        }
+        return false;
     }
 
     public function createOrder()
     {
-        //add vào bảng order
-        $orderCode = 'ORDER_' . date('Ymd-His');
-        
-        $paymentMethod = $_POST['payment_method'];
-        
-        $sql = "INSERT INTO orders (`user_id`, `order_code`, `receiver_name`, `receiver_address`, `receiver_mobile`, `total_price`, `delivery_date`, `payment_method`, `status`) 
-            VALUES (:uid, :order_code, :receiver_name, :receiver_address, :receiver_mobile, :total_price, :delivery_date, :payment_method, 1)";
-        
-        $stmt = $this->db->connection->prepare($sql);
-        $stmt->bindParam(':uid', $_SESSION['userInfo']['userId']);
-        $stmt->bindParam(':order_code', $orderCode);
-        $stmt->bindParam(':receiver_name', $_POST['receiver_name']);
-        $stmt->bindParam(':receiver_address', $_POST['receiver_address']);
-        $stmt->bindParam(':receiver_mobile', $_POST['receiver_mobile']);
-        $stmt->bindParam(':total_price', $_POST['total_price']);
-        @$stmt->bindParam(':delivery_date', date('Ymd'));
-        $stmt->bindParam(':payment_method', $paymentMethod);
+        try {
+            //add vào bảng donhang
+            $orderCode = 'ORDER_' . date('Ymd-His');
+            
+            $paymentMethod = $_POST['payment_method'] ?? 'Tiền mặt';
+            
+            // Chuyển số điện thoại thành số nguyên, loại bỏ ký tự không phải số
+            $mobile = preg_replace('/[^0-9]/', '', $_POST['receiver_mobile'] ?? '');
+            $mobile = (int)$mobile;
+            
+            // MaPay mặc định (1 = Tiền mặt, 2 = Chuyển khoản, etc.)
+            $paymentId = ($paymentMethod === 'Chuyển khoản') ? 2 : 1;
+            
+            $sql = "INSERT INTO donhang (`MaTK`, `HoTen`, `DiaChi`, `SoDienThoai`, `TongTien`, `PhuongThucThanhToan`, `TrangThai`, `NgayDat`, `DiaChiGiao`, `MaPay`, `GhiChu`) 
+                VALUES (?, ?, ?, ?, ?, ?, 'Chờ xác nhận', NOW(), ?, ?, '')";
+            
+            $params = [
+                $_SESSION['userInfo']['userId'],
+                $_POST['receiver_name'] ?? '',
+                $_POST['receiver_address'] ?? '',
+                $mobile,
+                (int)$_POST['total_price'],
+                $paymentMethod,
+                $_POST['receiver_address'] ?? '',
+                $paymentId
+            ];
+            
+            $this->db->execute($sql, $params);
+            
+            // lấy id đơn vừa mới tạo
+            $orderIdSql = "SELECT LAST_INSERT_ID() as order_id";
+            $orderResult = $this->db->getOne($orderIdSql);
+            $orderId = $orderResult['order_id'];
 
-        $stmt->execute();
-        // lấy id đơn vừa mới tạo
-        $orderId = $this->db->connection->lastInsertId();
-
-        // tạo các dòng trong bảng orders_detail sau khi tạo xong order
-        if (isset($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $id => $item) {
-                //add vào bảng orders_detail
-                $sql = "INSERT INTO order_details (`order_id`, `product_id`, `quantity`, `price`) 
-                    VALUES (:order_id, :product_id, :quantity, :price)";
-                $stmt = $this->db->connection->prepare($sql);
-                $stmt->bindParam(':order_id', $orderId);
-                $stmt->bindParam(':product_id', $id);
-                $stmt->bindParam(':quantity', $item['quantity']);
-                $stmt->bindParam(':price', $item['price']);
-                $stmt->execute();
+            // tạo các dòng trong bảng donhangchitiet sau khi tạo xong donhang
+            if (isset($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $id => $item) {
+                    //add vào bảng donhangchitiet
+                    $sql = "INSERT INTO donhangchitiet (`MaDH`, `MaSP`, `SoLuong`, `Gia`, `DonGia`) 
+                        VALUES (?, ?, ?, ?, ?)";
+                    $params = [$orderId, $id, $item['quantity'], $item['price'], $item['price']];
+                    $this->db->execute($sql, $params);
+                }
+                // huỷ giỏ hàng
+                unset($_SESSION['cart']);
             }
-            // huỷ giỏ hàng
-            unset($_SESSION['cart']);
+            return ['orderId' => $orderId, 'payment_method' => $paymentMethod, 'amount' => $_POST['total_price']];
+        } catch (Exception $e) {
+            error_log("Error creating order: " . $e->getMessage());
+            return false;
         }
-        return ['orderId' => $orderId, 'payment_method' => $paymentMethod, 'amount' => $_POST['total_price']];
     }
 }

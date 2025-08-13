@@ -88,7 +88,7 @@
                                 <td>
                                     <?php if (!empty($product['HinhAnh'])): ?>
                                         <img src="../public/img/<?= $product['HinhAnh'] ?>" 
-                                             alt="<?= htmlspecialchars($product['TenSP']) ?>" 
+                                             alt="<?= htmlspecialchars($product['TenSanPham']) ?>" 
                                              style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                                     <?php else: ?>
                                         <div style="width: 50px; height: 50px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
@@ -96,8 +96,8 @@
                                         </div>
                                     <?php endif; ?>
                                 </td>
-                                <td><?= htmlspecialchars($product['TenSP']) ?></td>
-                                <td><?= htmlspecialchars($product['DanhMuc']) ?></td>
+                                <td><?= htmlspecialchars($product['TenSanPham']) ?></td>
+                                <td><?= htmlspecialchars($product['TenDanhMuc']) ?></td>
                                 <td><?= number_format($product['Gia']) ?> đ</td>
                                 <td>
                                     <span class="stock-quantity <?= $product['SoLuong'] <= 5 ? 'low-stock' : '' ?>">
@@ -110,17 +110,21 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="status-badge status-<?= strtolower(str_replace(' ', '-', $product['TrangThai'])) ?>">
-                                        <?= htmlspecialchars($product['TrangThai']) ?>
+                                    <?php 
+                                    $statusText = $product['TrangThai'] == 1 ? 'Còn hàng' : 'Hết hàng';
+                                    $statusClass = $product['TrangThai'] == 1 ? 'status-con-hang' : 'status-het-hang';
+                                    ?>
+                                    <span class="status-badge <?= $statusClass ?>">
+                                        <?= htmlspecialchars($statusText) ?>
                                     </span>
                                 </td>
                                 <td class="action-buttons">
                                     <button class="btn btn-edit btn-sm" 
-                                            onclick="openEditProductModal(<?= $product['MaSP'] ?>, '<?= htmlspecialchars($product['TenSP']) ?>', '<?= htmlspecialchars($product['MoTa']) ?>', <?= $product['Gia'] ?>, <?= $product['SoLuong'] ?>, '<?= htmlspecialchars($product['DanhMuc']) ?>')">
+                                            onclick="openEditProductModal(<?= $product['MaSP'] ?>, '<?= htmlspecialchars($product['TenSanPham']) ?>', '<?= htmlspecialchars($product['MoTa']) ?>', <?= $product['Gia'] ?>, <?= $product['SoLuong'] ?>, '<?= $product['MaDM'] ?>')">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-delete btn-sm" 
-                                            onclick="confirmDelete(<?= $product['MaSP'] ?>, '<?= htmlspecialchars($product['TenSP']) ?>')">
+                                            onclick="confirmDelete(<?= $product['MaSP'] ?>, '<?= htmlspecialchars($product['TenSanPham']) ?>')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -244,7 +248,7 @@ function openAddProductModal() {
 // Mở modal sửa sản phẩm
 function openEditProductModal(id, name, description, price, quantity, category) {
     document.getElementById('editProductId').value = id;
-    document.getElementById('editTenSP').value = name;
+    document.getElementById('editTenSanPham').value = name;
     document.getElementById('editMoTa').value = description;
     document.getElementById('editGia').value = price;
     document.getElementById('editSoLuong').value = quantity;
@@ -261,12 +265,12 @@ function openEditProductModal(id, name, description, price, quantity, category) 
             <h3><i class="fas fa-plus"></i> Thêm sản phẩm mới</h3>
             <span class="close" onclick="closeModal('addProductModal')">&times;</span>
         </div>
-        <form id="addProductForm" method="POST" action="index.php?action=addproduct" enctype="multipart/form-data">
+        <form id="addProductForm" method="POST" action="index.php?page=addpro" enctype="multipart/form-data">
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="addTenSP">Tên sản phẩm <span class="required">*</span></label>
-                        <input type="text" id="addTenSP" name="TenSP" required>
+                        <label for="addTenSanPham">Tên sản phẩm <span class="required">*</span></label>
+                        <input type="text" id="addTenSanPham" name="TenSanPham" required>
                     </div>
                     <div class="form-group">
                         <label for="addDanhMuc">Danh mục <span class="required">*</span></label>
@@ -275,14 +279,14 @@ function openEditProductModal(id, name, description, price, quantity, category) 
                             <?php
                             $database = Database::getInstance();
                             $db = $database->getConnection();
-                            $sql = "SELECT TenDanhMuc FROM danhmuc ORDER BY TenDanhMuc ASC";
+                            $sql = "SELECT MaDM, TenDM FROM danhmuc ORDER BY TenDM ASC";
                             $stmt = $db->prepare($sql);
                             $stmt->execute();
                             $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             foreach ($categories as $category):
                             ?>
-                                <option value="<?= htmlspecialchars($category['TenDanhMuc']) ?>">
-                                    <?= htmlspecialchars($category['TenDanhMuc']) ?>
+                                <option value="<?= htmlspecialchars($category['MaDM']) ?>">
+                                    <?= htmlspecialchars($category['TenDM']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -323,21 +327,29 @@ function openEditProductModal(id, name, description, price, quantity, category) 
             <h3><i class="fas fa-edit"></i> Sửa thông tin sản phẩm</h3>
             <span class="close" onclick="closeModal('editProductModal')">&times;</span>
         </div>
-        <form id="editProductForm" method="POST" action="index.php?action=editproduct" enctype="multipart/form-data">
+        <form id="editProductForm" method="POST" action="index.php?page=editpro" enctype="multipart/form-data">
             <input type="hidden" id="editProductId" name="MaSP">
             <div class="modal-body">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="editTenSP">Tên sản phẩm <span class="required">*</span></label>
-                        <input type="text" id="editTenSP" name="TenSP" required>
+                        <label for="editTenSanPham">Tên sản phẩm <span class="required">*</span></label>
+                        <input type="text" id="editTenSanPham" name="TenSanPham" required>
                     </div>
                     <div class="form-group">
                         <label for="editDanhMuc">Danh mục <span class="required">*</span></label>
                         <select id="editDanhMuc" name="DanhMuc" required>
                             <option value="">-- Chọn danh mục --</option>
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?= htmlspecialchars($category['TenDanhMuc']) ?>">
-                                    <?= htmlspecialchars($category['TenDanhMuc']) ?>
+                            <?php
+                            // Lấy lại danh sách danh mục cho edit form
+                            $db = Database::getInstance()->getConnection();
+                            $sql = "SELECT MaDM, TenDM FROM danhmuc ORDER BY TenDM ASC";
+                            $stmt = $db->prepare($sql);
+                            $stmt->execute();
+                            $editCategories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($editCategories as $category): 
+                            ?>
+                                <option value="<?= htmlspecialchars($category['MaDM']) ?>">
+                                    <?= htmlspecialchars($category['TenDM']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

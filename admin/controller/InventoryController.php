@@ -12,6 +12,14 @@ class InventoryController {
      * Hiển thị trang quản lý tồn kho
      */
     public function index() {
+        // Hiển thị dashboard tồn kho mặc định
+        $this->showDashboard();
+    }
+    
+    /**
+     * Hiển thị dashboard tồn kho
+     */
+    public function showDashboard() {
         // Thông số phân trang cho sản phẩm sắp hết hàng
         $lowStockPage = (int)($_GET['low_stock_page'] ?? 1);
         $lowStockLimit = 10; // Số sản phẩm trên 1 trang
@@ -39,6 +47,12 @@ class InventoryController {
         // Lấy sản phẩm hết hàng với phân trang
         $outOfStockProducts = $this->inventoryManager->getOutOfStockProductsPaginated($outOfStockLimit, $outOfStockOffset);
         
+        // Debug: log data counts
+        error_log("Low stock products count: " . count($lowStockProducts));
+        error_log("Out of stock products count: " . count($outOfStockProducts));
+        error_log("Total low stock: " . $totalLowStockProducts);
+        error_log("Total out of stock: " . $totalOutOfStockProducts);
+        
         // Thông tin phân trang để truyền vào view
         $pagination = [
             'low_stock' => [
@@ -56,6 +70,48 @@ class InventoryController {
         ];
         
         include __DIR__ . '/../view/inventory_dashboard.php';
+    }
+    
+    /**
+     * Hiển thị danh sách tất cả sản phẩm với phân trang
+     */
+    public function listAll() {
+        // Lấy thông số phân trang từ URL
+        $page = max(1, (int)($_GET['page_num'] ?? 1));
+        $limit = 15; // Số sản phẩm trên 1 trang
+        $offset = ($page - 1) * $limit;
+        
+        // Lấy từ khóa tìm kiếm
+        $search = $_GET['search'] ?? '';
+        
+        // Lấy bộ lọc trạng thái
+        $statusFilter = $_GET['status'] ?? '';
+        
+        // Lấy bộ lọc theo danh mục
+        $categoryFilter = $_GET['category'] ?? '';
+        
+        // Lấy tổng số sản phẩm để tính phân trang
+        $totalProducts = $this->inventoryManager->countAllProducts($search, $statusFilter, $categoryFilter);
+        $totalPages = ceil($totalProducts / $limit);
+        
+        // Lấy danh sách sản phẩm với phân trang
+        $products = $this->inventoryManager->getAllProductsPaginated($limit, $offset, $search, $statusFilter, $categoryFilter);
+        
+        // Lấy danh sách danh mục để hiển thị trong bộ lọc
+        $categories = $this->inventoryManager->getAllCategories();
+        
+        // Thông tin phân trang
+        $pagination = [
+            'current_page' => $page,
+            'total_pages' => $totalPages,
+            'total_products' => $totalProducts,
+            'limit' => $limit,
+            'search' => $search,
+            'status_filter' => $statusFilter,
+            'category_filter' => $categoryFilter
+        ];
+        
+        include __DIR__ . '/../view/inventory_list_paginated.php';
     }
     
     /**

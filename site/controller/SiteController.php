@@ -1,6 +1,6 @@
 <?php
-require "site/model/User.php";
-require "site/model/Cart.php";
+require_once __DIR__ . "/../model/User.php";
+require_once __DIR__ . "/../model/Cart.php";
 class SiteController
 {
     public $baseUrl;
@@ -18,17 +18,38 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
-        include 'site/view/trangchu.php';
+        include __DIR__ . '/../view/trangchu.php';
     }
 
     public function cart()
     {
         $baseUrl = $this->baseUrl;
         $cart = new Cart($this->db);
-        $cart->addToCart();
-        //var_dump($_SESSION['cart']);
-        // sau đó gán data vào tầng View
-        include 'view/giohang.php';
+        
+        // Nếu có POST request (thêm sản phẩm vào giỏ hàng)
+        if (isset($_POST['addToCart']) || (isset($_POST['id']) && isset($_POST['quantity']))) {
+            $cart->addToCart();
+            
+            // Thêm thông báo thành công
+            $_SESSION['cart_message'] = [
+                'type' => 'success',
+                'message' => 'Đã thêm sản phẩm "' . ($_POST['name'] ?? 'Unknown') . '" (x' . ($_POST['quantity'] ?? 1) . ') vào giỏ hàng!'
+            ];
+            
+            // Redirect đến giỏ hàng
+            header("Location: index.php?page=giohang");
+            exit;
+        }
+        
+        // Hiển thị trang giỏ hàng
+        include __DIR__ . '/../view/giohang.php';
+    }
+    
+    public function giohang()
+    {
+        $baseUrl = $this->baseUrl;
+        // Hiển thị trang giỏ hàng
+        include __DIR__ . '/../view/giohang.php';
     }
 
     public function checkout()
@@ -36,7 +57,7 @@ class SiteController
         if (isset($_SESSION['cart']) && count($_SESSION['cart'])) {
             $baseUrl = $this->baseUrl;
             // sau đó gán data vào tầng View
-            include 'view/checkout.php';
+            include __DIR__ . '/../view/checkout.php';
         } else {
             header("Location: index.php");
             exit;
@@ -143,15 +164,121 @@ class SiteController
         } else {
             $info = "<span style='color:red'>Chữ ký không hợp lệ</span>";
         }
-        include 'view/thankyou.php';
+        include __DIR__ . '/../view/thankyou.php';
     }
 
     public function removeItemCart()
     {
         $id = $_GET['id'] ?? 0;
+        
+        // Debug log
+        file_put_contents('remove_debug.txt', 
+            date('Y-m-d H:i:s') . " - removeItemCart called with ID: $id\n" .
+            "GET data: " . print_r($_GET, true) . "\n", 
+            FILE_APPEND
+        );
+        
         $cart = new Cart($this->db);
-        $cart->deleteItem($id);
-        header("Location: index.php?page=cart");
+        $result = $cart->deleteItem($id);
+        
+        // Thêm thông báo thành công
+        if ($result) {
+            $_SESSION['cart_message'] = [
+                'type' => 'success',
+                'message' => 'Đã xóa sản phẩm khỏi giỏ hàng!'
+            ];
+        } else {
+            $_SESSION['cart_message'] = [
+                'type' => 'error',
+                'message' => 'Không thể xóa sản phẩm!'
+            ];
+        }
+        
+        header("Location: index.php?page=giohang");
+        exit;
+    }
+    
+    public function updateCartQuantity()
+    {
+        $id = $_GET['id'] ?? 0;
+        $quantity = (int)($_GET['quantity'] ?? 1);
+        
+        // Validate quantity
+        if ($quantity <= 0) {
+            $_SESSION['cart_message'] = [
+                'type' => 'error',
+                'message' => 'Số lượng phải lớn hơn 0!'
+            ];
+            header("Location: index.php?page=giohang");
+            exit;
+        }
+        
+        // Update quantity in session cart
+        if (isset($_SESSION['cart'][$id])) {
+            $_SESSION['cart'][$id]['quantity'] = $quantity;
+            
+            $_SESSION['cart_message'] = [
+                'type' => 'success',
+                'message' => 'Đã cập nhật số lượng sản phẩm!'
+            ];
+        } else {
+            $_SESSION['cart_message'] = [
+                'type' => 'error',
+                'message' => 'Không tìm thấy sản phẩm trong giỏ hàng!'
+            ];
+        }
+        
+        header("Location: index.php?page=giohang");
+        exit;
+    }
+    
+    public function thanhtoan()
+    {
+        // Kiểm tra đăng nhập
+        if (!isset($_SESSION['userInfo'])) {
+            header("Location: index.php?page=login");
+            exit;
+        }
+        
+        // Kiểm tra giỏ hàng
+        if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
+            header("Location: index.php?page=giohang");
+            exit;
+        }
+        
+        // Tính tổng tiền
+        $totalPrice = 0;
+        foreach ($_SESSION['cart'] as $item) {
+            $totalPrice += $item['price'] * $item['quantity'];
+        }
+        
+        include __DIR__ . '/../view/thanhtoan.php';
+    }
+    
+    public function createOrder()
+    {
+        // Kiểm tra đăng nhập
+        if (!isset($_SESSION['userInfo'])) {
+            header("Location: index.php?page=login");
+            exit;
+        }
+        
+        // Kiểm tra giỏ hàng
+        if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
+            header("Location: index.php?page=giohang");
+            exit;
+        }
+        
+        $cart = new Cart($this->db);
+        $result = $cart->createOrder();
+        
+        if ($result) {
+            $_SESSION['success'] = "Đặt hàng thành công! Mã đơn hàng của bạn là: #" . $result['orderId'] . ". Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng.";
+            header("Location: index.php?page=home");
+        } else {
+            $_SESSION['error'] = "Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ!";
+            header("Location: index.php?page=thanhtoan");
+        }
         exit;
     }
 
@@ -162,7 +289,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $products = $this->db->getAllProducts();
         // sau đó gán data vào tầng View
-        include 'view/product.php';
+        include __DIR__ . '/../view/product.php';
     }
 
     // hàm index sẽ gọi trang sản phẩm
@@ -173,7 +300,7 @@ class SiteController
         // có thể gọi model để lấy data nếu có
         $product = $this->db->getProductDetail($id);
         // sau đó gán data vào tầng View
-        include 'view/product_detail.php';
+        include __DIR__ . '/../view/product_detail.php';
     }
 
     public function login()

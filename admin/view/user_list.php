@@ -51,29 +51,29 @@
                     <?php if (!empty($users)): ?>
                         <?php foreach ($users as $user): ?>
                             <tr>
-                                <td><?= $user['MaTK'] ?></td>
-                                <td><?= htmlspecialchars($user['HoTen']) ?></td>
-                                <td><?= htmlspecialchars($user['Email']) ?></td>
-                                <td><?= htmlspecialchars($user['TenDangNhap']) ?></td>
-                                <td><?= htmlspecialchars($user['SoDienThoai']) ?></td>
+                                <td><?= $user['id'] ?></td>
+                                <td><?= htmlspecialchars($user['fullname'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($user['email'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($user['username'] ?? '') ?></td>
+                                <td><?= htmlspecialchars($user['mobile'] ?? '') ?></td>
                                 <td>
-                                    <span class="role-badge role-<?= $user['VaiTro'] == 1 ? 'admin' : 'user' ?>">
-                                        <?= $user['VaiTro'] == 1 ? 'Admin' : 'Khách hàng' ?>
+                                    <span class="role-badge role-<?= $user['role'] == 'admin' ? 'admin' : 'user' ?>">
+                                        <?= $user['role'] == 'admin' ? 'Admin' : 'Khách hàng' ?>
                                     </span>
                                 </td>
                                 <td>
-                                    <span class="status-badge status-<?= strtolower(str_replace(' ', '-', $user['TrangThai'])) ?>">
-                                        <?= htmlspecialchars($user['TrangThai']) ?>
+                                    <span class="status-badge status-<?= strtolower(str_replace(' ', '-', $user['status'] ?? '')) ?>">
+                                        <?= htmlspecialchars($user['status'] ?? '') ?>
                                     </span>
                                 </td>
-                                <td><?= date('d/m/Y H:i', strtotime($user['NgayDangKy'])) ?></td>
+                                <td><?= date('d/m/Y H:i', strtotime($user['created_at'] ?? '')) ?></td>
                                 <td class="action-buttons">
                                     <button class="btn btn-edit btn-sm" 
-                                            onclick="editUser(<?= $user['MaTK'] ?>, '<?= htmlspecialchars($user['HoTen']) ?>', '<?= htmlspecialchars($user['Email']) ?>', '<?= htmlspecialchars($user['TenDangNhap']) ?>', '<?= htmlspecialchars($user['SoDienThoai']) ?>', '<?= $user['VaiTro'] == 1 ? 'admin' : 'user' ?>', '<?= htmlspecialchars($user['TrangThai']) ?>', '<?= htmlspecialchars($user['DiaChi']) ?>')">
+                                            onclick="editUser(<?= $user['id'] ?>, '<?= htmlspecialchars($user['fullname'] ?? '') ?>', '<?= htmlspecialchars($user['email'] ?? '') ?>', '<?= htmlspecialchars($user['username'] ?? '') ?>', '<?= htmlspecialchars($user['mobile'] ?? '') ?>', '<?= $user['role'] ?? 'user' ?>', '<?= htmlspecialchars($user['status'] ?? '') ?>', '<?= htmlspecialchars($user['address'] ?? '') ?>')">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-delete btn-sm" 
-                                            onclick="confirmDelete('User', <?= $user['MaTK'] ?>, '<?= htmlspecialchars($user['HoTen']) ?>')">
+                                            onclick="confirmDelete('User', <?= $user['id'] ?>, '<?= htmlspecialchars($user['fullname'] ?? '') ?>')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -97,44 +97,44 @@
             <h3><i class="fas fa-plus"></i> Thêm người dùng mới</h3>
             <span class="close" onclick="closeModal('addUserModal')">&times;</span>
         </div>
-        <form method="POST" action="index.php?action=addUser">
+        <form method="POST" action="index.php?page=add_user_process">
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="HoTen">Họ tên <span class="required">*</span></label>
-                    <input type="text" id="HoTen" name="HoTen" required>
+                    <label for="fullname">Họ tên <span class="required">*</span></label>
+                    <input type="text" id="fullname" name="fullname" required>
                 </div>
                 <div class="form-group">
-                    <label for="Email">Email <span class="required">*</span></label>
-                    <input type="email" id="Email" name="Email" required>
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="TenDangNhap">Tên đăng nhập <span class="required">*</span></label>
-                    <input type="text" id="TenDangNhap" name="TenDangNhap" required>
+                    <label for="username">Tên đăng nhập <span class="required">*</span></label>
+                    <input type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="MatKhau">Mật khẩu <span class="required">*</span></label>
-                    <input type="password" id="MatKhau" name="MatKhau" required>
+                    <label for="password">Mật khẩu <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="SoDienThoai">Số điện thoại</label>
-                        <input type="text" id="SoDienThoai" name="SoDienThoai">
+                        <label for="mobile">Số điện thoại</label>
+                        <input type="text" id="mobile" name="mobile">
                     </div>
                     <div class="form-group">
-                        <label for="VaiTro">Vai trò</label>
-                        <select id="VaiTro" name="VaiTro">
+                        <label for="role">Vai trò</label>
+                        <select id="role" name="role">
                             <option value="user">Khách hàng</option>
                             <option value="admin">Admin</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="DiaChi">Địa chỉ</label>
-                    <textarea id="DiaChi" name="DiaChi" rows="3"></textarea>
+                    <label for="address">Địa chỉ</label>
+                    <textarea id="address" name="address" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="TrangThai">Trạng thái</label>
-                    <select id="TrangThai" name="TrangThai">
+                    <label for="status">Trạng thái</label>
+                    <select id="status" name="status">
                         <option value="Hoạt động">Hoạt động</option>
                         <option value="Bị khóa">Bị khóa</option>
                     </select>
@@ -155,45 +155,45 @@
             <h3><i class="fas fa-edit"></i> Chỉnh sửa người dùng</h3>
             <span class="close" onclick="closeModal('editUserModal')">&times;</span>
         </div>
-        <form method="POST" action="index.php?action=editUser">
+        <form method="POST" action="index.php?page=edit_user_process">
             <input type="hidden" id="editUserId" name="id">
             <div class="modal-body" style="overflow-y: auto !important; max-height: 60vh !important; height: auto !important;">
                 <div class="form-group">
-                    <label for="editHoTen">Họ tên <span class="required">*</span></label>
-                    <input type="text" id="editHoTen" name="HoTen" required>
+                    <label for="editFullname">Họ tên <span class="required">*</span></label>
+                    <input type="text" id="editFullname" name="fullname" required>
                 </div>
                 <div class="form-group">
                     <label for="editEmail">Email <span class="required">*</span></label>
-                    <input type="email" id="editEmail" name="Email" required>
+                    <input type="email" id="editEmail" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="editTenDangNhap">Tên đăng nhập <span class="required">*</span></label>
-                    <input type="text" id="editTenDangNhap" name="TenDangNhap" required>
+                    <label for="editUsername">Tên đăng nhập <span class="required">*</span></label>
+                    <input type="text" id="editUsername" name="username" required>
                 </div>
                 <div class="form-group">
-                    <label for="editMatKhau">Mật khẩu mới (để trống nếu không đổi)</label>
-                    <input type="password" id="editMatKhau" name="MatKhau">
+                    <label for="editPassword">Mật khẩu mới (để trống nếu không đổi)</label>
+                    <input type="password" id="editPassword" name="password">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="editSoDienThoai">Số điện thoại</label>
-                        <input type="text" id="editSoDienThoai" name="SoDienThoai">
+                        <label for="editMobile">Số điện thoại</label>
+                        <input type="text" id="editMobile" name="mobile">
                     </div>
                     <div class="form-group">
-                        <label for="editVaiTro">Vai trò</label>
-                        <select id="editVaiTro" name="VaiTro">
+                        <label for="editRole">Vai trò</label>
+                        <select id="editRole" name="role">
                             <option value="user">Khách hàng</option>
                             <option value="admin">Admin</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="editDiaChi">Địa chỉ</label>
-                    <textarea id="editDiaChi" name="DiaChi" rows="3"></textarea>
+                    <label for="editAddress">Địa chỉ</label>
+                    <textarea id="editAddress" name="address" rows="3"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="editTrangThai">Trạng thái</label>
-                    <select id="editTrangThai" name="TrangThai">
+                    <label for="editStatus">Trạng thái</label>
+                    <select id="editStatus" name="status">
                         <option value="Hoạt động">Hoạt động</option>
                         <option value="Bị khóa">Bị khóa</option>
                     </select>
@@ -263,15 +263,15 @@
 </style>
 
 <script>
-function editUser(id, hoTen, email, tenDangNhap, soDienThoai, vaiTro, trangThai, diaChi) {
+function editUser(id, fullname, email, username, mobile, role, status, address) {
     document.getElementById('editUserId').value = id;
-    document.getElementById('editHoTen').value = hoTen;
+    document.getElementById('editFullname').value = fullname;
     document.getElementById('editEmail').value = email;
-    document.getElementById('editTenDangNhap').value = tenDangNhap;
-    document.getElementById('editSoDienThoai').value = soDienThoai;
-    document.getElementById('editVaiTro').value = vaiTro;
-    document.getElementById('editTrangThai').value = trangThai;
-    document.getElementById('editDiaChi').value = diaChi;
+    document.getElementById('editUsername').value = username;
+    document.getElementById('editMobile').value = mobile;
+    document.getElementById('editRole').value = role;
+    document.getElementById('editStatus').value = status;
+    document.getElementById('editAddress').value = address;
     
     // Open modal with custom function
     openModalWithScroll('editUserModal');
@@ -306,7 +306,7 @@ function confirmDelete(type, id, name) {
     if (confirm(`Bạn có chắc chắn muốn xóa người dùng "${name}"?`)) {
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = `index.php?action=delete${type}`;
+        form.action = `index.php?page=delete_user`;
         
         const input = document.createElement('input');
         input.type = 'hidden';

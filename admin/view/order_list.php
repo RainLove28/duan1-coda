@@ -107,21 +107,23 @@
         </div>
         <form method="POST" action="index.php?page=update_order_status">
             <input type="hidden" id="updateOrderId" name="id">
+            <input type="hidden" id="currentStatus" name="current_status">
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="orderStatus">Trạng thái đơn hàng</label>
+                    <label for="orderStatus">Trạng thái hiện tại: <span id="currentStatusText" style="font-weight: bold;"></span></label>
+                    <label for="orderStatus">Chọn trạng thái mới:</label>
                     <select id="orderStatus" name="status" required>
-                        <option value="Chờ xác nhận">Chờ xác nhận</option>
-                        <option value="Đã xác nhận">Đã xác nhận</option>
-                        <option value="Đang giao">Đang giao</option>
-                        <option value="Đã giao">Đã giao</option>
-                        <option value="Đã hủy">Đã hủy</option>
+                        <!-- Sẽ được điền bằng JavaScript dựa trên trạng thái hiện tại -->
                     </select>
+                </div>
+                <div id="statusWarning" style="display: none; color: #dc3545; margin-top: 10px; padding: 10px; background: #f8d7da; border-radius: 5px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="warningText"></span>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="closeModal('updateStatusModal')">Hủy</button>
-                <button type="submit" class="btn btn-success">Cập nhật</button>
+                <button type="submit" class="btn btn-success" id="updateBtn">Cập nhật</button>
             </div>
         </form>
     </div>
@@ -201,9 +203,67 @@
 </style>
 
 <script>
+// Định nghĩa logic chuyển đổi trạng thái (giống với PHP)
+const statusTransitions = {
+    'Chờ xác nhận': ['Đã xác nhận', 'Đã hủy'],
+    'Đã xác nhận': ['Đang giao', 'Đã hủy'],
+    'Đang giao': ['Đã giao'], // Không thể hủy khi đang giao
+    'Đã giao': [], // Không thể chuyển từ đã giao
+    'Đã hủy': []  // Không thể chuyển từ đã hủy
+};
+
+const statusWarnings = {
+    'Đang giao': 'Lưu ý: Đơn hàng đang giao không thể hủy.',
+    'Đã giao': 'Đơn hàng đã hoàn thành, không thể thay đổi trạng thái.',
+    'Đã hủy': 'Đơn hàng đã hủy, không thể thay đổi trạng thái.'
+};
+
 function updateOrderStatus(id, currentStatus) {
     document.getElementById('updateOrderId').value = id;
-    document.getElementById('orderStatus').value = currentStatus;
+    document.getElementById('currentStatus').value = currentStatus;
+    document.getElementById('currentStatusText').textContent = currentStatus;
+    
+    // Lấy các trạng thái có thể chuyển đến
+    const availableStatuses = statusTransitions[currentStatus] || [];
+    const statusSelect = document.getElementById('orderStatus');
+    const updateBtn = document.getElementById('updateBtn');
+    const statusWarning = document.getElementById('statusWarning');
+    const warningText = document.getElementById('warningText');
+    
+    // Xóa các option cũ
+    statusSelect.innerHTML = '';
+    
+    if (availableStatuses.length === 0) {
+        // Không có trạng thái nào có thể chuyển đến
+        statusSelect.innerHTML = '<option value="">Không thể thay đổi trạng thái</option>';
+        updateBtn.disabled = true;
+        updateBtn.textContent = 'Không thể cập nhật';
+        
+        // Hiển thị cảnh báo
+        if (statusWarnings[currentStatus]) {
+            warningText.textContent = statusWarnings[currentStatus];
+            statusWarning.style.display = 'block';
+        }
+    } else {
+        // Thêm các option khả dụ
+        availableStatuses.forEach(status => {
+            const option = document.createElement('option');
+            option.value = status;
+            option.textContent = status;
+            statusSelect.appendChild(option);
+        });
+        
+        updateBtn.disabled = false;
+        updateBtn.textContent = 'Cập nhật';
+        statusWarning.style.display = 'none';
+        
+        // Hiển thị cảnh báo đặc biệt cho một số trạng thái
+        if (currentStatus === 'Đang giao') {
+            warningText.textContent = 'Đơn hàng đang giao chỉ có thể chuyển thành "Đã giao".';
+            statusWarning.style.display = 'block';
+        }
+    }
+    
     openModal('updateStatusModal');
 }
 </script>

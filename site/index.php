@@ -4,17 +4,53 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Bắt đầu output buffering để tránh lỗi "headers already sent"
+ob_start();
+
 $page = $_GET['page'] ?? 'home';
+
+// Khởi tạo database và baseUrl cho SiteController
+require_once('model/database.php');
+$db = Database::getInstance();
+$baseUrl = 'http://localhost/PHP1/new/duan1-coda/site/';
 
 require_once('controller/ProductController.php');
 $productController = new ProductController();
 
-if ($page === 'login.php') {
-    require_once("view/login.php");
-    // KHÔNG gọi header/footer ở đây
-} else {
-    $productController->renderHeader();
-    switch($page){
+// Xử lý các case cần redirect trước khi render header
+switch($page){
+    case 'login':
+        // Clean output buffer trước khi render login page
+        ob_clean();
+        require_once("view/login.php");
+        exit; // Dừng execution để không load header/footer
+        break;
+    case 'logout':
+        // Clean output buffer trước khi redirect
+        ob_clean();
+        
+        // Xóa toàn bộ session
+        $_SESSION = array();
+        
+        // Xóa session cookie nếu có
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        
+        // Destroy session và chuyển hướng
+        session_destroy();
+        header('Location: index.php?page=home');
+        exit;
+        break;
+}
+
+// Render header cho các trang khác
+$productController->renderHeader();
+switch($page){
         case 'home':
             $productController->renderHome();
             break;
@@ -28,10 +64,34 @@ if ($page === 'login.php') {
             require_once("view/vecomem.php");
             break;
         case 'giohang':
-            require_once("view/giohang.php");
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->giohang();
+            break;
+        case 'cart':
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->cart();
+            break;
+        case 'updateCartQuantity':
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->updateCartQuantity();
             break;
         case 'thanhtoan':
-            require_once("view/thanhtoan.php");
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->thanhtoan();
+            break;
+        case 'createOrder':
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->createOrder();
+            break;
+        case 'removeItemCart':
+            require_once('controller/SiteController.php');
+            $siteController = new SiteController($baseUrl, $db);
+            $siteController->removeItemCart();
             break;
         case 'product':           
             if (isset($_GET['category'])) {
@@ -39,9 +99,8 @@ if ($page === 'login.php') {
             }
             break;
         case 'product-details':
-            $id = $_GET['id'];         
+            $id = $_GET['id'] ?? 0;         
             $productController->productDetail();
-            $productController->proDetail($id);
             break;
         case 'ChiTietTaiKhoan.php':
             require_once("view/ChiTietTaiKhoan.php");
@@ -57,26 +116,11 @@ if ($page === 'login.php') {
         //     $userController = new UserController();
         //     $userController ->register($data);
         //     break;
-        // case "loginpage":
-        //     require_once('controller/UserController.php');
-        //     $userController = new UserController();
-        //     $userController -> renderLogin();
-        //     break;
-        // case "login":
-        //     $data= $_POST;
-        //     require_once('controller/UserController.php');
-        //     $userController = new UserController();
-        //     $userController ->login($data);
-        //     break;
-        // case "logout":
-        //     require_once('controller/UserController.php');
-        //     $userController = new UserController();
-        //     $userController ->logout();
-        //     break;
         default:
         
     }
     require_once("view/footer.php");
-}
+    
+    // Flush output buffer
+    ob_end_flush();
 ?>
-<link rel="stylesheet" href="../public/css/login.css" />

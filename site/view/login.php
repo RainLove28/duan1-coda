@@ -1,413 +1,665 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once __DIR__ . '/../model/database.php';
-require_once __DIR__ . '/../model/auth.php';
+require_once __DIR__ . '/../model/SendOTP.php';
 
-// Khởi tạo kết nối cơ sở dữ liệu
-$db = Database::getInstance();
-
-// Xác định tab hiện tại (đăng nhập, đăng ký, hoặc quên mật khẩu)
-$tab = isset($_GET['tab']) ? $_GET['tab'] : 'login';
 $errors = [];
 $success = '';
+$active_tab = $_GET['tab'] ?? 'login';
 
-// Xử lý khi người dùng gửi form
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($tab === 'register') { // Xử lý form đăng ký
-        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
-        $password = $_POST['password'];
-        $terms = isset($_POST['terms']);
-
-        // Kiểm tra dữ liệu đầu vào
-        if (empty($username) || empty($password) || !$terms) {
-            $errors[] = 'Vui lòng điền đầy đủ thông tin và chấp nhận điều khoản.';
-        } else {
-            // Validation bổ sung
-            if (strlen($username) < 3) {
-                $errors[] = 'Tài khoản phải có ít nhất 3 ký tự.';
-            } elseif (strlen($password) < 6) {
-                $errors[] = 'Mật khẩu phải có ít nhất 6 ký tự.';
-        } else {
-                // Kiểm tra trùng tài khoản
-                $sql_check = "SELECT * FROM users WHERE username = ?";
-                $user_exist = $db->getOne($sql_check, [$username]);
-                if ($user_exist) {
-                    $errors[] = 'Tài khoản đã tồn tại.';
-                } else {
-                    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-                    if ($db->execute($sql, [$username, $hashed_password])) {
-                        $success = 'Đăng ký thành công! Vui lòng đăng nhập.';
-                        $tab = 'login';
-                    } else {
-                        $errors[] = 'Đăng ký thất bại. Vui lòng thử lại.';
-                    }
-                }
-            }
-        }
-    } else if ($tab === 'login') { // Xử lý form đăng nhập
-    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
-        
+// Xử lý đăng nhập
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
+    $username = trim($_POST['username'] ?? '');
+    $password = trim($_POST['password'] ?? '');
+    
     if (empty($username) || empty($password)) {
-        $errors[] = 'Vui lòng điền đầy đủ thông tin.';
+        $errors[] = 'Vui lòng nhập đầy đủ tài khoản và mật khẩu.';
     } else {
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $user = $db->getOne($sql, [$username]);
-        if ($user && password_verify($password, $user['password'])) {
-            // Set session khi đăng nhập thành công
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['logged_in'] = true;
+        try {
+            $db = Database::getInstance();
+            $user = $db->getOne("SELECT * FROM users WHERE username = ? OR email = ?", [$username, $username]);
             
-            header('Location: index.php?page=home');
-            exit;
-        } else {
-            $errors[] = 'Tài khoản hoặc mật khẩu không đúng.';
+            if ($user) {
+                $passwordValid = false;
+                if (password_verify($password, $user['password'])) {
+                    $passwordValid = true;
+                } elseif ($user['password'] === $password) {
+                    $passwordValid = true;
+                }
+                
+                if ($passwordValid) {
+                    $_SESSION['user'] = $user;
+                    
+                    // Cũng set userInfo để tương thích với các module khác
+                    $_SESSION['userInfo'] = [
+                        'userId' => $user['id'],
+                        'username' => $user['username'], 
+                        'fullname' => $user['fullname'],
+                        'address' => $user['address'] ?? '',
+                        'mobile' => $user['mobile'] ?? '',
+                        'email' => $user['email'] ?? '',
+                        'role' => $user['role']
+                    ];
+                    
+                    if ($user['role'] === 'admin') {
+                        header('Location: /PHP1/new/duan1-coda/admin/index.php');
+                    } else {
+                        header('Location: index.php?page=home');
+                    }
+                    exit();
+                } else {
+                    $errors[] = 'Mật khẩu không đúng.';
+                }
+            } else {
+                $errors[] = 'Tài khoản không tồn tại.';
             }
+        } catch (Exception $e) {
+            $errors[] = 'Lỗi hệ thống: ' . $e->getMessage();
         }
     }
 }
 
-// Xử lý gửi lại OTP
-if (isset($_POST['resend_otp'])) {
-    $_SESSION['otp'] = rand(100000, 999999);
-    $success = 'Mã OTP mới đã được gửi!';
+// Xử lý đăng ký
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
+    $active_tab = 'register';
+    $username = trim($_POST['reg_username'] ?? '');
+    $email = trim($_POST['reg_email'] ?? '');
+    $fullname = trim($_POST['reg_fullname'] ?? '');
+    $password = trim($_POST['reg_password'] ?? '');
+    $confirm_password = trim($_POST['reg_confirm_password'] ?? '');
+    
+    if (empty($username) || empty($email) || empty($fullname) || empty($password)) {
+        $errors[] = 'Vui lòng nhập đầy đủ thông tin.';
+    } elseif ($password !== $confirm_password) {
+        $errors[] = 'Mật khẩu xác nhận không khớp.';
+    } elseif (strlen($password) < 6) {
+        $errors[] = 'Mật khẩu phải có ít nhất 6 ký tự.';
+    } else {
+        try {
+            $db = Database::getInstance();
+            
+            // Debug log
+            error_log("DEBUG: Checking registration for email: $email, username: $username");
+            
+            // Kiểm tra username đã tồn tại
+            $existing_user = $db->getOne("SELECT id FROM users WHERE username = ?", [$username]);
+            if ($existing_user) {
+                error_log("DEBUG: Username $username already exists");
+                $errors[] = 'Tên đăng nhập đã tồn tại.';
+            }
+            
+            // Kiểm tra email đã tồn tại
+            $existing_email = $db->getOne("SELECT id FROM users WHERE email = ?", [$email]);
+            if ($existing_email) {
+                error_log("DEBUG: Email $email already exists");
+                $errors[] = 'Email đã được sử dụng.';
+            } else {
+                error_log("DEBUG: Email $email is available for registration");
+            }
+            
+            if (empty($errors)) {
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+                $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+                $otp_expires_at = date('Y-m-d H:i:s', strtotime('+15 minutes'));
+                
+                // Debug log
+                error_log("DEBUG: Attempting to register user: $email with OTP: $otp");
+                
+                $sql = "INSERT INTO users (username, email, fullname, password, role, otp, otp_expires_at, status) VALUES (?, ?, ?, ?, 'user', ?, ?, 'pending')";
+                
+                if ($db->execute($sql, [$username, $email, $fullname, $hashed_password, $otp, $otp_expires_at])) {
+                    // Debug log
+                    error_log("DEBUG: User inserted successfully");
+                    
+                    // Gửi email xác thực
+                    if (sendOTPEmail($email, $otp)) {
+                        error_log("DEBUG: OTP email sent successfully to $email");
+                        $success = 'Đăng ký thành công! Mã OTP đã được gửi đến email (có hiệu lực 15 phút). Vui lòng kiểm tra email để xác thực tài khoản.';
+                        $active_tab = 'verify';
+                        $_SESSION['verify_email'] = $email;
+                    } else {
+                        error_log("DEBUG: Failed to send OTP email to $email");
+                        $errors[] = 'Đăng ký thành công nhưng không thể gửi email xác thực. Vui lòng liên hệ admin.';
+                    }
+                } else {
+                    error_log("DEBUG: Failed to insert user to database");
+                    $errors[] = 'Lỗi khi tạo tài khoản.';
+                }
+            }
+        } catch (Exception $e) {
+            $errors[] = 'Lỗi hệ thống: ' . $e->getMessage();
+        }
+    }
+}
+
+// Xử lý xác thực OTP
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
+    $active_tab = 'verify';
+    $email = $_SESSION['verify_email'] ?? '';
+    $otp = trim($_POST['otp'] ?? '');
+    
+    if (empty($otp)) {
+        $errors[] = 'Vui lòng nhập mã OTP.';
+    } else {
+        try {
+            $db = Database::getInstance();
+            
+            // Debug: Kiểm tra thông tin OTP
+            $debug_user = $db->getOne("SELECT email, otp, otp_expires_at, NOW() as server_time FROM users WHERE email = ?", [$email]);
+            error_log("DEBUG OTP: " . json_encode($debug_user));
+            
+            $user = $db->getOne("SELECT * FROM users WHERE email = ? AND otp = ?", [$email, $otp]);
+            
+            if ($user) {
+                // Kiểm tra thời hạn OTP riêng biệt
+                $current_time = time();
+                $expires_time = strtotime($user['otp_expires_at']);
+                
+                error_log("DEBUG: Current time: $current_time, Expires time: $expires_time, Diff: " . ($expires_time - $current_time));
+                
+                if ($expires_time > $current_time) {
+                    // OTP còn hiệu lực
+                    $db->execute("UPDATE users SET status = 'active', otp = NULL, otp_expires_at = NULL WHERE id = ?", [$user['id']]);
+                    $success = 'Xác thực thành công! Bạn có thể đăng nhập ngay bây giờ.';
+                    $active_tab = 'login';
+                    unset($_SESSION['verify_email']);
+                } else {
+                    $errors[] = 'Mã OTP đã hết hạn. Vui lòng gửi lại mã mới.';
+                }
+            } else {
+                $errors[] = 'Mã OTP không đúng.';
+            }
+        } catch (Exception $e) {
+            error_log("ERROR in OTP verification: " . $e->getMessage());
+            $errors[] = 'Lỗi hệ thống: ' . $e->getMessage();
+        }
+    }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura Beauty - Đăng nhập</title>
-    <link rel="stylesheet" href="public/css/login.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Đăng nhập - Aura Beauty</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #056405ff 0%, #0d8a06ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .auth-header p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab-btn.active {
+            color: #667eea;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+        
+        .tab-btn:hover {
+            color: #667eea;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .error-messages, .success-message {
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .error-messages {
+            background: #fee;
+            border: 1px solid #fcc;
+        }
+        
+        .success-message {
+            background: #efe;
+            border: 1px solid #cfc;
+        }
+        
+        .error-messages ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .error-messages li {
+            color: #c33;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .success-message {
+            color: #2d5a3d;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+             background: linear-gradient(135deg, #056405ff 0%, #0d8a06ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            width: 100%;
+            padding: 12px;
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #666;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e5e9;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+        }
+        
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .google-btn:hover {
+            background: #3367d6;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .otp-input {
+            text-align: center;
+            font-size: 24px;
+            letter-spacing: 5px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="left-panel">
-        <div class="logo"> 
-                <img src="public/img/logo.png" alt="Aura Beauty Logo">
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1><img src="path/to/logo.png" alt=""> Aura Beauty</h1>
+            <p>Chào mừng bạn đến với hệ thống quản lý</p>
         </div>
-    </div>
-    <div class="right-panel">
-        <div class="form-box">
-                <h2 class="brand-name">Aura Beauty</h2>
-                
-                <!-- Tab Navigation -->
-            <div class="tab">
-                    <button class="tablink <?php echo $tab === 'register' ? 'active' : ''; ?>" onclick="switchTab('register')">Đăng ký</button>
-                    <button class="tablink <?php echo $tab === 'login' ? 'active' : ''; ?>" onclick="switchTab('login')">Đăng nhập</button>
-                    <button class="tablink <?php echo $tab === 'forgot' ? 'active' : ''; ?>" onclick="switchTab('forgot')">Quên mật khẩu</button>
-            </div>
-
-                <!-- Error Messages -->
-            <?php if (!empty($errors)): ?>
-                    <div class="error-message">
+        
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn <?= $active_tab === 'login' ? 'active' : '' ?>" onclick="switchTab('login')">
+                Đăng nhập
+            </button>
+            <button class="tab-btn <?= $active_tab === 'register' ? 'active' : '' ?>" onclick="switchTab('register')">
+                Đăng ký
+            </button>
+            <button class="tab-btn <?= $active_tab === 'verify' ? 'active' : '' ?>" onclick="switchTab('verify')" 
+                    style="<?= $active_tab !== 'verify' ? 'display:none;' : '' ?>">
+                Xác thực
+            </button>
+        </div>
+        
+        <!-- Messages -->
+        <?php if (!empty($errors)): ?>
+            <div class="error-messages">
+                <ul>
                     <?php foreach ($errors as $error): ?>
-                            <p><?php echo htmlspecialchars($error); ?></p>
+                        <li><?= htmlspecialchars($error) ?></li>
                     <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (!empty($success)): ?>
+            <div class="success-message">
+                <?= htmlspecialchars($success) ?>
+            </div>
+        <?php endif; ?>
+        
+        <!-- Login Tab -->
+        <div id="login-tab" class="tab-content <?= $active_tab === 'login' ? 'active' : '' ?>">
+            <form method="POST" action="?page=login">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập hoặc Email</label>
+                    <input type="text" id="username" name="username" required autocomplete="username" 
+                           value="<?= htmlspecialchars($_POST['username'] ?? '') ?>">
                 </div>
-            <?php endif; ?>
-
-                <!-- Success Messages -->
-            <?php if (!empty($success)): ?>
-                    <div class="success-message">
-                        <p><?php echo htmlspecialchars($success); ?></p>
+                
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
                 </div>
-            <?php endif; ?>
-
-                <!-- Register Form -->
-                <form id="register-form" class="form <?php echo $tab === 'register' ? '' : 'hidden'; ?>" method="POST" action="?page=login.php&tab=register">
-                    <label>Tài khoản</label>
-                    <input type="text" name="username" placeholder="Nhập tên tài khoản" value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" required>
-
-                    <label>Mật khẩu</label>
-                    <input type="password" name="password" placeholder="Nhập mật khẩu" required>
-
-                    <label class="checkbox">
-                        <input type="checkbox" name="terms" required>
-                        Chấp nhận điều khoản
-                    </label>
-
-                    <button type="submit" class="btn register">Đăng ký</button>
-                    <button type="button" class="btn google" disabled>
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
-                        Đăng nhập bằng Google
-                    </button>
-                </form>
-
-                <!-- Login Form -->
-                <form id="login-form" class="form <?php echo $tab === 'login' ? '' : 'hidden'; ?>" method="POST" action="?page=login.php&tab=login">
-                    <label>Tài khoản</label>
-                    <input type="text" name="username" placeholder="Nhập tên tài khoản" value="<?php echo isset($_COOKIE['username']) ? htmlspecialchars($_COOKIE['username']) : ''; ?>" required>
-
-                    <label>Mật khẩu</label>
-                    <input type="password" name="password" placeholder="Nhập mật khẩu" required>
-
-                    <div class="login-options">
-                        <label class="checkbox">
-                            <input type="checkbox" name="remember">
-                            Ghi nhớ đăng nhập
-                        </label>
-                        <a href="#" onclick="switchTab('forgot')" class="forgot-password">Quên mật khẩu</a>
-                    </div>
-
-                    <button type="submit" class="btn register">Đăng nhập</button>
-
-                    <button type="button" class="btn google" disabled>
-                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
-                        Đăng nhập bằng Google
-                    </button>
-
-                    <button type="button" class="btn admin" onclick="window.location.href='admin/'">
-                        <img src="https://www.svgrepo.com/show/506501/user-circle.svg" alt="Admin">
-                        Đăng nhập Admin
-                    </button>
-                </form>
-
-                <!-- Forgot Password Form -->
-                <form id="forgot-form" class="form <?php echo $tab === 'forgot' ? '' : 'hidden'; ?>">
-                    <label>Tài khoản</label>
-                    <input type="text" id="forgot-username" placeholder="Nhập tên tài khoản" required>
-
-                    <label>Email</label>
-                    <input type="email" id="forgot-email" placeholder="Nhập email đăng ký" required>
-
-                    <button type="button" class="btn register" onclick="sendOTP()">Gửi mã OTP</button>
-
-                    <div id="otp-section" style="display: none;">
-                        <label>Mã OTP</label>
-                        <div class="otp-group">
-                            <input type="text" id="otp-input" placeholder="Nhập mã 6 số" maxlength="6">
-                            <button type="button" id="resend-btn" disabled>Gửi lại mã sau <span id="countdown">60</span>s</button>
-                        </div>
-                        <button type="button" class="btn register" onclick="verifyOTP()">Xác nhận OTP</button>
-                    </div>
-
-                    <div id="password-section" style="display: none;">
-                        <label>Mật khẩu mới</label>
-                        <input type="password" id="new-password" placeholder="Nhập mật khẩu mới" required>
-
-                        <label>Xác nhận mật khẩu</label>
-                        <input type="password" id="confirm-password" placeholder="Nhập lại mật khẩu mới" required>
-
-                        <button type="button" class="btn register" onclick="resetPassword()">Đổi mật khẩu</button>
-                    </div>
-
-                    <button type="button" class="btn google" onclick="switchTab('login')">
-                        <i class="fas fa-arrow-left"></i>
-                        Quay lại đăng nhập
-                    </button>
-                </form>
+                
+                <button type="submit" name="login" class="btn-primary">Đăng nhập</button>
+                
+                <div class="divider">
+                    <span>hoặc</span>
+                </div>
+                
+                <button type="button" class="google-btn" onclick="loginWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Đăng nhập bằng Google
+                </button>
+                
+                <button type="button" class="btn-secondary" onclick="window.location.href='../forgot-password.php'">
+                    Quên mật khẩu?
+                </button>
+            </form>
+        </div>
+        
+        <!-- Register Tab -->
+        <div id="register-tab" class="tab-content <?= $active_tab === 'register' ? 'active' : '' ?>">
+            <form method="POST" action="?page=login">
+                <div class="form-group">
+                    <label for="reg_fullname">Họ và tên</label>
+                    <input type="text" id="reg_fullname" name="reg_fullname" required 
+                           value="<?= htmlspecialchars($_POST['reg_fullname'] ?? '') ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg_username">Tên đăng nhập</label>
+                    <input type="text" id="reg_username" name="reg_username" required 
+                           value="<?= htmlspecialchars($_POST['reg_username'] ?? '') ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg_email">Email</label>
+                    <input type="email" id="reg_email" name="reg_email" required 
+                           value="<?= htmlspecialchars($_POST['reg_email'] ?? '') ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg_password">Mật khẩu</label>
+                    <input type="password" id="reg_password" name="reg_password" required minlength="6">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reg_confirm_password">Xác nhận mật khẩu</label>
+                    <input type="password" id="reg_confirm_password" name="reg_confirm_password" required minlength="6">
+                </div>
+                
+                <button type="submit" name="register" class="btn-primary">Đăng ký</button>
+            </form>
+        </div>
+        
+        <!-- Verify Tab -->
+        <div id="verify-tab" class="tab-content <?= $active_tab === 'verify' ? 'active' : '' ?>">
+            <form method="POST" action="?page=login">
+                <p style="text-align: center; margin-bottom: 20px; color: #666;">
+                    Chúng tôi đã gửi mã xác thực đến email: <strong><?= htmlspecialchars($_SESSION['verify_email'] ?? '') ?></strong>
+                </p>
+                
+                <div style="text-align: center; margin-bottom: 15px; padding: 10px; background: #e3f2fd; border-radius: 5px; color: #1976d2;">
+                    <i class="fas fa-clock"></i> Mã OTP có hiệu lực trong <strong>15 phút</strong>
+                    <div id="countdown-timer" style="font-weight: bold; margin-top: 5px; color: #d32f2f;"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="otp">Mã OTP (6 số)</label>
+                    <input type="text" id="otp" name="otp" required maxlength="6" 
+                           class="otp-input" placeholder="000000">
+                </div>
+                
+                <button type="submit" name="verify_otp" class="btn-primary">Xác thực</button>
+                
+                <button type="button" class="btn-secondary" onclick="resendOTP()">
+                    Gửi lại mã OTP
+                </button>
+            </form>
+        </div>
+        
+        <div class="back-link">
+            <a href="/PHP1/dự án 1/index.php">← Quay về trang chủ</a>
         </div>
     </div>
-</div>
 
     <script>
-        function switchTab(tab) {
-            // Ẩn tất cả forms
-            document.querySelectorAll(".form").forEach(form => form.classList.add("hidden"));
-            document.querySelectorAll(".tablink").forEach(btn => btn.classList.remove("active"));
-            
-            // Hiện form tương ứng
-            if (tab === 'register') {
-                document.getElementById("register-form").classList.remove("hidden");
-                document.querySelector(".tablink:nth-child(1)").classList.add("active");
-            } else if (tab === 'login') {
-                document.getElementById("login-form").classList.remove("hidden");
-                document.querySelector(".tablink:nth-child(2)").classList.add("active");
-            } else if (tab === 'forgot') {
-                document.getElementById("forgot-form").classList.remove("hidden");
-                document.querySelector(".tablink:nth-child(3)").classList.add("active");
-                // Clear form khi chuyển đến tab forgot
-                clearForgotPasswordForm();
-            }
-        }
-
-        // Gửi OTP
-        function sendOTP() {
-            const username = document.getElementById('forgot-username').value;
-            const email = document.getElementById('forgot-email').value;
-            
-            if (!username || !email) {
-                alert('Vui lòng điền đầy đủ thông tin.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('username', username);
-            formData.append('email', email);
-
-            fetch('controller/PasswordResetController.php?action=send_otp', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response data:', data);
-                if (data.success) {
-                    alert(data.message);
-                    document.getElementById('otp-section').style.display = 'block';
-                    startCountdown();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
-        }
-
-        // Verify OTP
-        function verifyOTP() {
-            const username = document.getElementById('forgot-username').value;
-            const email = document.getElementById('forgot-email').value;
-            const otp = document.getElementById('otp-input').value;
             
-            if (!otp) {
-                alert('Vui lòng nhập mã OTP.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('username', username);
-            formData.append('email', email);
-            formData.append('otp', otp);
-
-            fetch('controller/PasswordResetController.php?action=verify_otp', {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to selected button
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            
+            // Update URL
+            window.history.replaceState({}, '', `?tab=${tabName}`);
+        }
+        
+        function loginWithGoogle() {
+            // Redirect to Google OAuth
+            window.location.href = 'google-auth.php';
+        }
+        
+        function resendOTP() {
+            fetch('resend-otp.php', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: '<?= $_SESSION['verify_email'] ?? '' ?>'
+                })
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert(data.message);
-                    document.getElementById('password-section').style.display = 'block';
+                    alert('Mã OTP mới đã được gửi đến email của bạn!');
+                    // Restart countdown timer
+                    startOTPCountdown();
                 } else {
-                    alert(data.message);
+                    alert('Lỗi: ' + data.message);
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                alert('Có lỗi xảy ra khi gửi lại OTP');
             });
         }
+        
+        // Auto-format OTP input
+        document.getElementById('otp').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
 
-        // Reset Password
-        function resetPassword() {
-            const username = document.getElementById('forgot-username').value;
-            const email = document.getElementById('forgot-email').value;
-            const otp = document.getElementById('otp-input').value;
-            const newPassword = document.getElementById('new-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
+        // OTP Countdown Timer
+        function startOTPCountdown() {
+            const countdownElement = document.getElementById('countdown-timer');
+            if (!countdownElement) return;
             
-            if (!newPassword || !confirmPassword) {
-                alert('Vui lòng điền đầy đủ thông tin.');
-                return;
-            }
-
-            if (newPassword !== confirmPassword) {
-                alert('Mật khẩu xác nhận không khớp.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('username', username);
-            formData.append('email', email);
-            formData.append('otp', otp);
-            formData.append('new_password', newPassword);
-            formData.append('confirm_password', confirmPassword);
-
-            fetch('controller/PasswordResetController.php?action=reset_password', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    // Clear tất cả form fields
-                    clearForgotPasswordForm();
-                    // Chuyển về tab login
-                    switchTab('login');
-                } else {
-                    alert(data.message);
+            // Set 15 minutes countdown (15 * 60 = 900 seconds)
+            let timeLeft = 15 * 60;
+            
+            const timer = setInterval(function() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                countdownElement.innerHTML = `Thời gian còn lại: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    countdownElement.innerHTML = `<span style="color: #d32f2f;">⚠️ Mã OTP đã hết hạn</span>`;
+                    countdownElement.style.background = '#ffebee';
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra. Vui lòng thử lại.');
-            });
-        }
-
-        // Function để clear form quên mật khẩu
-        function clearForgotPasswordForm() {
-            // Clear input fields
-            document.getElementById('forgot-username').value = '';
-            document.getElementById('forgot-email').value = '';
-            document.getElementById('otp-input').value = '';
-            document.getElementById('new-password').value = '';
-            document.getElementById('confirm-password').value = '';
-            
-            // Ẩn các section
-            document.getElementById('otp-section').style.display = 'none';
-            document.getElementById('password-section').style.display = 'none';
-            
-            // Reset countdown
-            if (window.countdownTimer) {
-                clearInterval(window.countdownTimer);
-            }
-            const resendBtn = document.getElementById("resend-btn");
-            resendBtn.textContent = "Gửi lại mã";
-            resendBtn.disabled = false;
-            resendBtn.classList.add("enabled");
-        }
-
-        // Countdown timer
-        let countdown = 60;
-        const resendBtn = document.getElementById("resend-btn");
-        const countdownSpan = document.getElementById("countdown");
-
-        function startCountdown() {
-            resendBtn.disabled = true;
-            resendBtn.classList.remove("enabled");
-            countdown = 60;
-            countdownSpan.textContent = countdown;
-            window.countdownTimer = setInterval(() => {
-                countdown--;
-                countdownSpan.textContent = countdown;
-                if (countdown <= 0) {
-                    clearInterval(window.countdownTimer);
-                    resendBtn.textContent = "Gửi lại mã";
-                    resendBtn.disabled = false;
-                    resendBtn.classList.add("enabled");
-                }
+                
+                timeLeft--;
             }, 1000);
         }
 
-        resendBtn.addEventListener("click", () => {
-            if (!resendBtn.disabled) {
-                sendOTP();
-                resendBtn.innerHTML = `Gửi lại mã sau <span id="countdown">60</span>s`;
-                startCountdown();
-            }
-        });
-
-        // Auto-switch tab based on URL parameter
-        <?php if ($tab): ?>
-        switchTab('<?php echo $tab; ?>');
-        <?php endif; ?>
+        // Start countdown when on verify tab
+        if (document.getElementById('verify-tab').classList.contains('active')) {
+            startOTPCountdown();
+        }
     </script>
 </body>
 </html>
-

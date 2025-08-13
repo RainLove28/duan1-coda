@@ -21,7 +21,119 @@
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="../public/css/style.css" />
-    <link rel="stylesheet" href="/New folder/duan1-coda/public/css/login.css" />
+    <link rel="stylesheet" href="../public/css/login.css" />
+    <style>
+        /* Simple User Dropdown CSS */
+        .user-dropdown-simple {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .user-info {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .user-info:hover {
+            background: #e9ecef;
+        }
+        
+        .user-info span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .user-info .fa-chevron-down {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .user-menu-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 220px;
+            z-index: 999999;
+            display: none;
+            margin-top: 5px;
+        }
+        
+        .user-info:hover .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        
+        .user-info:hover .user-menu-dropdown {
+            display: block !important;
+        }
+        
+        .user-menu-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s ease;
+        }
+        
+        .user-menu-dropdown a:last-child {
+            border-bottom: none;
+        }
+        
+        .user-menu-dropdown a:hover {
+            background: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .user-menu-dropdown a[href*="logout"]:hover {
+            background: #fee;
+            color: #dc3545;
+        }
+        
+        .user-menu-dropdown i {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .dropdown-item.logout-item:hover {
+            background: #fee;
+            color: #dc3545;
+        }
+        
+        .dropdown-item i {
+            width: 16px;
+            text-align: center;
+        }
+        
+        .dropdown-item span {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,8 +172,42 @@
                     <div class="cart">
                         <a href="/cart"><i class="fas fa-heart"></i></a>
                     </div>
-                    <div class="cart">
-                        <a href="?page=ChiTietTaiKhoan.php"><i class="fas fa-user"></i></a>
+                    <div class="cart user-menu">
+                        <?php 
+                        // Kiểm tra session nghiêm ngặt để tránh hiển thị sai
+                        $isLoggedIn = false;
+                        if (isset($_SESSION['user']) && 
+                            is_array($_SESSION['user']) && 
+                            isset($_SESSION['user']['fullname']) &&
+                            !empty(trim($_SESSION['user']['fullname'])) &&
+                            isset($_SESSION['user']['id']) &&
+                            !empty($_SESSION['user']['id'])) {
+                            $isLoggedIn = true;
+                            $firstName = explode(' ', trim($_SESSION['user']['fullname']))[0];
+                        }
+                        
+                        if ($isLoggedIn): ?>
+                            <!-- Simple dropdown with pure CSS hover -->
+                            <div class="user-dropdown-simple">
+                                <div class="user-info">
+                                    <i class="fas fa-user"></i>
+                                    <span>Xin chào, <?= htmlspecialchars($firstName) ?></span>
+                                    <i class="fas fa-chevron-down"></i>
+                                    
+                                    <!-- Dropdown menu inside user-info -->
+                                    <div class="user-menu-dropdown">
+                                        <a href="?page=ChiTietTaiKhoan.php">
+                                            <i class="fas fa-user-circle"></i> Thông tin tài khoản
+                                        </a>
+                                        <a href="?page=logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+                                            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <a href="?page=login"><i class="fas fa-user"></i></a>
+                        <?php endif; ?>
                     </div>
                     <div class="cart">
                         <a href="?page=giohang" class="cart-link">
@@ -1384,6 +1530,39 @@
         </div>
 </body>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Simple dropdown script loaded');
+    
+    // Simple search form validation
+    const searchForm = document.querySelector('.search-box');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            const keyword = this.querySelector('input[name="keyword"]').value.trim();
+            if (keyword.length < 2) {
+                e.preventDefault();
+                alert('Vui lòng nhập ít nhất 2 ký tự để tìm kiếm');
+            }
+        });
+    }
+    
+    // Check if user dropdown exists
+    const userDropdown = document.querySelector('.user-dropdown-simple');
+    const userInfo = document.querySelector('.user-info');
+    const dropdown = document.querySelector('.user-menu-dropdown');
+    
+    console.log('User dropdown elements:');
+    console.log('userDropdown:', userDropdown);
+    console.log('userInfo:', userInfo);
+    console.log('dropdown:', dropdown);
+    
+    if (userInfo) {
+        console.log('User is logged in, dropdown should work with CSS hover');
+    } else {
+        console.log('User not logged in');
+    }
+});
+</script>
 <script src="../public/JS/header.js"></script>
 
 </html>

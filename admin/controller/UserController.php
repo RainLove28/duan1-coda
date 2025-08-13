@@ -10,45 +10,55 @@ class UserController extends BaseController {
         include __DIR__ . '/../view/user_list.php';
     }
     
+    public function renderAddUser() {
+        // Redirect back to user list since we use modal
+        header('Location: index.php?page=User');
+    }
+    
+    public function renderEditUser($id) {
+        // Redirect back to user list since we use modal  
+        header('Location: index.php?page=User');
+    }
+    
     public function addUser($data) {
         try {
             $data = $this->sanitize($data);
             
-            if (!$this->validateRequired($data, ['HoTen', 'Email', 'TenDangNhap', 'MatKhau'])) {
+            if (!$this->validateRequired($data, ['fullname', 'email', 'username', 'password'])) {
                 $this->redirect('User', 'Vui lòng nhập đầy đủ thông tin bắt buộc!', 'error');
             }
             
             // Kiểm tra email đã tồn tại
-            $checkEmailSql = "SELECT COUNT(*) as count FROM taikhoan WHERE Email = ?";
-            $emailResult = $this->getOne($checkEmailSql, [$data['Email']]);
+            $checkEmailSql = "SELECT COUNT(*) as count FROM users WHERE email = ?";
+            $emailResult = $this->getOne($checkEmailSql, [$data['email']]);
             
             if ($emailResult['count'] > 0) {
                 $this->redirect('User', 'Email đã tồn tại!', 'error');
             }
             
             // Kiểm tra username đã tồn tại
-            $checkUsernameSql = "SELECT COUNT(*) as count FROM taikhoan WHERE TenDangNhap = ?";
-            $usernameResult = $this->getOne($checkUsernameSql, [$data['TenDangNhap']]);
+            $checkUsernameSql = "SELECT COUNT(*) as count FROM users WHERE username = ?";
+            $usernameResult = $this->getOne($checkUsernameSql, [$data['username']]);
             
             if ($usernameResult['count'] > 0) {
                 $this->redirect('User', 'Tên đăng nhập đã tồn tại!', 'error');
             }
             
             // Thêm user mới
-            $sql = "INSERT INTO taikhoan (HoTen, Email, TenDangNhap, MatKhau, SoDienThoai, VaiTro, DiaChi, TrangThai) 
+            $sql = "INSERT INTO users (fullname, email, username, password, mobile, role, address, status) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
-            $vaiTro = ($data['VaiTro'] == 'admin') ? 1 : 0;
+            $role = ($data['role'] == 'admin') ? 'admin' : 'user';
             
             $success = $this->execute($sql, [
-                $data['HoTen'],
-                $data['Email'],
-                $data['TenDangNhap'],
-                $data['MatKhau'],
-                $data['SoDienThoai'] ?? '',
-                $vaiTro,
-                $data['DiaChi'] ?? '',
-                1 // TrangThai mặc định là active
+                $data['fullname'],
+                $data['email'],
+                $data['username'],
+                $data['password'],
+                $data['mobile'] ?? '',
+                $role,
+                $data['address'] ?? '',
+                $data['status'] ?? 1
             ]);
             
             $message = $success ? 'Thêm người dùng thành công!' : 'Thêm người dùng thất bại!';
@@ -62,30 +72,30 @@ class UserController extends BaseController {
     
     public function editUser($data) {
         try {
-            if (empty($data['id']) || empty($data['HoTen']) || empty($data['Email']) || empty($data['TenDangNhap'])) {
+            if (empty($data['id']) || empty($data['fullname']) || empty($data['email']) || empty($data['username'])) {
                 $_SESSION['error'] = 'Vui lòng nhập đầy đủ thông tin!';
                 header('Location: index.php?page=User');
                 return;
             }
             
-            $query = "UPDATE taikhoan SET HoTen = ?, Email = ?, TenDangNhap = ?, SoDienThoai = ?, VaiTro = ?, DiaChi = ?, TrangThai = ?";
+            $query = "UPDATE users SET fullname = ?, email = ?, username = ?, mobile = ?, role = ?, address = ?, status = ?";
             $params = [
-                $data['HoTen'],
-                $data['Email'],
-                $data['TenDangNhap'],
-                $data['SoDienThoai'] ?? '',
-                ($data['VaiTro'] == 'admin') ? 1 : 0,
-                $data['DiaChi'] ?? '',
-                $data['TrangThai'] ?? 'Hoạt động'
+                $data['fullname'],
+                $data['email'],
+                $data['username'],
+                $data['mobile'] ?? '',
+                ($data['role'] == 'admin') ? 'admin' : 'user',
+                $data['address'] ?? '',
+                $data['status'] ?? 'Hoạt động'
             ];
             
             // Chỉ cập nhật mật khẩu nếu có nhập
-            if (!empty($data['MatKhau'])) {
-                $query .= ", MatKhau = ?";
-                $params[] = $data['MatKhau'];
+            if (!empty($data['password'])) {
+                $query .= ", password = ?";
+                $params[] = $data['password'];
             }
             
-            $query .= " WHERE MaTK = ?";
+            $query .= " WHERE id = ?";
             $params[] = $data['id'];
             
             $stmt = $this->conn->prepare($query);
@@ -108,18 +118,18 @@ class UserController extends BaseController {
             }
             
             // Không cho xóa admin cuối cùng
-            $checkAdmin = "SELECT COUNT(*) FROM taikhoan WHERE VaiTro = 1 AND MaTK != ?";
+            $checkAdmin = "SELECT COUNT(*) FROM users WHERE role = 'admin' AND id != ?";
             $stmt = $this->conn->prepare($checkAdmin);
             $stmt->execute([$data['id']]);
             
             $user = $this->getUserById($data['id']);
-            if ($user && $user['VaiTro'] == 1 && $stmt->fetchColumn() == 0) {
+            if ($user && $user['role'] == 'admin' && $stmt->fetchColumn() == 0) {
                 $_SESSION['error'] = 'Không thể xóa admin cuối cùng!';
                 header('Location: index.php?page=User');
                 return;
             }
             
-            $query = "DELETE FROM taikhoan WHERE MaTK = ?";
+            $query = "DELETE FROM users WHERE id = ?";
             $stmt = $this->conn->prepare($query);
             $stmt->execute([$data['id']]);
             
@@ -134,11 +144,11 @@ class UserController extends BaseController {
     private function getAllUsers($search = '') {
         try {
             if (!empty($search)) {
-                $sql = "SELECT * FROM taikhoan WHERE HoTen LIKE ? OR Email LIKE ? OR TenDangNhap LIKE ? ORDER BY MaTK DESC";
+                $sql = "SELECT * FROM users WHERE fullname LIKE ? OR email LIKE ? OR username LIKE ? ORDER BY id DESC";
                 $searchParam = '%' . $search . '%';
                 return $this->getAll($sql, [$searchParam, $searchParam, $searchParam]);
             } else {
-                $sql = "SELECT * FROM taikhoan ORDER BY MaTK DESC";
+                $sql = "SELECT * FROM users ORDER BY id DESC";
                 return $this->getAll($sql);
             }
         } catch (Exception $e) {
@@ -148,7 +158,7 @@ class UserController extends BaseController {
     
     private function getUserById($id) {
         try {
-            $query = "SELECT * FROM taikhoan WHERE MaTK = ?";
+            $query = "SELECT * FROM users WHERE id = ?";
             $stmt = $this->conn->prepare($query);
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -186,7 +196,7 @@ class UserController extends BaseController {
             }
             
             try {
-                $query = "DELETE FROM taikhoan WHERE MaTK = ?";
+                $query = "DELETE FROM users WHERE id = ?";
                 $stmt = $this->conn->prepare($query);
                 $stmt->execute([$id]);
                 
