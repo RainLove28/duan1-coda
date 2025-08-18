@@ -25,6 +25,12 @@ switch($page){
         require_once("view/login.php");
         exit; // Dừng execution để không load header/footer
         break;
+    case 'forgot-password':
+        // Clean output buffer trước khi render forgot password page
+        ob_clean();
+        require_once("forgot-password.php");
+        exit; // Dừng execution để không load header/footer
+        break;
     case 'logout':
         // Clean output buffer trước khi redirect
         ob_clean();

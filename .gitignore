@@ -1,0 +1,32 @@
+# Thông tin cấu hình nhạy cảm
+site/config/email.php
+
+# Log files
+*.log
+error.log
+
+# Cache files
+*.cache
+cache/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+
+# Upload directories với nội dung nhạy cảm
+uploads/private/

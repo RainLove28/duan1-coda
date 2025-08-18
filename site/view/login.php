@@ -503,7 +503,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
                     Đăng nhập bằng Google
                 </button>
                 
-                <button type="button" class="btn-secondary" onclick="window.location.href='../forgot-password.php'">
+                <button type="button" class="btn-secondary" onclick="window.location.href='index.php?page=forgot-password'">
                     Quên mật khẩu?
                 </button>
             </form>
