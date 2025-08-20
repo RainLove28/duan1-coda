@@ -2,8 +2,8 @@
    class Database{
        private $host = "localhost";
        private $username = "root";
-       private $password = "220401";
-       private $database = "duan2";
+       private $password = "";
+       private $database = "duan2(1)";
        private $conn;
 
 

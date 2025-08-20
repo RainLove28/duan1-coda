@@ -975,7 +975,111 @@
                 min-width: 120px;
             }
         }
-        
+        .pagination-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .pagination .page-link {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            color: #007bff;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .pagination .page-link:hover {
+            background: #007bff;
+            color: #fff;
+            border-color: #007bff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .pagination .page-link.active {
+            background: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: default;
+        }
+
+        .pagination .page-ellipsis {
+            padding: 8px 12px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Nút Prev / Next */
+        .pagination .prev,
+        .pagination .next {
+            font-weight: bold;
+        }
+
+        /* Jump form */
+        .page-jump {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .page-jump label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .page-jump .page-input {
+            width: 70px;
+            padding: 5px 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .page-jump .btn {
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        .pagination .page-btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #fff;
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease-in-out;
+    border: 1px solid #1e1e1e;
+    cursor: pointer;
+}
+
+/* Hover */
+.pagination .page-btn:hover {
+    background: #333;
+    color: #fff;
+}
+/* Khi nhấn giữ chuột */
+.pagination .page-btn:active {
+    background: #3e9b00ff;  /* xanh nổi bật */
+    color: #fff;
+    border-color: #3e9b00ff;
+    transform: scale(0.95); /* hiệu ứng nhấn xuống */
+}
+
     </style>
 </head>
 <body>
