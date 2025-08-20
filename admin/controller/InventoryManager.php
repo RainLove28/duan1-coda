@@ -294,15 +294,20 @@ class InventoryManager {
      */
     public function getLowStockProductsPaginated($threshold = 10, $limit = 10, $offset = 0) {
         try {
-            // Join với bảng danhmuc để lấy tên danh mục
-            $sql = "SELECT sp.MaSP, sp.TenSanPham as TenSP, dm.TenDM as DanhMuc, sp.SoLuong, sp.DonGia as Gia, sp.TrangThai 
-                    FROM sanpham sp 
-                    LEFT JOIN danhmuc dm ON sp.MaDM = dm.MaDM 
-                    WHERE sp.SoLuong > 0 AND sp.SoLuong <= ? 
-                    ORDER BY sp.SoLuong ASC, sp.TenSanPham ASC
-                    LIMIT ? OFFSET ?";
+            // Đảm bảo limit và offset là số nguyên
+            $limit = (int)$limit;
+            $offset = (int)$offset;
+            $threshold = (int)$threshold;
             
-            return $this->db->getAll($sql, [$threshold, $limit, $offset]);
+            // Sử dụng query đơn giản hơn
+            $sql = "SELECT MaSP, TenSanPham as TenSP, SoLuong, DonGia as Gia, TrangThai,
+                    (SELECT TenDM FROM danhmuc WHERE MaDM = sanpham.MaDM) as DanhMuc
+                    FROM sanpham 
+                    WHERE SoLuong <= ? AND SoLuong > 0
+                    ORDER BY SoLuong ASC, TenSanPham ASC
+                    LIMIT $limit OFFSET $offset";
+            
+            return $this->db->getAll($sql, [$threshold]);
         } catch (Exception $e) {
             error_log("Lỗi getLowStockProductsPaginated: " . $e->getMessage());
             return [];
@@ -314,14 +319,18 @@ class InventoryManager {
      */
     public function getOutOfStockProductsPaginated($limit = 10, $offset = 0) {
         try {
-            $sql = "SELECT sp.MaSP, sp.TenSanPham as TenSP, dm.TenDM as DanhMuc, sp.SoLuong, sp.DonGia as Gia, sp.TrangThai 
-                    FROM sanpham sp 
-                    LEFT JOIN danhmuc dm ON sp.MaDM = dm.MaDM 
-                    WHERE sp.SoLuong <= 0 
-                    ORDER BY sp.TenSanPham ASC
-                    LIMIT ? OFFSET ?";
+            // Đảm bảo limit và offset là số nguyên
+            $limit = (int)$limit;
+            $offset = (int)$offset;
             
-            return $this->db->getAll($sql, [$limit, $offset]);
+            $sql = "SELECT MaSP, TenSanPham as TenSP, SoLuong, DonGia as Gia, TrangThai,
+                    (SELECT TenDM FROM danhmuc WHERE MaDM = sanpham.MaDM) as DanhMuc
+                    FROM sanpham 
+                    WHERE SoLuong <= 0 
+                    ORDER BY TenSanPham ASC
+                    LIMIT $limit OFFSET $offset";
+            
+            return $this->db->getAll($sql);
         } catch (Exception $e) {
             error_log("Lỗi getOutOfStockProductsPaginated: " . $e->getMessage());
             return [];
@@ -436,12 +445,10 @@ class InventoryManager {
      * Lấy tất cả danh mục để hiển thị trong bộ lọc
      */
     public function getAllCategories() {
-        $sql = "SELECT MaDanhMuc, TenDanhMuc FROM danhmuc ORDER BY TenDanhMuc ASC";
+        $sql = "SELECT MaDM, TenDM FROM danhmuc ORDER BY TenDM ASC";
         
         try {
-            $stmt = $this->db->getConnection()->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $this->db->getAll($sql);
         } catch (Exception $e) {
             error_log("Lỗi lấy danh sách danh mục: " . $e->getMessage());
             return [];

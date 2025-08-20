@@ -2,7 +2,7 @@
    class Database{
        private $host = "localhost";
        private $username = "root";
-       private $password = "";
+       private $password = ""; // Thử mật khẩu trống trước
        private $database = "duan2(1)";
        private $conn;
 
@@ -18,12 +18,19 @@
       
        public function __construct(){
            try{
-               // Tạo kết nối đến database theo phương thức PDO
+               // Thử kết nối với mật khẩu trống trước
                $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                // echo "Connect thành công";
            }catch(PDOException $e){
-               echo "Connection failed: ".$e->getMessage();
+               // Nếu lỗi, thử với mật khẩu 220401
+               try {
+                   $this->password = "220401";
+                   $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
+                   $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+               } catch(PDOException $e2) {
+                   echo "Connection failed: ".$e2->getMessage();
+               }
            }
        }
        

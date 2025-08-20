@@ -1,3 +1,11 @@
+<?php
+// Debug: kiểm tra dữ liệu
+echo "<!-- DEBUG INFO -->";
+echo "<!-- Low stock products count: " . count($lowStockProducts ?? []) . " -->";
+echo "<!-- Out of stock products count: " . count($outOfStockProducts ?? []) . " -->";
+echo "<!-- Stats: " . json_encode($stats ?? []) . " -->";
+?>
+
 <div class="main-content">
     <div class="content-header">
         <h1><i class="fas fa-warehouse"></i> Quản lý Tồn kho</h1>
@@ -82,46 +90,14 @@
     </div>
 
     <!-- Cảnh báo sản phẩm sắp hết hàng -->
-    <?php if (!empty($lowStockProducts) || $pagination['low_stock']['total_products'] > 0): ?>
-    <div class="alert alert-warning">
-        <h4>
-            <i class="fas fa-exclamation-triangle"></i> 
-            Cảnh báo: Có <strong><?= number_format($pagination['low_stock']['total_products']) ?></strong> sản phẩm sắp hết hàng!
-        </h4>
-        <?php if (!empty($lowStockProducts)): ?>
-        <div class="low-stock-list">
-            <?php 
-            $displayCount = min(5, count($lowStockProducts)); // Hiển thị tối đa 5 sản phẩm
-            for ($i = 0; $i < $displayCount; $i++): 
-                $product = $lowStockProducts[$i];
-            ?>
-                <div class="low-stock-item">
-                    <strong><?= htmlspecialchars($product['TenSP']) ?></strong> 
-                    - Còn lại: <span class="stock-number"><?= $product['SoLuong'] ?></span>
-                    - Danh mục: <?= htmlspecialchars($product['DanhMuc'] ?? 'Chưa phân loại') ?>
-                </div>
-            <?php endfor; ?>
-            <?php if (count($lowStockProducts) > 5): ?>
-                <div class="low-stock-item more-items">
-                    <em>... và <?= count($lowStockProducts) - 5 ?> sản phẩm khác</em>
-                </div>
-            <?php endif; ?>
-        </div>
-        <?php endif; ?>
-        <p style="margin-top: 10px; font-size: 14px;">
-            <a href="#low-stock-section" style="color: #856404; text-decoration: underline;">
-                📋 Xem danh sách chi tiết bên dưới
-            </a>
-        </p>
-    </div>
-    <?php endif; ?>
+    
 
     <div class="inventory-content">
         <!-- Sản phẩm sắp hết hàng -->
         <div class="content-box" id="low-stock-section">
             <div class="box-header">
                 <h3>
-                    <i class="fas fa-exclamation-triangle"></i> 
+                    <i class="fas fa-exclamation-triangle" style="color: #fadb14;"></i> 
                     Sản phẩm sắp hết hàng (≤ 10 sản phẩm)
                     <span class="product-count-badge"><?= number_format($pagination['low_stock']['total_products']) ?> sản phẩm</span>
                 </h3>
@@ -227,7 +203,7 @@
         <div class="content-box">
             <div class="box-header">
                 <h3>
-                    <i class="fas fa-times-circle"></i> 
+                    <i class="fas fa-times-circle" style="color: #dc3545;"></i> 
                     Sản phẩm hết hàng
                     <span class="product-count-badge danger"><?= number_format($pagination['out_of_stock']['total_products']) ?> sản phẩm</span>
                 </h3>

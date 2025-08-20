@@ -249,7 +249,31 @@ switch($page){
         }
         break;    
    
-            
+    // Quản lý tồn kho
+    case "inventory":
+        $inventoryController = new InventoryController();
+        $inventoryController->index();
+        break;
+        
+    case "inventory_list":
+        $inventoryController = new InventoryController();
+        $inventoryController->listAll();
+        break;
+        
+    case "add_stock":
+        $inventoryController = new InventoryController();
+        $inventoryController->addStock();
+        break;
+        
+    case "remove_stock":
+        $inventoryController = new InventoryController();
+        $inventoryController->removeStock();
+        break;
+        
+    case "update_all_status":
+        $inventoryController = new InventoryController();
+        $inventoryController->updateAllStatus();
+        break;
 
         } 
 include_once('view/footer.php');
