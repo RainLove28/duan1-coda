@@ -5,8 +5,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <style>
+/* Popup styles */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+    width: 90%;
+    z-index: 1000;
+    animation: scaleIn 0.3s ease-in-out;
+}
+
+@keyframes scaleIn {
+    from { transform: translate(-50%, -50%) scale(0.9); }
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.popup-content {
+    position: relative;
+    width: 100%;
+}
+
+.popup-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.popup-close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #3d640f;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+    background: #2b4809;
+    transform: scale(1.1);
+}
+
+.popup-link {
+    display: block;
+    text-decoration: none;
+}
+
+/* Tawk.to custom styles */
+.tawk-min-container {
+    background-color: #3d640f !important;
+}
+
+.tawk-button {
+    background-color: #3d640f !important;
+    color: white !important;
+}
+
 /* Alert styles */
 .alert {
     padding: 15px;
@@ -56,10 +141,13 @@
     font-family: "Inter", serif;
     text-align: left;
     display: -webkit-box;
+    display: box;
     /* Quan trọng */
     -webkit-box-orient: vertical;
+    box-orient: vertical;
     /* Quan trọng */
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     /* Số dòng muốn hiển thị */
     overflow: hidden;
     /* Ẩn phần dư */
@@ -89,6 +177,51 @@
 
 <body>
 
+    <!-- Popup Quảng Cáo -->
+    <div class="popup-overlay" id="welcomePopup">
+        <div class="popup-container">
+            <div class="popup-content">
+                <a href="index.php?page=product-list" class="popup-link">
+                    <img src="../public/img/thuong_hieu.webp" alt="Thương hiệu Cỏ Mềm" class="popup-image">
+                </a>
+                <div class="popup-close" onclick="closePopup()">&times;</div>
+            </div>
+        </div>
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/68a56a930e086319244e0e42/1j332gk3f';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+    })();
+    
+    // Tùy chỉnh Tawk.to
+    Tawk_API.onLoad = function(){
+        // Thay đổi màu sắc cho phù hợp với website
+        Tawk_API.customize({
+            headerBackground: '#3d640f', // Màu xanh của website
+            headerTextColor: '#ffffff'    // Màu chữ trắng
+        });
+    };
+    
+    // Thiết lập thông tin mặc định
+    Tawk_API.visitor = {
+        name: 'Khách hàng',
+        email: 'visitor@example.com'
+    };
+    
+    // Xử lý sự kiện khi có tin nhắn mới
+    Tawk_API.onMessage = function(message){
+        console.log('Tin nhắn mới:', message);
+    };
+    </script>
+    <!--End of Tawk.to Script-->
 </body>
 
 </html>
@@ -220,6 +353,7 @@
                 <img src="../public/img/banner-6.webp" alt="">
                 <img src="../public/img/banner-7.webp" alt="">
             </div>
+        </div>
     </section>
     <!-- CARD bán chạy -->
     <section class="card-section">
@@ -522,3 +656,130 @@
 
 <script src="../public/JS/header.js"></script>
 <script src="../public/JS/slider.js"></script>
+<script>
+// Popup functionality
+function showPopup() {
+    setTimeout(() => {
+        const popup = document.getElementById('welcomePopup');
+        if (popup) {
+            popup.style.display = 'block';
+        }
+    }, 2000);
+}
+
+function closePopup() {
+    const popup = document.getElementById('welcomePopup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+// Khởi tạo popup khi trang được tải
+document.addEventListener('DOMContentLoaded', function() {
+    showPopup();
+});
+
+// Show popup when page loads
+window.addEventListener('load', checkPopupTime);
+
+// Chatbox functionality
+function toggleChat() {
+    const chatbox = document.getElementById('chatbox');
+    const chatToggle = document.querySelector('.chat-toggle');
+    
+    if (chatbox.style.display === 'none' || !chatbox.style.display) {
+        chatbox.style.display = 'block';
+        chatToggle.style.display = 'none';
+    } else {
+        chatbox.style.display = 'none';
+        chatToggle.style.display = 'flex';
+    }
+}
+
+// Tawk.to event handlers
+window.addEventListener('tawkReady', function() {
+    // Chat đã sẵn sàng
+    console.log('Tawk.to chat is ready');
+});
+
+const skincareKnowledge = {
+    'chăm sóc da': 'Các bước cơ bản chăm sóc da bao gồm: 1. Làm sạch, 2. Toner, 3. Serum, 4. Kem dưỡng ẩm, 5. Kem chống nắng (ban ngày)',
+    'chống nắng': 'Kem chống nắng rất quan trọng, nên: 1. Bôi ít nhất SPF 30, 2. Bôi lại sau mỗi 2-3 giờ, 3. Dùng khoảng 1/4 muỗng cà phê cho mặt',
+    'dưỡng ẩm': 'Dưỡng ẩm giúp da khỏe mạnh bằng cách: 1. Sử dụng kem dưỡng phù hợp loại da, 2. Dưỡng ẩm khi da còn ẩm, 3. Kết hợp với serum hyaluronic acid',
+    'tẩy da chết': 'Nên tẩy da chết 1-2 lần/tuần, có thể chọn: 1. Tẩy da chết vật lý (scrub), 2. Tẩy da chết hóa học (AHA/BHA)',
+    'serum': 'Serum là sản phẩm đậm đặc với các thành phần hoạt tính cao. Một số serum phổ biến: 1. Vitamin C (sáng da), 2. Niacinamide (se khít lỗ chân lông), 3. Retinol (chống lão hóa)',
+    'vitamin c': 'Vitamin C giúp: 1. Làm sáng da, 2. Chống oxy hóa, 3. Kích thích collagen. Nên dùng buổi sáng và kết hợp kem chống nắng',
+    'retinol': 'Retinol giúp: 1. Chống lão hóa, 2. Giảm mụn, 3. Cải thiện kết cấu da. Nên dùng buổi tối và tăng dần nồng độ',
+    'aha bha': 'AHA (glycolic acid, lactic acid) tẩy tế bào chết bề mặt, BHA (salicylic acid) làm sạch sâu lỗ chân lông. Không dùng chung với Vitamin C hoặc Retinol',
+    'da nhạy cảm': 'Với da nhạy cảm nên: 1. Dùng sản phẩm không cồn, không mùi, 2. Test sản phẩm mới, 3. Tránh các thành phần gây kích ứng, 4. Ưu tiên sản phẩm dịu nhẹ',
+    'lão hóa': 'Chống lão hóa cần: 1. Chống nắng đều đặn, 2. Sử dụng Retinol, 3. Bổ sung Collagen, 4. Dưỡng ẩm đầy đủ, 5. Tránh các thói quen xấu (hút thuốc, thiếu ngủ)'
+};
+
+function findBestMatch(userInput) {
+    userInput = userInput.toLowerCase();
+    let bestMatch = '';
+    let maxMatchCount = 0;
+
+    for (let key of Object.keys(skincareKnowledge)) {
+        const words = key.split(' ');
+        let matchCount = 0;
+        
+        for (let word of words) {
+            if (userInput.includes(word)) {
+                matchCount++;
+            }
+        }
+        
+        if (matchCount > maxMatchCount) {
+            maxMatchCount = matchCount;
+            bestMatch = key;
+        }
+    }
+
+    return maxMatchCount > 0 ? skincareKnowledge[bestMatch] : null;
+}
+
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value.trim();
+    
+    if (message) {
+        const chatMessages = document.getElementById('chatMessages');
+        
+        // Add user message
+        chatMessages.innerHTML += `
+            <div style="padding: 10px; text-align: right;">
+                <strong>Bạn:</strong>
+                <p style="background: #e9ecef; padding: 8px; border-radius: 8px; display: inline-block;">${message}</p>
+            </div>
+        `;
+        
+        // Clear input
+        input.value = '';
+        
+        // Auto-scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // Find relevant skincare advice
+        const response = findBestMatch(message) || 'Xin chào! Tôi có thể tư vấn cho bạn về: \n- Chăm sóc da cơ bản\n- Trị mụn\n- Chống nắng\n- Dưỡng ẩm\n- Tẩy da chết\n- Serum và các thành phần hoạt tính\n- Vitamin C\n- Retinol\n- AHA/BHA\n- Chăm sóc da nhạy cảm\n- Chống lão hóa\nBạn muốn tìm hiểu về vấn đề nào?';
+        
+        // Show response after a short delay
+        setTimeout(() => {
+            chatMessages.innerHTML += `
+                <div style="padding: 10px;">
+                    <strong>Tư vấn viên:</strong>
+                    <p style="background: #f8f9fa; padding: 8px; border-radius: 8px; display: inline-block; white-space: pre-line;">${response}</p>
+                </div>
+            `;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+    }
+}
+
+// Allow sending message with Enter key
+document.getElementById('messageInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+</script>
