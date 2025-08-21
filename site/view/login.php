@@ -200,52 +200,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
             justify-content: center;
             padding: 20px;
         }
-        
-        /* --- Bố cục ngang: logo + form --- */
-        .main-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 60px; /* khoảng cách logo ↔ form */
-  width: 100%;
-  max-width: 1100px;
-  margin: auto;
-}
 
+        .main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* khoảng cách vừa phải */
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+}
 /* Logo bên trái */
 .logo-side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    max-width: none; 
+    padding: 0; 
 }
 
 .logo-side img {
-  max-width: 90%;
-  height: auto;
-  border-radius: 16px; /* tuỳ chọn: bo góc logo */
+    width: 500px;  
+    max-width: none; 
+    height: auto;
+    border-radius: 16px;
 }
+
 
 /* Form bên phải */
 .auth-container {
-  flex: 1;
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-  text-align: left;
+    flex: 2;   
+    background-color: #ffffff;
+    padding: 50px 40px; 
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: left;
+    min-width: 400px;   
 }
 
-/* Responsive: khi màn nhỏ thì logo trên, form dưới */
+/* Responsive */
 @media (max-width: 768px) {
-  .main-wrapper {
-    flex-direction: column;
-    gap: 30px;
-  }
-  .logo-side, .auth-container {
-    flex: unset;
-    width: 100%;
-  }
+    .main-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .logo-side, .auth-container {
+        flex: unset;
+        width: 100%;
+    }
+    .auth-container {
+        padding: 30px 20px; /* giảm padding trên mobile */
+    }
 }
+
+
         .auth-container {
             background: white;
             padding: 40px;
@@ -256,11 +265,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         }
         
         .auth-header {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* giữ font dễ đọc */
-            font-size: 32px;        /* chữ lớn hơn 1 chút */
-            font-weight: 700;       /* đậm */
-            color: #222;            /* màu chữ đậm hơn */
-            text-align: center;     /* căn giữa */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-size: 32px;        
+            font-weight: 700;       
+            color: #222;            
+            text-align: center;     
             margin-bottom: 8px;     
             letter-spacing: 0.5px;  
         }
@@ -274,8 +283,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         .auth-header p {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 15px;
-            font-weight: 400;       /* mảnh hơn so với tiêu đề */
-            color: #555;            /* xám nhẹ */
+            font-weight: 400;       
+            color: #555;           
             text-align: center;
             margin: 0;
         }

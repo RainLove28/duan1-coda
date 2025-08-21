@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['logout'])) {
 
 /* Header cho profile */
 .profile-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #3d640f;
     color: white;
     padding: 1rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['logout'])) {
 
 .sidebar ul li a:hover,
 .sidebar ul li a.active {
-    background-color: #667eea;
+    background-color: #3d640f;
     color: white;
 }
 
@@ -243,7 +243,7 @@ main {
     font-size: 1.8rem;
     color: #333;
     margin-bottom: 0.5rem;
-    border-bottom: 2px solid #667eea;
+    border-bottom: 2px solid #3d640f;
     padding-bottom: 0.5rem;
 }
 
@@ -276,7 +276,7 @@ main {
 
 .summary-item i {
     width: 20px;
-    color: #667eea;
+    color: #3d640f;
     font-size: 1.1rem;
 }
 
@@ -344,7 +344,7 @@ main {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #3d640f;
 }
 
 .form-group input[readonly] {
@@ -400,13 +400,13 @@ main {
 }
 
 .save-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #3d640f;
     color: white;
 }
 
 .save-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px #3d640f;
 }
 
 .cancel-btn {
