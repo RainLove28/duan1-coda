@@ -255,7 +255,7 @@ if (isset($_SESSION['cart_message'])) {
                     <?php foreach ($_SESSION['cart'] as $id => $item): ?>
                         <div class="cart-row">
                             <input type="checkbox" class="cart-checkbox" checked>
-                            <img src="../public/img/<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
+                            <img src="<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
                             <div class="cart-info">
                                 <div class="cart-name"><?= htmlspecialchars($item['name']) ?></div>
                                 <div style="color:#888;font-size:15px;">Mã SP: <?= $id ?></div>
@@ -276,7 +276,7 @@ if (isset($_SESSION['cart_message'])) {
                 <?php else: ?>
                     <div class="cart-row">
                         <div style="text-align: center; padding: 40px; color: #888;">
-                            Giỏ hàng trống. <a href="?page=product">Tiếp tục mua sắm</a>
+                            Giỏ hàng trống. <a href="?page=home">Tiếp tục mua sắm</a>
                         </div>
                     </div>
                 <?php endif; ?>

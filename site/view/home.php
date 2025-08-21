@@ -31,7 +31,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 600px;
+    max-width: 900px;
     width: 90%;
     z-index: 1000;
     animation: scaleIn 0.3s ease-in-out;
@@ -181,8 +181,8 @@
     <div class="popup-overlay" id="welcomePopup">
         <div class="popup-container">
             <div class="popup-content">
-                <a href="index.php?page=product-list" class="popup-link">
-                    <img src="../public/img/thuong_hieu.webp" alt="Thương hiệu Cỏ Mềm" class="popup-image">
+                <a href="index.php?page=product&category=sale" class="popup-link">
+                    <img src="../public/img/popup.jpg" alt="Thương hiệu Cỏ Mềm" class="popup-image">
                 </a>
                 <div class="popup-close" onclick="closePopup()">&times;</div>
             </div>
@@ -666,7 +666,13 @@ function showPopup() {
         }
     }, 2000);
 }
+ window.onclick = function(e) {
+        const popup = document.getElementById('welcomePopup');
 
+        if (e.target == popup) {
+            popup.style.display = "none";
+        }
+    }
 function closePopup() {
     const popup = document.getElementById('welcomePopup');
     if (popup) {
@@ -782,4 +788,6 @@ document.getElementById('messageInput').addEventListener('keypress', function(e)
         sendMessage();
     }
 });
+
+
 </script>

@@ -1,0 +1,158 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #ffffff;
+  color: #333333;
+  line-height: 1.8;
+  font-size: 24px;
+}
+
+/* Container chính */
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+  background-color: #f9f9f9;
+}
+
+.title h2{
+  text-align: center;
+  margin: 110px;
+  padding-top: 60px;
+  font-size: 40px;
+  color: #3e6807;
+}
+/* Tiêu đề chính */
+h2 {
+  font-size: 28px;
+  color: #3e6807;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* Phần giới thiệu */
+.intro-text {
+  font-style: italic;
+  color: #000000;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+/* Hình ảnh banner đầu */
+.image-container img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 20px 0;
+  display: block;
+}
+
+/* Quote chính */
+.main-quote {
+  font-size: 24px;
+  font-style: italic;
+  color: #ffffff;
+  text-align: center;
+  margin: 40px 0;
+  line-height: 1.6;
+}
+
+.main-quote .highlight {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.main-quote strong {
+  color: #d32f2f;
+}
+
+/* Phần bố cục 3 phần */
+.quote-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.left-img, .right-img {
+  flex: 1;
+  min-width: 250px;
+}
+
+.left-img img,
+.right-img img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.text-box {
+  flex: 2;
+  min-width: 300px;
+  color: #444444;
+  font-size: 24px;
+}
+
+
+/* Logo báo chí */
+.press-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  padding: 40px 0;
+  border-top: 1px solid #ddd;
+  max-width: 1000px;
+}
+
+.press-logos img {
+  max-height: 90px;
+  opacity: 0.75;
+  transition: all 0.3s ease;
+}
+
+.press-logos img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.nature-story .container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nature-story .text-right,
+.nature-story .text-below {
+  text-align: justify;
+  font-size: 24px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.nature-story .herb-img-row {
+  text-align: center;
+}
+
+.nature-story .herb-img-row img,
+.nature-story .image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}

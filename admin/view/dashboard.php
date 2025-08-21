@@ -1,3 +1,62 @@
+<style>
+    /* Product Image Styles */
+    .item-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        position: relative;
+    }
+
+    .item-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .item-image.img-error img {
+        opacity: 0.5;
+    }
+
+    .item-image.img-error::after {
+        content: '⚠️';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+    }
+
+    .no-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #adb5bd;
+        font-size: 12px;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .no-image i {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+    
+    /* Hover effect */
+    .item-image:hover img {
+        transform: scale(1.1);
+    }
+    
+</style>
+
 <div class="main-content">
     <div class="content-header">
         <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
@@ -109,9 +168,14 @@
                             <div class="list-item">
                                 <div class="item-image">
                                     <?php if (!empty($product['HinhAnh'])): ?>
-                                        <img src="../public/img/<?= $product['HinhAnh'] ?>" alt="<?= htmlspecialchars($product['TenSanPham'] ?? '') ?>">
+                                        <img src="<?= $product['HinhAnh'] ?>" 
+                                             alt="<?= htmlspecialchars($product['TenSanPham'] ?? '') ?>"
+                                             onerror="this.onerror=null; this.src='../public/img/default-product.jpg'; this.parentElement.classList.add('img-error');">
                                     <?php else: ?>
-                                        <i class="fas fa-image"></i>
+                                        <div class="no-image">
+                                            <i class="fas fa-image"></i>
+                                            <span>Không có ảnh</span>
+                                        </div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="item-content">

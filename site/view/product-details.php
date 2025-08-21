@@ -486,7 +486,7 @@
     </div>
     </div>
 
-    <script src="../public/JS/product-details.js"></script>
+    
     <script src="../public/JS/header.js"></script>
     
     <script>

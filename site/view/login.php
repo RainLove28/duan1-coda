@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])) {
                     ];
                     
                     if ($user['role'] === 'admin') {
-                        header('Location: /PHP1/duan-coda%20(1)/duan1-coda/admin/index.php');
+                        header('Location: /duan1-coda/admin/index.php');
                     } else {
                         header('Location: index.php?page=home');
                     }

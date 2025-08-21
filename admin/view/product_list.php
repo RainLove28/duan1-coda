@@ -87,7 +87,7 @@
                                 <td><?= $product['MaSP'] ?></td>
                                 <td>
                                     <?php if (!empty($product['HinhAnh'])): ?>
-                                        <img src="../public/img/<?= $product['HinhAnh'] ?>" 
+                                        <img src="<?= $product['HinhAnh'] ?>" 
                                              alt="<?= htmlspecialchars($product['TenSanPham']) ?>" 
                                              style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                                     <?php else: ?>

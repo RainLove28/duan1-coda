@@ -154,7 +154,7 @@
           <?php if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0): ?>
             <?php foreach ($_SESSION['cart'] as $id => $item): ?>
               <div class="cart-row">
-                <img src="../public/img/<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
+                <img src="<?= $item['image'] ?>" class="cart-img" alt="<?= htmlspecialchars($item['name']) ?>">
                 <div class="cart-info">
                   <div class="cart-name"><?= htmlspecialchars($item['name']) ?></div>
                   <div class="cart-qty">

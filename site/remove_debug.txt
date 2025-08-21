@@ -1,0 +1,35 @@
+2025-08-21 06:44:08 - removeItemCart called with ID: 85
+GET data: Array
+(
+    [page] => removeItemCart
+    [id] => 85
+)
+
+2025-08-21 06:44:14 - removeItemCart called with ID: 100
+GET data: Array
+(
+    [page] => removeItemCart
+    [id] => 100
+)
+
+2025-08-21 06:47:41 - removeItemCart called with ID: 51
+GET data: Array
+(
+    [page] => removeItemCart
+    [id] => 51
+)
+
+2025-08-21 07:26:33 - removeItemCart called with ID: 1
+GET data: Array
+(
+    [page] => removeItemCart
+    [id] => 1
+)
+
+2025-08-21 09:29:12 - removeItemCart called with ID: 1
+GET data: Array
+(
+    [page] => removeItemCart
+    [id] => 1
+)
+
