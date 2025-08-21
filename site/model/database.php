@@ -2,7 +2,7 @@
    class Database{
        private $host = "localhost";
        private $username = "root";
-       private $password = ""; // Thử mật khẩu trống trước
+       private $password = ""; 
        private $database = "duan2(1)";
        private $conn;
 

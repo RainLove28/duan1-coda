@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #056405ff 0%, #0d8a06ff 100%);
+            background: #3d640f;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -201,6 +201,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
             padding: 20px;
         }
         
+        /* --- Bố cục ngang: logo + form --- */
+        .main-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px; /* khoảng cách logo ↔ form */
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Logo bên trái */
+.logo-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-side img {
+  max-width: 90%;
+  height: auto;
+  border-radius: 16px; /* tuỳ chọn: bo góc logo */
+}
+
+/* Form bên phải */
+.auth-container {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+/* Responsive: khi màn nhỏ thì logo trên, form dưới */
+@media (max-width: 768px) {
+  .main-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .logo-side, .auth-container {
+    flex: unset;
+    width: 100%;
+  }
+}
         .auth-container {
             background: white;
             padding: 40px;
@@ -211,8 +256,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         }
         
         .auth-header {
-            text-align: center;
-            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* giữ font dễ đọc */
+            font-size: 32px;        /* chữ lớn hơn 1 chút */
+            font-weight: 700;       /* đậm */
+            color: #222;            /* màu chữ đậm hơn */
+            text-align: center;     /* căn giữa */
+            margin-bottom: 8px;     
+            letter-spacing: 0.5px;  
         }
         
         .auth-header h1 {
@@ -222,9 +272,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         }
         
         .auth-header p {
-            color: #666;
-            font-size: 14px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            font-weight: 400;       /* mảnh hơn so với tiêu đề */
+            color: #555;            /* xám nhẹ */
+            text-align: center;
+            margin: 0;
         }
+        
         
         /* Tab Navigation */
         .tab-navigation {
@@ -327,14 +382,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         }
         
         .success-message {
-            color: #2d5a3d;
+            color: #3d640f;
             font-size: 14px;
         }
         
         .btn-primary {
             width: 100%;
             padding: 15px;
-             background: linear-gradient(135deg, #056405ff 0%, #0d8a06ff 100%);
+             background: #3d640f;
             color: white;
             border: none;
             border-radius: 8px;
@@ -436,6 +491,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
     </style>
 </head>
 <body>
+    <div class="main-wrapper">
+  <div class="logo-side">
+    <img src="../public/img/logo.png" alt="Aura Beauty Logo">
+  </div>
     <div class="auth-container">
         <div class="auth-header">
             <h1><img src="path/to/logo.png" alt=""> Aura Beauty</h1>
@@ -571,7 +630,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_otp'])) {
         </div>
         
         <div class="back-link">
-            <a href="/PHP1/dự án 1/index.php">← Quay về trang chủ</a>
+            <a href="../view/home.php">← Quay về trang chủ</a>
         </div>
     </div>
 
