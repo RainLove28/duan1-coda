@@ -60,9 +60,6 @@ switch($page){
         case 'home':
             $productController->renderHome();
             break;
-        case 'shop':
-            require_once("view/shop.php");
-            break;
         case 'filter':
         $productController->filterProduct();
         break;

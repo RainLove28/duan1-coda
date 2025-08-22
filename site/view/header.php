@@ -165,7 +165,7 @@
                 </div>
                 <div class="header-top-right">
                     <div class="cart">
-                        <a href="?page=shop" class="cart-link">
+                        <a href="#" class="cart-link">
                             <i class="fas fa-home"></i>
                             <span>Hệ thống cửa hàng</span></a>
                     </div>
